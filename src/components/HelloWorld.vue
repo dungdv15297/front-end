@@ -1,15 +1,20 @@
 <template>
   <div class="hello">
-    <button @click="openDialog">open dialog</button>
+    <button @click="open">{{ $t('hello') }}</button>
+    
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import * as axios from '@/base/customAxios';
+import BaseHelper from '@/base/BaseHelper.vue';
 
 @Component
-export default class HelloWorld extends Vue {
+export default class HelloWorld extends BaseHelper {
+
+  open() {
+    this.openDialog();
+  }
 }
 </script>
 
