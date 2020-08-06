@@ -1,3 +1,13 @@
 {
-  "hello": "helloaasdasd"
+  "hello": "hello",
+  "title": {
+    "confirmDialog": "CONFIRM",
+    "informationDialog": "INFORMATION",
+    "warningDialog": "WARNING"
+  },
+  "dialog": {
+    "yes": "Ok",
+    "no": "No",
+    "infor": "Success"
+  }
 }

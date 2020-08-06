@@ -1,204 +1,142 @@
 .<template>
-  <div class="site-content cf">
-  <div class="boxed-group dangerzone">
+  <!-- Draggable DIV -->
+  <div class="full-size">
+    <div ref="mydiv" id="mydiv">
+      <!-- Confirm dialog -->
+      <div v-if="isConfirmDialog">
+        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
+        <p>Move</p>
+        <p>this</p>
+        <p>DIV</p>
+        <div class="button" @click="closeHandle">{{ defaultText.yes }}</div>
+        <div class="button" @click="closeHandle">{{ defaultText.no }}</div>
+      </div>
 
-    <h3> abc {{ title }} </h3>
+      <!-- Warning dialog -->
+      <div v-if="isWarningDialog">
+        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
+        <p>Move</p>
+        <p>this</p>
+        <p>DIV</p>
+        <div class="button" @click="closeHandle">{{ defaultText.infor }}</div>
+      </div>
 
-    <div class="boxed-group-inner">
-      <section>
-        <h4> abc {{ message }}</h4>
-
-        <button class="btn btn-danger boxed-action" @click="deleteAccount">Delete Account</button>
-        <p>This action is permanent; think twice before proceeding!</p>
-
-        <div v-if="open" class="site-dialog">
-          <header class="dialog-header">
-            <h1>Please Confirm</h1>
-          </header>
-          <div class="dialog-content">
-            <p>You are about to close your account. This action is irreversible. It will permanently delete your account along with its associated data. Are you sure you want to continue?</p>
-          </div>
-          <div class="btn-group cf">
-            <button class="btn btn-danger" id="delete">Delete</button>
-            <button class="btn btn-cancel" id="cancel">Cancel</button>
-          </div>
-        </div>
-
-      </section>
+      <!-- Information dialog -->
+      <div v-if="isInforDialog">
+        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
+        <p>Move</p>
+        <p>this</p>
+        <p>DIV</p>
+        <div class="button" @click="closeHandle">{{ defaultText.infor }}</div>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { dialogTypes } from "@/base/enum/dialog-types";
+import defaultDialog from "@/base/domains/default-dialog";
 
 @Component
-export default class Dialog extends Vue{
-  readonly types = {"INFORMATION": 1, "CONFIRM": 2, "WARNING": 3};
-  open: boolean = false;
-  deleteAccount(): void {
-    this.open=true;
+export default class Dialog extends Vue {
+  @Prop()
+  type!: string;
+  @Prop()
+  message!: string;
+  @Prop()
+  title!: string;
+  @Prop()
+  callback!: Function;
+  @Prop()
+  default!: defaultDialog;
+  pos1 = 0;
+  pos2 = 0;
+  pos3 = 0;
+  pos4 = 0;
+
+  get defaultText(): defaultDialog {
+    return this.default ? this.default : new defaultDialog();
   }
-  
+  get titleDialog(): string {
+    return this.title ? this.title : "";
+  }
 
+  get isConfirmDialog(): boolean {
+    return this.type === dialogTypes.CONFIRM;
+  }
+  get isInforDialog(): boolean {
+    return this.type === dialogTypes.INFORMATION;
+  }
+  get isWarningDialog(): boolean {
+    return this.type === dialogTypes.WARNING;
+  }
+  deleteAccount(): void {
+    this.callbackFn();
+  }
+
+  closeHandle() {
+    this.callbackFn();
+  }
+
+  callbackFn(): void {
+    this.callback(false);
+  }
+
+  dragMouseDown(e: any) {
+    e = e || window.event;
+    e.preventDefault();
+    this.pos3 = e.clientX;
+    this.pos4 = e.clientY;
+    document.onmouseup = this.closeDragElement;
+    document.onmousemove = this.elementDrag;
+  }
+
+  elementDrag(e: any) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    this.pos1 = this.pos3 - e.clientX;
+    this.pos2 = this.pos4 - e.clientY;
+    this.pos3 = e.clientX;
+    this.pos4 = e.clientY;
+    // set the element's new position:
+    (this.$refs["mydiv"] as any).style.top =
+      (this.$refs["mydiv"] as any).offsetTop - this.pos2 + "px";
+    (this.$refs["mydiv"] as any).style.left =
+      (this.$refs["mydiv"] as any).offsetLeft - this.pos1 + "px";
+  }
+
+  closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
-
 </script>
 
 <style>
-html {
-  box-sizing: border-box;
+.full-size {
+  position: relative;
+  background-color:rgba(0, 0, 0);
+  background-color:rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
 }
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-.cf:before,
-.cf:after {
-  display: table;
-  content: ' ';
-}
-.cf:after {
-  clear: both;
-}
-.cf {
-  *zoom: 1;
-}
-body {
-  font-family: 'Roboto', Arial, sans-serif;
-  margin: 0;
-  color: #555;
-  background-color: #f5f7fa;
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-figure {
-  margin: 0;
-  padding: 10px;
-}
-figure a {
-  display: block;
-}
-mark {
-  padding: 0 5px;
-  background-color: #ddd;
-}
-::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.btn {
-  padding: 10px 15px;
-  cursor: pointer;
-  color: #555;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 3px;
-  background-color: #f3f3f3;
-}
-.btn.disabled {
-  cursor: not-allowed;
-  color: #ddd;
-  border-color: #ddd;
-}
-.btn-group {
-  padding: 15px 20px;
-  text-align: right;
-  background-color: #f5f6f8;
-}
-.btn-primary {
-  color: #fff;
-  border-color: #0066c0;
-  background-color: #0074d9;
-}
-.btn-primary:hover {
-  background-color: #0066c0;
-}
-.btn-danger {
-  color: #fff;
-  border-color: #ab3326;
-  background-color: #c0392b;
-}
-.btn-danger:hover {
-  background-color: #ab3326;
-}
-.btn-cancel {
-  color: #999;
-  border-color: #ddd;
-}
-.btn-cancel:hover {
-  background-color: #e6e6e6;
-}
-.site-header {
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
   text-align: center;
-  background-color: #196e76;
+  left: 50%;
+  top: 35%;
 }
-.site-header h1,
-.site-header a {
-  padding: 15px;
-  text-transform: uppercase;
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196f3;
   color: #fff;
-}
-.site-header h1 {
-  font-size: 18px;
-  margin: 0;
-}
-.site-header a {
-  font-size: 14px;
-  font-weight: 300;
-  display: block;
-  text-decoration: none;
-  background-color: #10474c;
-}
-.boxed-group {
-  width: 90%;
-  max-width: 680px;
-  margin-top: 50px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.boxed-group h3,
-.boxed-group h4 {
-  font-weight: 400;
-  margin: 0;
-}
-.boxed-group h3 {
-  padding: 12px 20px;
-  color: #fff;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: #434a54;
-}
-.boxed-group h4 {
-  font-size: 18px;
-  color: #555;
-}
-.boxed-group section {
-  padding: 30px 20px;
-}
-.boxed-group section:first-child {
-  border-bottom: 1px solid #e6e9ed;
-}
-.boxed-group section:only-of-type,
-.boxed-group section:only-child {
-  border-bottom: 0;
-}
-.boxed-group .boxed-group-inner {
-  font-size: 14px;
-  font-weight: 300;
-  color: #aaa;
-  border-width: 0 1px 1px;
-  border-style: solid;
-  border-color: #e6e9ed;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: #fff;
-}
-.boxed-group .btn {
-  float: right;
-  margin-left: 20px;
 }
 </style>

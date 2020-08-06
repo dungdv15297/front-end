@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <button @click="open">{{ $t('hello') }}</button>
-    
   </div>
 </template>
 
@@ -13,7 +12,13 @@ import BaseHelper from '@/base/BaseHelper.vue';
 export default class HelloWorld extends BaseHelper {
 
   open() {
-    this.openDialog();
+    this.openDialog('confirm', 'dm dialog nhe', (result: boolean) => {
+      if(result) {
+        alert('We say YES');
+      } else {
+        alert('We say NO!!');
+      }
+    });
   }
 }
 </script>
