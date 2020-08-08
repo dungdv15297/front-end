@@ -1,0 +1,21 @@
+{
+  "hello": "Chao xìn",
+  "title": {
+    "confirmDialog": "CONFIRM",
+    "informationDialog": "INFORMATION",
+    "warningDialog": "WARNING"
+  },
+  "dialog": {
+    "yes": "Có",
+    "no": "Không",
+    "infor": "Xác nhận"
+  },
+  "message": {
+    "hello": "Dialog nè anh em"
+  },
+  "language": {
+    "lang": "Ngôn ngữ",
+    "vn": "Việt Nam",
+    "en": "Tiếng Anh"
+  }
+}

@@ -1,10 +1,12 @@
+import Domain from './domain';
 
-export default class defaultDialog {
-  yes = '';
-  no = '';
-  infor = '';
+export default class DefaultDialog extends Domain {
+  yes?: string;
+  no?: string;
+  infor?: string;
 
-  constructor(args?: defaultDialog) {
-    Object.assign(this, args);
+  constructor(init?: Partial<DefaultDialog>) {
+    super();
+    this.init(init);
   }
 }

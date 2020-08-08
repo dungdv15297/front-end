@@ -5,10 +5,14 @@
       <!-- Confirm dialog -->
       <div v-if="isConfirmDialog">
         <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
-        <p>Move</p>
-        <p>this</p>
-        <p>DIV</p>
-        <div class="button" @click="closeHandle">{{ defaultText.yes }}</div>
+        <dl>This is header of dialog</dl>
+        <dl>
+          <dt>This is 1</dt>
+          <dt>This is 2</dt>
+          <dt>This is 3</dt>
+        </dl>
+        <dl>This is footer</dl>
+        <div class="button" @click="closeHandle">{{  }}</div>
         <div class="button" @click="closeHandle">{{ defaultText.no }}</div>
       </div>
 
@@ -36,7 +40,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { dialogTypes } from "@/base/enum/dialog-types";
-import defaultDialog from "@/base/domains/default-dialog";
+import DefaultDialog from "@/base/domains/default-dialog";
+import VueI18n from 'vue-i18n';
 
 @Component
 export default class Dialog extends Vue {
@@ -49,17 +54,16 @@ export default class Dialog extends Vue {
   @Prop()
   callback!: Function;
   @Prop()
-  default!: defaultDialog;
-  pos1 = 0;
-  pos2 = 0;
-  pos3 = 0;
-  pos4 = 0;
+  default!: DefaultDialog;
 
-  get defaultText(): defaultDialog {
-    return this.default ? this.default : new defaultDialog();
+  // Position of dialog
+  pos1 = 0; pos2 = 0; pos3 = 0; pos4 = 0;
+
+  get defaultText(): DefaultDialog {
+    return this.default ? this.default : new DefaultDialog();
   }
   get titleDialog(): string {
-    return this.title ? this.title : "";
+    return this.title ? this.title : '';
   }
 
   get isConfirmDialog(): boolean {
@@ -101,10 +105,10 @@ export default class Dialog extends Vue {
     this.pos3 = e.clientX;
     this.pos4 = e.clientY;
     // set the element's new position:
-    (this.$refs["mydiv"] as any).style.top =
-      (this.$refs["mydiv"] as any).offsetTop - this.pos2 + "px";
-    (this.$refs["mydiv"] as any).style.left =
-      (this.$refs["mydiv"] as any).offsetLeft - this.pos1 + "px";
+    (this.$refs['mydiv'] as any).style.top =
+      (this.$refs['mydiv'] as any).offsetTop - this.pos2 + 'px';
+    (this.$refs['mydiv'] as any).style.left =
+      (this.$refs['mydiv'] as any).offsetLeft - this.pos1 + 'px';
   }
 
   closeDragElement() {

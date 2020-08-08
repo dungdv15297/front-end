@@ -9,5 +9,13 @@
     "yes": "Ok",
     "no": "No",
     "infor": "Success"
+  },
+  "message": {
+    "hello": "I am dialog"
+  },
+  "language": {
+    "lang": "Language",
+    "vn": "Vietnamese",
+    "en": "English"
   }
 }

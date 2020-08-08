@@ -12,7 +12,7 @@ import BaseHelper from '@/base/BaseHelper.vue';
 export default class HelloWorld extends BaseHelper {
 
   open() {
-    this.openDialog('confirm', 'dm dialog nhe', (result: boolean) => {
+    this.openDialog('confirm', 'hello', (result: boolean) => {
       if(result) {
         alert('We say YES');
       } else {

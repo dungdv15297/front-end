@@ -1,14 +1,15 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
+import ForSign from '@/views/ForSign.vue';
+import ListComp from '@/base/list-components';
 
 Vue.use(VueRouter);
 
   const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'ForSign',
+    component: ForSign
   }
 ]
 

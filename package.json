@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.16.0",
     "core-js": "^3.6.5",
     "custom-env": "^2.0.1",
     "json-loader": "^0.5.7",
