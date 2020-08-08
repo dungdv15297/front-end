@@ -42,9 +42,13 @@ export default class SelectLanguage extends BaseHelper {
   position: fixed;
   right: 100px;
   bottom: 60px;
-  width: 150px;
+  width: 180px;
   font-weight: bold;
   display: inline-block;
+  border: 1px solid;
+  padding: 5px 20px 15px 20px;
+  border-radius: 5px;
+  background-color: #ffe598;
 }
 .flex {
   display: flex;

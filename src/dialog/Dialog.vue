@@ -4,7 +4,7 @@
     <div ref="mydiv" id="mydiv">
       <!-- Confirm dialog -->
       <div v-if="isConfirmDialog">
-        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
+        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ $t('dialog.confirm') }}</div>
         <dl>This is header of dialog</dl>
         <dl>
           <dt>This is 1</dt>
@@ -12,26 +12,26 @@
           <dt>This is 3</dt>
         </dl>
         <dl>This is footer</dl>
-        <div class="button" @click="closeHandle">{{  }}</div>
-        <div class="button" @click="closeHandle">{{ defaultText.no }}</div>
+        <div class="button" @click="closeHandle">{{ $t('dialog.yes') }}</div>
+        <div class="button" @click="closeHandle">{{ $t('dialog.no') }}</div>
       </div>
 
       <!-- Warning dialog -->
       <div v-if="isWarningDialog">
-        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
+        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ $t('dialog.warning') }}</div>
         <p>Move</p>
         <p>this</p>
         <p>DIV</p>
-        <div class="button" @click="closeHandle">{{ defaultText.infor }}</div>
+        <div class="button" @click="closeHandle">{{ $t('dialog.infor') }}</div>
       </div>
 
       <!-- Information dialog -->
       <div v-if="isInforDialog">
-        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ titleDialog }}</div>
+        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ $t('dialog.information') }}</div>
         <p>Move</p>
         <p>this</p>
         <p>DIV</p>
-        <div class="button" @click="closeHandle">{{ defaultText.infor }}</div>
+        <div class="button" @click="closeHandle">{{ $t('dialog.infor') }}</div>
       </div>
     </div>
   </div>
@@ -40,8 +40,6 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { dialogTypes } from "@/base/enum/dialog-types";
-import DefaultDialog from "@/base/domains/default-dialog";
-import VueI18n from 'vue-i18n';
 
 @Component
 export default class Dialog extends Vue {
@@ -50,21 +48,10 @@ export default class Dialog extends Vue {
   @Prop()
   message!: string;
   @Prop()
-  title!: string;
-  @Prop()
   callback!: Function;
-  @Prop()
-  default!: DefaultDialog;
 
   // Position of dialog
   pos1 = 0; pos2 = 0; pos3 = 0; pos4 = 0;
-
-  get defaultText(): DefaultDialog {
-    return this.default ? this.default : new DefaultDialog();
-  }
-  get titleDialog(): string {
-    return this.title ? this.title : '';
-  }
 
   get isConfirmDialog(): boolean {
     return this.type === dialogTypes.CONFIRM;

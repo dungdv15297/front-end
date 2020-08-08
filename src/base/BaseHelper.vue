@@ -6,6 +6,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import Dialog from '@/dialog/Dialog.vue';
 import { shallowMount, mount, Wrapper } from '@vue/test-utils';
 import ListComp from '@/base/list-components';
+import i18n from '@/i18n/index';
 
 @Component({
   components: {
@@ -13,8 +14,6 @@ import ListComp from '@/base/list-components';
   }
 })
 export default class BaseHelper extends Vue {
-  
-  
   /** 
    * Open dialog
    */
@@ -25,12 +24,10 @@ export default class BaseHelper extends Vue {
       infor: this.$t('dialog.infor').toString()
     }
     const msg = this.$t(`message.${message}`).toString();
-    const comp: Wrapper<Dialog> = shallowMount(Dialog);
+    const comp: Wrapper<Dialog> = shallowMount(Dialog, { i18n });
     comp.setProps({
       type: types.CONFIRM,
       message: msg,
-      title: '',
-      default: defaultDialog,
       callback: func
     });
     this.$root.$el.appendChild(comp.vm.$el);

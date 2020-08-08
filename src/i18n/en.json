@@ -17,5 +17,12 @@
     "lang": "Language",
     "vn": "Vietnamese",
     "en": "English"
+  },
+  "pageFooter": {
+    "created": "Poly Information System",
+    "design": "@2020 Designed by UD-Poly Team"
+  },
+  "system": {
+    "name": "PIS"
   }
 }
