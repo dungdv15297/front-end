@@ -3,26 +3,26 @@
     <ul class="nav header">
       <!-- navbar-left -->
       <li class="nav-item brand">
-        <img src="@/assets/PIS-logo.png" class="logo" />
+        <a href="/signin" class="css-none"><img src="@/assets/PIS-logo.png" class="logo" /></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" @click="open">{{ $t('module.pis01') }}</a>
+        <a class="nav-link a-hover" @click="open">{{ $t('module.pis01') }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link">{{ $t('module.pis02') }}</a>
+        <a class="nav-link a-hover">{{ $t('module.pis02') }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link">{{ $t('module.pis03') }}</a>
+        <a class="nav-link a-hover">{{ $t('module.pis03') }}</a>
       </li>
       <!-- navbar-right -->
       <li>
-        <a> {{ $t('module.account') }} &#9662;</a>
+        <a class="a-hover"> {{ $t('module.account') }} &#9662;</a>
         <ul class="dropdown">
           <li>
-            <a>{{ $t('module.infor') }}</a>
+            <a class="a-hover">{{ $t('module.infor') }}</a>
           </li>
           <li>
-            <a>{{ $t('module.signOut') }}</a>
+            <a class="a-hover">{{ $t('module.signOut') }}</a>
           </li>
         </ul>
       </li>
@@ -46,7 +46,9 @@ export default class PageFooter extends BaseHelper {
   };
 
   open() {
-    this.openDialog(dialogTypes.CONFIRM, "abc");
+    this.openDialog(dialogTypes.CONFIRM, 'MSG001', (result: boolean) => {
+      this.openDialog(dialogTypes.INFORMATION, 'MSG002');
+    });
   }
 }
 </script>
@@ -76,7 +78,7 @@ ul li a {
   color: #333;
   text-decoration: none;
 }
-ul li a:hover {
+ul li .a-hover:hover {
   background: #ffecd6;
 }
 ul li ul.dropdown {
@@ -94,8 +96,12 @@ ul li ul.dropdown li {
   display: block;
 }
 
-.dropdown a:hover {
+.dropdown .a-hover:hover {
   background: burlywood;
   color: white;
 }
+.css-none{
+  padding: 0px 0px 0px 0px;
+}
+
 </style>

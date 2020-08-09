@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import MainView from '@/views/MainView.vue';
-import ListComp from '@/base/list-components';
+import Signin from '@/views/Signin.vue';
+import Error from '@/views/Error.vue';
 
 Vue.use(VueRouter);
 
@@ -10,6 +11,16 @@ Vue.use(VueRouter);
     path: '/main-view',
     name: 'MainView',
     component: MainView
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: Signin
+  },
+  {
+    path: '/404',
+    name: 'Error',
+    component: Error
   }
 ]
 

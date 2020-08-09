@@ -18,16 +18,10 @@ export default class BaseHelper extends Vue {
    * Open dialog
    */
   openDialog(type: string, message: string, callback?: Function) {
-    const defaultDialog = {
-      yes: this.$t('dialog.yes').toString(),
-      no: this.$t('dialog.no').toString(),
-      infor: this.$t('dialog.infor').toString()
-    }
-    const msg = this.$t(`message.${message}`).toString();
     const comp: Wrapper<Dialog> = shallowMount(Dialog, { i18n });
     comp.setProps({
-      type: types.CONFIRM,
-      message: msg,
+      type: type,
+      message: message,
       callback: func
     });
     this.$root.$el.appendChild(comp.vm.$el);

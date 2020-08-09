@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <HeaderNav />
     <img src="@/assets/PIS-logo.png" class="logo" />
     <SelectLanguage />
     <PageFooter />
@@ -14,10 +13,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   components: {
     SelectLanguage: () => import('@/components/SelectLanguage/SelectLanguage.vue'),
     PageFooter: () => import('@/components/PageFooter/PageFooter.vue'),
-    HeaderNav: () => import('@/components/HeaderNav/HeaderNav.vue')
   }
 })
-export default class MainView extends Vue {
+export default class Signin extends Vue {
 }
 </script>
 

@@ -6,12 +6,16 @@
     "warningDialog": "WARNING"
   },
   "dialog": {
-    "yes": "Ok",
+    "confirm": "Confirm",
+    "warning": "Warning",
+    "infor": "Information",
+    "yes": "Yes",
     "no": "No",
-    "infor": "Success"
+    "ok": "OK"
   },
   "message": {
-    "hello": "I am dialog"
+    "MSG001": "Are you sure?",
+    "MSG002": "Success!"
   },
   "language": {
     "lang": "Language",
@@ -29,5 +33,11 @@
     "signOut": "Sign Out",
     "infor": "Information",
     "account": "Account"
+  },
+  "errorMess": {
+    "404": "Sory!! <br/> 404 Page not found!"
+  },
+  "errorCode": {
+    "404": "404"
   }
 }

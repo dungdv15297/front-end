@@ -3,35 +3,55 @@
   <div class="full-size">
     <div ref="mydiv" id="mydiv">
       <!-- Confirm dialog -->
-      <div v-if="isConfirmDialog">
-        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ $t('dialog.confirm') }}</div>
-        <dl>This is header of dialog</dl>
-        <dl>
-          <dt>This is 1</dt>
-          <dt>This is 2</dt>
-          <dt>This is 3</dt>
+      <div class="dialog" v-if="isConfirmDialog">
+        <div
+          ref="mydivheader"
+          id="mydivheader"
+          :class="bgColorCss"
+          @mousedown="dragMouseDown"
+        >
+          <Icons :icon="'exclamation-triangle-fill'" :scale="1.3"/>
+          <span>{{ $t('dialog.confirm') }}</span>
+        </div>
+        <dl class="dialog-content">{{ $t(`message.${message}`) }}</dl>
+        <dl class="dialog-footer">
+          <button class="btn-confirm" @click="closeHandle">{{ $t('dialog.yes') }}</button>
+          <button class="btn-confirm" @click="closeHandle">{{ $t('dialog.no') }}</button>
         </dl>
-        <dl>This is footer</dl>
-        <div class="button" @click="closeHandle">{{ $t('dialog.yes') }}</div>
-        <div class="button" @click="closeHandle">{{ $t('dialog.no') }}</div>
       </div>
 
       <!-- Warning dialog -->
-      <div v-if="isWarningDialog">
-        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ $t('dialog.warning') }}</div>
-        <p>Move</p>
-        <p>this</p>
-        <p>DIV</p>
-        <div class="button" @click="closeHandle">{{ $t('dialog.infor') }}</div>
+      <div class="dialog" v-if="isWarningDialog">
+        <div
+          ref="mydivheader"
+          id="mydivheader"
+          :class="bgColorCss"
+          @mousedown="dragMouseDown"
+        >
+          <Icons :icon="'exclamation-triangle-fill'" :scale="1.3"/>
+          <span>{{ $t('dialog.warning') }}</span>
+        </div>
+        <dl class="dialog-content">{{ $t(`message.${message}`) }}</dl>
+        <dl class="dialog-footer">
+          <button class="btn-warning" @click="closeHandle">{{ $t('dialog.ok') }}</button>
+        </dl>
       </div>
 
       <!-- Information dialog -->
-      <div v-if="isInforDialog">
-        <div ref="mydivheader" id="mydivheader" @mousedown="dragMouseDown">{{ $t('dialog.information') }}</div>
-        <p>Move</p>
-        <p>this</p>
-        <p>DIV</p>
-        <div class="button" @click="closeHandle">{{ $t('dialog.infor') }}</div>
+      <div class="dialog" v-if="isInforDialog">
+        <div
+          ref="mydivheader"
+          id="mydivheader"
+          :class="bgColorCss"
+          @mousedown="dragMouseDown"
+        >
+          <Icons :icon="'info-circle-fill'" :scale="1.3"/>
+          <span>{{ $t('dialog.infor') }}</span>
+        </div>
+        <dl class="dialog-content">{{ $t(`message.${message}`) }}</dl>
+        <dl class="dialog-footer">
+          <button class="btn-infor" @click="closeHandle">{{ $t('dialog.ok') }}</button>
+        </dl>
       </div>
     </div>
   </div>
@@ -41,7 +61,11 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { dialogTypes } from "@/base/enum/dialog-types";
 
-@Component
+@Component({
+  components: {
+    Icons: () => import('@/components/Icons/Icons.vue')
+  }
+})
 export default class Dialog extends Vue {
   @Prop()
   type!: string;
@@ -51,7 +75,20 @@ export default class Dialog extends Vue {
   callback!: Function;
 
   // Position of dialog
-  pos1 = 0; pos2 = 0; pos3 = 0; pos4 = 0;
+  pos1 = 0;
+  pos2 = 0;
+  pos3 = 0;
+  pos4 = 0;
+
+  get bgColorCss(): string {
+    return this.type === dialogTypes.CONFIRM
+      ? "dialog-confirm-title"
+      : this.type === dialogTypes.INFORMATION
+      ? "dialog-infor-title"
+      : this.type === dialogTypes.WARNING
+      ? "dialog-warning-title"
+      : "";
+  }
 
   get isConfirmDialog(): boolean {
     return this.type === dialogTypes.CONFIRM;
@@ -92,10 +129,10 @@ export default class Dialog extends Vue {
     this.pos3 = e.clientX;
     this.pos4 = e.clientY;
     // set the element's new position:
-    (this.$refs['mydiv'] as any).style.top =
-      (this.$refs['mydiv'] as any).offsetTop - this.pos2 + 'px';
-    (this.$refs['mydiv'] as any).style.left =
-      (this.$refs['mydiv'] as any).offsetLeft - this.pos1 + 'px';
+    (this.$refs["mydiv"] as any).style.top =
+      (this.$refs["mydiv"] as any).offsetTop - this.pos2 + "px";
+    (this.$refs["mydiv"] as any).style.left =
+      (this.$refs["mydiv"] as any).offsetLeft - this.pos1 + "px";
   }
 
   closeDragElement() {
@@ -106,10 +143,13 @@ export default class Dialog extends Vue {
 </script>
 
 <style>
+span {
+  margin: 10px;
+}
 .full-size {
   position: relative;
-  background-color:rgba(0, 0, 0);
-  background-color:rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.3);
   width: 100vw;
   height: 100vh;
 }
@@ -117,17 +157,69 @@ export default class Dialog extends Vue {
   position: absolute;
   z-index: 9;
   background-color: #f1f1f1;
-  border: 1px solid #d3d3d3;
+  border: 2px solid #d3d3d3;
   text-align: center;
-  left: 50%;
+  border-radius: 5px;
+  left: 45%;
   top: 35%;
 }
-
 #mydivheader {
-  padding: 10px;
+  text-align: left;
+  padding: 5px 5px 5px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   cursor: move;
   z-index: 10;
-  background-color: #2196f3;
   color: #fff;
+  border-bottom: 1px solid black;
+}
+.dialog-confirm-title {
+  background-color: #17a2b8!important;
+  font-weight: bold;
+  width: 300px;
+}
+.dialog-warning-title {
+  background-color: #ffc107!important;
+  font-weight: bold;
+  width: 300px;
+}
+.dialog-infor-title {
+  background-color: #28a745!important;
+  font-weight: bold;
+  width: 300px;
+}
+.dialog-content {
+  border-bottom: 1px solid black;
+  margin: 10px 0px 0px 0px;
+  padding: 10px 10px 20px 10px;
+}
+.dialog-footer {
+  display: inline-flex;
+  margin: 0px 0px 0px 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.dialog-footer button {
+  border: 1px solid #f1f1f1;
+  padding: 5px 0px 5px 0px;
+  border-radius: 3px;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 150px;
+}
+.btn-confirm:hover {
+  background-color: #17a2b8!important;
+  border: 1px solid;
+  color: #fff;
+}
+.btn-warning:hover {
+  width: 300px;
+  background-color: #ffc107!important;
+}
+.btn-infor:hover {
+  width: 300px;
+  background-color: #28a745!important;
 }
 </style>
