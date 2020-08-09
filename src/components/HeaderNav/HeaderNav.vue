@@ -47,7 +47,9 @@ export default class PageFooter extends BaseHelper {
 
   open() {
     this.openDialog(dialogTypes.CONFIRM, 'MSG001', (result: boolean) => {
-      this.openDialog(dialogTypes.INFORMATION, 'MSG002');
+      if (result) {
+      this.openDialog(dialogTypes.WARNING, 'MSG002');
+      }
     });
   }
 }

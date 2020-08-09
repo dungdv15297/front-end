@@ -15,8 +15,8 @@
         </div>
         <dl class="dialog-content">{{ $t(`message.${message}`) }}</dl>
         <dl class="dialog-footer">
-          <button class="btn-confirm" @click="closeHandle">{{ $t('dialog.yes') }}</button>
-          <button class="btn-confirm" @click="closeHandle">{{ $t('dialog.no') }}</button>
+          <button class="btn-confirm" @click="onClickYes">{{ $t('dialog.yes') }}</button>
+          <button class="btn-confirm" @click="onClickNo">{{ $t('dialog.no') }}</button>
         </dl>
       </div>
 
@@ -33,7 +33,7 @@
         </div>
         <dl class="dialog-content">{{ $t(`message.${message}`) }}</dl>
         <dl class="dialog-footer">
-          <button class="btn-warning" @click="closeHandle">{{ $t('dialog.ok') }}</button>
+          <button class="btn-warning" @click="onClickYes">{{ $t('dialog.ok') }}</button>
         </dl>
       </div>
 
@@ -50,7 +50,7 @@
         </div>
         <dl class="dialog-content">{{ $t(`message.${message}`) }}</dl>
         <dl class="dialog-footer">
-          <button class="btn-infor" @click="closeHandle">{{ $t('dialog.ok') }}</button>
+          <button class="btn-infor" @click="onClickYes">{{ $t('dialog.ok') }}</button>
         </dl>
       </div>
     </div>
@@ -99,15 +99,12 @@ export default class Dialog extends Vue {
   get isWarningDialog(): boolean {
     return this.type === dialogTypes.WARNING;
   }
-  deleteAccount(): void {
-    this.callbackFn();
+
+  onClickYes() {
+    this.callback(true);
   }
 
-  closeHandle() {
-    this.callbackFn();
-  }
-
-  callbackFn(): void {
+  onClickNo() {
     this.callback(false);
   }
 
@@ -199,7 +196,7 @@ span {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-.dialog-footer button {
+.btn-confirm {
   border: 1px solid #f1f1f1;
   padding: 5px 0px 5px 0px;
   border-radius: 3px;
@@ -213,6 +210,18 @@ span {
   background-color: #17a2b8!important;
   border: 1px solid;
   color: #fff;
+}
+.btn-warning,
+.btn-infor {
+  border: 1px solid #f1f1f1;
+  padding: 5px 0px 5px 0px;
+  border-radius: 3px;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 300px;
+  background-color: #f1f1f1;
 }
 .btn-warning:hover {
   width: 300px;
