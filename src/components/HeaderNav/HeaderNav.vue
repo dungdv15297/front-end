@@ -6,23 +6,23 @@
         <a href="/signin" class="css-none"><img src="@/assets/PIS-logo.png" class="logo" /></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link a-hover" @click="open">{{ $t('module.pis01') }}</a>
+        <a href="#" class="nav-link a-hover" @click="open">{{ $t('module.pis01') }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link a-hover">{{ $t('module.pis02') }}</a>
+        <a href="#" class="nav-link a-hover">{{ $t('module.pis02') }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link a-hover">{{ $t('module.pis03') }}</a>
+        <a href="#" class="nav-link a-hover">{{ $t('module.pis03') }}</a>
       </li>
       <!-- navbar-right -->
       <li>
-        <a class="a-hover"> {{ $t('module.account') }} &#9662;</a>
+        <a href="#" class="a-hover"> {{ $t('module.account') }} &#9662;</a>
         <ul class="dropdown">
           <li>
-            <a class="a-hover">{{ $t('module.infor') }}</a>
+            <a href="#" class="a-hover">{{ $t('module.infor') }}</a>
           </li>
           <li>
-            <a class="a-hover">{{ $t('module.signOut') }}</a>
+            <a href="#" class="a-hover">{{ $t('module.signOut') }}</a>
           </li>
         </ul>
       </li>
