@@ -22,7 +22,12 @@
     "created": "Poly Information System",
     "design": "@2020 Designed by UD-Poly Team"
   },
-  "system": {
-    "name": "PIS"
+  "module": {
+    "pis01": "Inform Sys 1",
+    "pis02": "Inform Sys 2",
+    "pis03": "Inform Sys 3",
+    "signOut": "Sign Out",
+    "infor": "Information",
+    "account": "Account"
   }
 }
