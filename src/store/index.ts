@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     token: localStorage.getItem('vuex.state.token') ? localStorage.getItem('vuex.state.token') : '',
     accountId: localStorage.getItem('vuex.state.accountId') ? localStorage.getItem('vuex.state.accountId') : '',
-    locale: localStorage.getItem('vuex.state.locale') ? localStorage.getItem('vuex.state.locale') : 'vn'
+    locale: localStorage.getItem('vuex.state.locale') ? localStorage.getItem('vuex.state.locale') : 'vn',
+    listScreen: []
   },
   //use: this.$store.commit(mutation, data)
   //if you want to save a object to localStorage, you must stringify this object to json by JSON.stringify(object)
@@ -24,14 +25,17 @@ export default new Vuex.Store({
     changeLocale(state, locale) {
       state.locale = locale;
       localStorage.setItem('vuex.state.locale', locale);
+    },
+    setListScreen(state, listScreen) {
+      state.listScreen = listScreen
     }
   },
   //use: this.$store.dispatch(action, data)
   actions: {
     setToken: ({ commit }, data) => commit('setToken', data),
     setAccountId: ({ commit }, data) => commit('setAccountId', data),
-    changeLocale: ({ commit }, data) => commit('changeLocale', data)
-
+    changeLocale: ({ commit }, data) => commit('changeLocale', data),
+    setListScreen: ({ commit }, data) => commit('setListScreen', data)
   },
   modules: {
   },
@@ -39,6 +43,7 @@ export default new Vuex.Store({
   getters: {
     token: state => state.token,
     accountId: state => state.accountId,
-    locale: state => state.locale
+    locale: state => state.locale,
+    listScreen: state => state.listScreen
   }
 })

@@ -5,8 +5,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Dialog from '@/dialog/Dialog.vue';
 import { shallowMount, mount, Wrapper } from '@vue/test-utils';
-import ListComp from '@/base/list-components';
 import i18n from '@/i18n/index';
+import store from '@/store'
 
 @Component({
   components: {
@@ -26,9 +26,11 @@ export default class BaseHelper extends Vue {
     });
     this.$root.$el.appendChild(comp.vm.$el);
     let vm = this;
+    const router = this.$root.$children[0].$children[0].$el;
+    router.classList.add('disabledAll');
     function func(result: boolean) {
-      vm.$root.$refs['router'];
       vm.$root.$el.removeChild(comp.vm.$el);
+      router.classList.remove('disabledAll');
       if (callback) {
         callback(result);
       }
@@ -38,8 +40,15 @@ export default class BaseHelper extends Vue {
   /**
    * open new window
    */
-  openWindow(screenCode: string, props?: any, callback?: Function ): void {
-    // ListComp.screenCode
+  openWindow(component: any, props?: any): void {
+    const comp: Wrapper<any> = shallowMount(component, { i18n, store });
+    comp.setProps({
+      initParams: props
+    });
+    this.$parent.$el.appendChild(comp.vm.$el);
+    const listScreen: any[] = this.$store.getters['listScreen'];
+    listScreen.push(comp.vm.$el);
+    this.$store.dispatch('setListScreen', listScreen);
   }
 }
 

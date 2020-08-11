@@ -3,25 +3,18 @@
     <a href="/signin"><img src="@/assets/PIS-logo.png" class="logo" /></a>
     <div class="errorCode" v-html="errorCode"></div>
     <div class="errorMess" v-html="errorMess"></div>
-    <PageFooter />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    SelectLanguage: () => import("@/components/SelectLanguage/SelectLanguage.vue"),
-    PageFooter: () => import("@/components/PageFooter/PageFooter.vue"),
-    HeaderNav: () => import("@/components/HeaderNav/HeaderNav.vue"),
-  },
-})
+@Component
 export default class Error extends Vue {
   @Prop()
-  code: string = "404";
+  code: string = '404';
   @Prop()
-  mess: string = "404";
+  mess: string = '404';
 
   get errorCode(): string {
     return !!this.code ? this.$t(`errorCode.${this.code}`).toString() : '';

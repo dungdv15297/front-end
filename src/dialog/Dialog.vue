@@ -82,12 +82,12 @@ export default class Dialog extends Vue {
 
   get bgColorCss(): string {
     return this.type === dialogTypes.CONFIRM
-      ? "dialog-confirm-title"
+      ? 'dialog-confirm-title'
       : this.type === dialogTypes.INFORMATION
-      ? "dialog-infor-title"
+      ? 'dialog-infor-title'
       : this.type === dialogTypes.WARNING
-      ? "dialog-warning-title"
-      : "";
+      ? 'dialog-warning-title'
+      : '';
   }
 
   get isConfirmDialog(): boolean {
@@ -126,10 +126,10 @@ export default class Dialog extends Vue {
     this.pos3 = e.clientX;
     this.pos4 = e.clientY;
     // set the element's new position:
-    (this.$refs["mydiv"] as any).style.top =
-      (this.$refs["mydiv"] as any).offsetTop - this.pos2 + "px";
-    (this.$refs["mydiv"] as any).style.left =
-      (this.$refs["mydiv"] as any).offsetLeft - this.pos1 + "px";
+    (this.$refs['mydiv'] as any).style.top =
+      (this.$refs['mydiv'] as any).offsetTop - this.pos2 + 'px';
+    (this.$refs['mydiv'] as any).style.left =
+      (this.$refs['mydiv'] as any).offsetLeft - this.pos1 + 'px';
   }
 
   closeDragElement() {
@@ -139,7 +139,7 @@ export default class Dialog extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 span {
   margin: 10px;
 }

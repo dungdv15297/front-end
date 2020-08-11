@@ -1,4 +1,7 @@
 {
+  "screen": {
+    "PIS001": "Demo manger screen"
+  },
   "hello": "hello",
   "title": {
     "confirmDialog": "CONFIRM",

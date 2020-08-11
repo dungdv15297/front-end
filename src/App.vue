@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view class="absolute" />
+    <router-view ref="router" class="absolute" />
   </div>
 </template>
 
@@ -27,5 +27,8 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.disabledAll {
+  pointer-events: none;
 }
 </style>

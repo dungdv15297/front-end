@@ -9,7 +9,7 @@
         <a href="#" class="nav-link a-hover" @click="open">{{ $t('module.pis01') }}</a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link a-hover">{{ $t('module.pis02') }}</a>
+        <a href="#" class="nav-link a-hover" @click="open2">{{ $t('module.pis02') }}</a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link a-hover">{{ $t('module.pis03') }}</a>
@@ -34,6 +34,8 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import BaseHelper from "@/base/BaseHelper.vue";
 import { dialogTypes } from "@/base/enum/dialog-types";
+import DemoManager from '@/components/PIS001/DemoManager.vue'
+import { listComp } from '@/base/list-components'
 
 @Component
 export default class PageFooter extends BaseHelper {
@@ -51,6 +53,10 @@ export default class PageFooter extends BaseHelper {
       this.openDialog(dialogTypes.WARNING, 'MSG002');
       }
     });
+  }
+
+  open2() {
+    this.openWindow(listComp.PIS001, 'abc')
   }
 }
 </script>
