@@ -30,7 +30,7 @@ export default class BizHeader extends BaseHelper {
   pos4 = 0;
 
   close() {
-    this.$emit('close')
+    this.$emit('close', this.screenId)
   }
 
   dragMouseDown(e: any) {
@@ -68,16 +68,17 @@ export default class BizHeader extends BaseHelper {
   color: black;
 }
 button {
+  background-color: #ea7629;
   border: 0px;
   margin: 0px 0px 0px 0px;
 }
 button:hover {
-  background-color: burlywood;
+  background-color: blanchedalmond;
 }
 #mydiv {
   position: absolute;
   z-index: 5;
-  background-color: #f1f1f1;
+  background-color: #ea7629;
   border: 2px solid #d3d3d3;
   text-align: center;
   border-radius: 5px;
@@ -91,7 +92,7 @@ button:hover {
   border-top-right-radius: 5px;
   cursor: move;
   z-index: 6;
-  color: #fff;
-  border-bottom: 1px solid black;
+  color: #000000;
+  border-bottom: 1px solid #ffffff;
 }
 </style>

@@ -34,18 +34,10 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import BaseHelper from "@/base/BaseHelper.vue";
 import { dialogTypes } from "@/base/enum/dialog-types";
-import DemoManager from '@/components/PIS001/DemoManager.vue'
 import { listComp } from '@/base/list-components'
 
 @Component
-export default class PageFooter extends BaseHelper {
-  mainProps = {
-    blank: true,
-    blankColor: "#777",
-    width: 30,
-    height: 30,
-    class: "m1",
-  };
+export default class HeaderNav extends BaseHelper {
 
   open() {
     this.openDialog(dialogTypes.CONFIRM, 'MSG001', (result: boolean) => {
@@ -56,7 +48,7 @@ export default class PageFooter extends BaseHelper {
   }
 
   open2() {
-    this.openWindow(listComp.PIS001, 'abc')
+    this.openWindow('PIS001', listComp.PIS001, 'abc')
   }
 }
 </script>

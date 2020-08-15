@@ -17,6 +17,8 @@
     "ok": "OK"
   },
   "message": {
+    "hasScreenBefore": "This screen has now been opened",
+    "cantPrint": "Don't have the reference to print",
     "MSG001": "Are you sure?",
     "MSG002": "Success!"
   },

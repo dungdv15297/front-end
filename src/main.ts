@@ -2,9 +2,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import VueI18n from 'vue-i18n';
 import i18n from '@/i18n/index';
-import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
