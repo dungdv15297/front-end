@@ -1,6 +1,6 @@
 .<template>
-  <div class="screen-size" v-if="isShow">
-    <biz-header ref="header" screen-id="PIS001" @close="closeWindow" />
+  <div class="screen-size" ref="screen-size" v-if="isShow">
+    <biz-header ref="header" screen-id="PIS001" pw=800 ph=800 @close="closeWindow" />
     <div ref="print">
       <table style="width:100%">
         <tr>
@@ -20,7 +20,7 @@
         </tr>
       </table>
     </div>
-    <button @click="print()">print</button>
+    <biz-footer />
   </div>
 </template>
 
@@ -44,5 +44,11 @@ export default class DemoManager extends BaseHelper {
 .screen-size {
   width: 800px;
   height: 800px;
+  position: absolute;
+  z-index: 5;
+  background-color: #ffffff;
+  border: 2px solid #d3d3d3;
+  text-align: center;
+  border-radius: 5px;
 }
 </style>

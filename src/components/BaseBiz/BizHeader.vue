@@ -24,10 +24,25 @@ import BaseHelper from '@/base/BaseHelper.vue';
 export default class BizHeader extends BaseHelper {
   @Prop()
   screenId!: string;
+  @Prop()
+  pw!: number;
+  @Prop()
+  ph!: number;
   pos1 = 0;
   pos2 = 0;
   pos3 = 0;
   pos4 = 0;
+  
+  mounted() {
+    const screentW = window.innerWidth;
+    const screentH = window.innerHeight;
+    const subW = (screentW - this.pw)/2;
+    const subH = (screentH - this.ph)/2;
+    if (this.$parent.$refs['screen-size']) {
+      (this.$parent.$refs['screen-size'] as any).style.top = subH + 'px';
+      (this.$parent.$refs['screen-size'] as any).style.left = subW + 'px';
+    }
+  }
 
   close() {
     this.$emit('close', this.screenId)
@@ -51,10 +66,10 @@ export default class BizHeader extends BaseHelper {
     this.pos3 = e.clientX;
     this.pos4 = e.clientY;
     // set the element's new position:
-    (this.$refs['mydiv'] as any).style.top =
-      (this.$refs['mydiv'] as any).offsetTop - this.pos2 + 'px';
-    (this.$refs['mydiv'] as any).style.left =
-      (this.$refs['mydiv'] as any).offsetLeft - this.pos1 + 'px';
+    (this.$parent.$refs['screen-size'] as any).style.top =
+      (this.$parent.$refs['screen-size'] as any).offsetTop - this.pos2 + 'px';
+    (this.$parent.$refs['screen-size'] as any).style.left =
+      (this.$parent.$refs['screen-size'] as any).offsetLeft - this.pos1 + 'px';
   }
 
   closeDragElement() {
@@ -68,6 +83,7 @@ export default class BizHeader extends BaseHelper {
   color: black;
 }
 button {
+  float: right;
   background-color: #ea7629;
   border: 0px;
   margin: 0px 0px 0px 0px;
@@ -76,14 +92,10 @@ button:hover {
   background-color: blanchedalmond;
 }
 #mydiv {
-  position: absolute;
-  z-index: 5;
   background-color: #ea7629;
   border: 2px solid #d3d3d3;
   text-align: center;
   border-radius: 5px;
-  left: 45%;
-  top: 35%;
 }
 #mydivheader {
   text-align: left;

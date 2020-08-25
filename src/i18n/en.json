@@ -1,4 +1,8 @@
 {
+  "button": {
+    "print": "Print",
+    "clear": "Clear"
+  },
   "screen": {
     "PIS001": "Demo manger screen"
   },

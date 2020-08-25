@@ -80,6 +80,18 @@ export default class Dialog extends Vue {
   pos3 = 0;
   pos4 = 0;
 
+  mounted() {
+    const screentW = window.innerWidth;
+    const screentH = window.innerHeight;
+    if (this.$refs['mydiv']) {
+      const compW = (this.$refs['mydiv'] as any);
+      const subW = (screentW - 300)/2;
+      const subH = (screentH - 300)/2;
+      (this.$refs['mydiv'] as any).style.top = subH + 'px';
+      (this.$refs['mydiv'] as any).style.left = subW + 'px';
+    }
+  }
+
   get bgColorCss(): string {
     return this.type === dialogTypes.CONFIRM
       ? 'dialog-confirm-title'
