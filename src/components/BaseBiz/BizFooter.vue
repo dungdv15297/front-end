@@ -1,6 +1,5 @@
 <template>
   <div class="biz-footer">
-    <!-- <button @click="close"><Icons :icon="'printer'" :scale="1.3"/>aaa</button> -->
     <a href="#" @click="clear()"> {{ $t('button.clear') }} </a>
     <a href="#" @click="print()"> {{ $t('button.print') }} </a>
   </div>
@@ -27,16 +26,20 @@ export default class BizHeader extends BaseHelper {
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 30px;
   background-color: #ea7629;
   color: white;
   text-align: right;
 }
 a {
+  padding: 7px 10px 7px 10px;
+  line-height: 30px;
   font-size: 15px;
-  margin-right: 10px;
+  color: black;
 }
 a:hover {
   text-decoration: none;
   background-color: blanchedalmond;
+  color: #ea7629;
 }
 </style>

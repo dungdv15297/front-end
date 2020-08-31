@@ -1,25 +1,7 @@
 .<template>
   <div class="screen-size" ref="screen-size" v-if="isShow">
     <biz-header ref="header" screen-id="PIS001" pw=800 ph=800 @close="closeWindow" />
-    <div ref="print">
-      <table style="width:100%">
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Age</th>
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>Eve</td>
-          <td>Jackson</td>
-          <td>94</td>
-        </tr>
-      </table>
-    </div>
+    <biz-content ref="biz-content"/>
     <biz-footer />
   </div>
 </template>
@@ -32,6 +14,7 @@ import BaseHelper from '@/base/BaseHelper.vue';
 @Component({
   components: {
     BizHeader: () => import('@/components/BaseBiz/BizHeader.vue'),
+    BizContent: () => import('@/components/PIS001/DemoManagerContent.vue'),
     BizFooter: () => import('@/components/BaseBiz/BizFooter.vue')
   }
 })

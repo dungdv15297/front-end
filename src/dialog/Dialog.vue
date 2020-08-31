@@ -243,4 +243,7 @@ span {
   width: 300px;
   background-color: #28a745!important;
 }
+dl {
+  position: unset;
+}
 </style>
