@@ -6,7 +6,7 @@
         <a href="/signin" class="css-none"><img src="@/assets/PIS-logo.png" class="logo" /></a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link a-hover" @click="open">{{ $t('module.pis01') }}</a>
+        <a href="#" class="nav-link a-hover" @click="openPis002">{{ $t('module.pis01') }}</a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link a-hover" @click="open2">{{ $t('module.pis02') }}</a>
@@ -45,6 +45,10 @@ export default class HeaderNav extends BaseHelper {
       this.openDialog(dialogTypes.WARNING, 'MSG002');
       }
     });
+  }
+
+  openPis002(): void {
+    this.openWindow('PIS002', listComp.PIS002)
   }
 
   open2() {

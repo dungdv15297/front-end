@@ -4,7 +4,8 @@
     "clear": "Clear"
   },
   "screen": {
-    "PIS001": "Demo manger screen"
+    "PIS001": "Demo manger screen",
+    "PIS002": "Course Information"
   },
   "hello": "hello",
   "title": {
@@ -48,5 +49,19 @@
   },
   "errorCode": {
     "404": "404"
-  }
+  },
+  "pis002": {
+    "code": "Code",
+    "name": "Name",
+    "start": "Start",
+    "end": "End",
+    "desc": "Description",
+    "created":"Created",
+    "updated": "Updated",
+    "search": "Search"
+  },
+  "table": {
+    "loading": "Loading...",
+    "emptyText": "The are no record to show."
+  }  
 }

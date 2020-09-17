@@ -15,6 +15,8 @@ export default class BizHeader extends BaseHelper {
   error: any;
   @Prop()
   value: any;
+  @Prop()
+  customClass: any;
 
   get textValue(): string {
     return this.value;
@@ -29,7 +31,8 @@ export default class BizHeader extends BaseHelper {
   }
 
   get inputClass(): string {
-    return this.condition ? 'pis-err' : '';
+    const css = this.customClass ? this.customClass : '';
+    return this.condition ? css + ' pis-err' : css;
   }
 
 }

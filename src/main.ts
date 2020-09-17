@@ -3,11 +3,13 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import i18n from '@/i18n/index';
+import momen from 'vue-moment';
 import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(BootstrapVueIcons);
+Vue.use(momen);
 Vue.config.productionTip = false;
 
 new Vue({

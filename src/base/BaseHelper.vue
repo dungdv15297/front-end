@@ -75,13 +75,19 @@ export default class BaseHelper extends Vue {
     this.$store.dispatch('setListScreen', listScreen);
   }
 
-  print(ref: string): void {
-    if (this.$refs[ref]) {
-      const html = (this.$refs[ref] as HTMLElement);
+  showAllError(error: any): void {
+    
+  }
+
+  print(): void {
+    if (this.$refs['print']) {
+      const html = (this.$refs['print'] as HTMLElement);
       const newWindow = window.open('', 'newWindow', '""');
       (newWindow as Window).document.write(html.innerHTML);
+      (newWindow as Window).document.close();
       (newWindow as Window).focus();
       (newWindow as Window).print();
+      (newWindow as Window).close();
     } else {
       this.openDialog(dialogTypes.WARNING, 'cantPrint');
     }
