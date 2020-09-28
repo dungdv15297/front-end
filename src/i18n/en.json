@@ -63,5 +63,15 @@
   "table": {
     "loading": "Loading...",
     "emptyText": "The are no record to show."
-  }  
+  } ,
+  "login": {
+    "login": "LOGIN",
+    "username": "Username",
+    "password": "Password",
+    "loginBtn": "Login",
+    "remember": "Remember Me",
+    "forgot": "Forgot password",
+    "signUp": "Sign up now",
+    "domain": "pihome.heroku-app.com"
+  }
 }

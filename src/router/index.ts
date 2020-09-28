@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import MainView from '@/views/MainView.vue';
-import Signin from '@/views/Signin.vue';
+import Login from '@/views/login/Login.vue';
 import Error from '@/views/Error.vue';
 
 Vue.use(VueRouter);
@@ -13,9 +13,9 @@ Vue.use(VueRouter);
     component: MainView
   },
   {
-    path: '/signin',
-    name: 'Signin',
-    component: Signin
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/404',
