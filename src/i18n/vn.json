@@ -1,21 +1,77 @@
 {
-  "hello": "Chao xìn",
+  "button": {
+    "print": "Print",
+    "clear": "Clear"
+  },
+  "screen": {
+    "PIS001": "Demo manger screen",
+    "PIS002": "Course Information"
+  },
+  "hello": "hello",
   "title": {
     "confirmDialog": "CONFIRM",
     "informationDialog": "INFORMATION",
     "warningDialog": "WARNING"
   },
   "dialog": {
-    "yes": "Có",
-    "no": "Không",
-    "infor": "Xác nhận"
+    "confirm": "Confirm",
+    "warning": "Warning",
+    "infor": "Information",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK"
   },
   "message": {
-    "hello": "Dialog nè anh em"
+    "hasScreenBefore": "This screen has now been opened",
+    "cantPrint": "Don't have the reference to print",
+    "MSG001": "Are you sure?",
+    "MSG002": "Success!"
   },
   "language": {
-    "lang": "Ngôn ngữ",
-    "vn": "Việt Nam",
-    "en": "Tiếng Anh"
+    "lang": "Language",
+    "vn": "Vietnamese",
+    "en": "English"
+  },
+  "pageFooter": {
+    "created": "Poly Information System",
+    "design": "@2020 Designed by UD-Poly Team"
+  },
+  "module": {
+    "pis01": "Inform Sys 1",
+    "pis02": "Inform Sys 2",
+    "pis03": "Inform Sys 3",
+    "signOut": "Sign Out",
+    "infor": "Information",
+    "account": "Account"
+  },
+  "errorMess": {
+    "404": "Sory!! <br/> 404 Page not found!"
+  },
+  "errorCode": {
+    "404": "404"
+  },
+  "pis002": {
+    "code": "Code",
+    "name": "Name",
+    "start": "Start",
+    "end": "End",
+    "desc": "Description",
+    "created":"Created",
+    "updated": "Updated",
+    "search": "Search"
+  },
+  "table": {
+    "loading": "Loading...",
+    "emptyText": "The are no record to show."
+  } ,
+  "login": {
+    "login": "LOGIN",
+    "username": "Username",
+    "password": "Password",
+    "loginBtn": "Login",
+    "remember": "Remember Me",
+    "forgot": "Forgot password",
+    "signUp": "Đăng ký ngay",
+    "domain": "pihomee.herokuapp.com"
   }
 }

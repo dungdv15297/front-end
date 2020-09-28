@@ -51,7 +51,14 @@
       </b-row>
     </div>
     
-    <a href="#" class="cl-white"> {{ $t('login.domain') }} </a>
+    <div class="footer">
+          <!-- homepage -->
+          <a href="#" class="cl-white fl-left">
+            <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('login.domain') }}
+          </a>
+          <!-- change language -->
+          <select-language/>
+    </div>
   </b-container>
 </template>
 
@@ -59,20 +66,28 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
 
-@Component
+@Component({
+  components: {
+    SelectLanguage: () => import('@/components/SelectLanguage/SelectLanguage.vue')
+  }
+})
 export default class Login extends Vue {
 
 }
 </script>
 <style scoped>
 .content {
-  max-width: 350px;
-  min-width: 200x;
+  width: 350px;
   margin: 0 auto;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 50px;
   margin-top: 150px;
   background-color: white;
+}
+.footer {
+  width: 350px;
+  margin: 0 auto;
+  padding-top: 10px;
 }
 .title {
   font-size: 2rem !important;
@@ -101,5 +116,11 @@ export default class Login extends Vue {
 }
 a:hover {
   text-decoration: none;
+}
+.fl-left {
+  float: left;
+}
+.footer >>> .lang-position {
+  float: right;
 }
 </style>

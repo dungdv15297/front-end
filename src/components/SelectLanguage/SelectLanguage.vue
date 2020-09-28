@@ -1,6 +1,5 @@
 <template>
   <div class="lang-position">
-    <div class="flex">{{ $t('language.lang') }}</div>
     <b-form-select @change="onChangeLang" v-model="selected" size="sm">
       <b-form-select-option value="vn"> {{ $t('language.vn') }} </b-form-select-option>
       <b-form-select-option value="en"> {{ $t('language.en') }} </b-form-select-option>
@@ -39,16 +38,8 @@ export default class SelectLanguage extends BaseHelper {
 
 <style scoped>
 .lang-position {
-  position: fixed;
-  right: 100px;
-  bottom: 60px;
-  width: 180px;
-  font-weight: bold;
+  width: 100px;
   display: inline-block;
-  border: 1px solid;
-  padding: 5px 20px 15px 20px;
-  border-radius: 5px;
-  background-color: #ffe598;
 }
 .flex {
   display: flex;
