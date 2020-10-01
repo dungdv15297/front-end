@@ -71,7 +71,19 @@
     "loginBtn": "Login",
     "remember": "Remember Me",
     "forgot": "Forgot password",
-    "signUp": "Sign up now",
-    "domain": "pihomee.herokuapp.com"
-  }
+    "signUp": "Sign up now"
+  },
+  "register": {
+    "username": "Username",
+    "password": "Password",
+    "phone": "Phone number",
+    "rePassword": "Re-Password",
+    "name": "Full name",
+    "note": "❖ Use 6 or more characters",
+    "registerBtn": "Register",
+    "signin": "Login now",
+    "register": "REGISTER",
+    "slogan": "Pihomee in your account"
+  },
+  "domain": "pihomee.herokuapp.com"
 }

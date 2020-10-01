@@ -10,13 +10,13 @@
       <b-row class="my-3">
         <b-col>
           <!-- Username -->
-          <b-form-input v-model="text" :placeholder="$t('login.username')"></b-form-input>
+          <b-form-input v-model="loginData.username" :placeholder="$t('login.username')"></b-form-input>
         </b-col>
       </b-row>
       <b-row class="my-3">
         <b-col>
           <!-- Password -->
-          <b-form-input v-model="password" :placeholder="$t('login.password')"></b-form-input>
+          <b-form-input v-model="loginData.password" :placeholder="$t('login.password')"></b-form-input>
         </b-col>
       </b-row>
       <b-row>
@@ -24,7 +24,7 @@
           <!-- Remember Me -->
           <b-form-checkbox
             id="checkbox-1"
-            v-model="status"
+            v-model="loginData.rememberMe"
             name="checkbox-1"
             value="accepted"
             unchecked-value="not_accepted"
@@ -36,7 +36,7 @@
       <b-row class="my-3">
         <b-col>
           <!-- Login button -->
-          <b-button class="btn-login" block variant="info"> {{ $t('login.loginBtn') }} </b-button>
+          <b-button class="btn-login" block variant="info" @click="onClickLogin"> {{ $t('login.loginBtn') }} </b-button>
         </b-col>
       </b-row>
       <b-row>
@@ -52,12 +52,12 @@
     </div>
     
     <div class="footer">
-          <!-- homepage -->
-          <a href="#" class="cl-white fl-left">
-            <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('login.domain') }}
-          </a>
-          <!-- change language -->
-          <select-language/>
+      <!-- homepage -->
+      <a href="#" class="cl-white fl-left">
+        <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('domain') }}
+      </a>
+      <!-- change language -->
+      <select-language/>
     </div>
   </b-container>
 </template>
@@ -65,6 +65,7 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
+import LoginData from './login-data';
 
 @Component({
   components: {
@@ -73,11 +74,23 @@ import BaseHelper from '@/base/BaseHelper.vue';
 })
 export default class Login extends Vue {
 
+  loginData: LoginData = new LoginData();
+
+  created() {
+
+  }
+
+  onClickLogin(): void {
+    this.loginData.time = (this.$moment() as any)._d;
+    localStorage.getItem('loginInfor')
+    
+  }
 }
 </script>
 <style scoped>
 .content {
-  width: 350px;
+  max-width: 350px;
+  min-width: 280px;
   margin: 0 auto;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 50px;

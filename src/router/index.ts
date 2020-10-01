@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import MainView from '@/views/MainView.vue';
 import Login from '@/views/login/Login.vue';
 import Error from '@/views/Error.vue';
+import Register from '@/views/register/Register.vue';
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,11 @@ Vue.use(VueRouter);
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
   {
     path: '/404',
