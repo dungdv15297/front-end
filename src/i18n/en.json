@@ -25,7 +25,11 @@
     "hasScreenBefore": "This screen has now been opened",
     "cantPrint": "Don't have the reference to print",
     "MSG001": "Are you sure?",
-    "MSG002": "Success!"
+    "MSG002": "Success!",
+    "MSG100": "Login failed!",
+    "MSG101": "Login successful",
+    "ERR100": "You must login first as administrator to view this site",
+    "ERR101": "User must be an administrator to view this site"
   },
   "language": {
     "lang": "Language",

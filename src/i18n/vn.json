@@ -25,7 +25,9 @@
     "hasScreenBefore": "This screen has now been opened",
     "cantPrint": "Don't have the reference to print",
     "MSG001": "Are you sure?",
-    "MSG002": "Success!"
+    "MSG002": "Success!",
+    "MSG100": "Login failed!",
+    "MSG101": "Login successful"
   },
   "language": {
     "lang": "Language",
@@ -45,10 +47,14 @@
     "account": "Account"
   },
   "errorMess": {
-    "404": "Sory!! <br/> 404 Page not found!"
+    "404": "Sory!! <br/> 404 Page not found!",
+    "ERR100": "Sory!! <br/> You must login first as administrator to view this site",
+    "ERR101": "Sory!! <br/> User must be an administrator to view this site"
   },
   "errorCode": {
-    "404": "404"
+    "404": "404",
+    "ERR100": "ERR100",
+    "ERR101": "ERR101"
   },
   "pis002": {
     "code": "Code",
@@ -71,7 +77,19 @@
     "loginBtn": "Login",
     "remember": "Remember Me",
     "forgot": "Forgot password",
-    "signUp": "Đăng ký ngay",
-    "domain": "pihomee.herokuapp.com"
-  }
+    "signUp": "Sign up now"
+  },
+  "register": {
+    "username": "Username",
+    "password": "Password",
+    "phone": "Phone number",
+    "rePassword": "Re-Password",
+    "name": "Full name",
+    "note": "❖ Use 6 or more characters",
+    "registerBtn": "Register",
+    "signin": "Login now",
+    "register": "REGISTER",
+    "slogan": "Pihomee in your account"
+  },
+  "domain": "pihomee.herokuapp.com"
 }

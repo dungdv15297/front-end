@@ -12,11 +12,12 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class Error extends Vue {
   @Prop()
-  code: string = '404';
+  code!: string;
   @Prop()
-  mess: string = '404';
+  mess!: string;
 
   get errorCode(): string {
+    debugger
     return !!this.code ? this.$t(`errorCode.${this.code}`).toString() : '';
   }
 

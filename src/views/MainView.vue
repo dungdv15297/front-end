@@ -34,4 +34,10 @@ export default class MainView extends Vue {
 	margin-right: auto;
 	display: block;
 }
+.home >>> .lang-position {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 150px;
+}
 </style>

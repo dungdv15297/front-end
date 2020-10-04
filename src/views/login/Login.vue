@@ -66,23 +66,50 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
 import LoginData from './login-data';
+import axios from '@/base/customAxios';
+import AuthRequest from '@/base/request/auth-request';
+import AuthResponse from '@/base/response/auth-response';
+import Account from '@/base/domains/account';
+import { dialogTypes } from '@/base/enum/dialog-types';
 
 @Component({
   components: {
     SelectLanguage: () => import('@/components/SelectLanguage/SelectLanguage.vue')
   }
 })
-export default class Login extends Vue {
+export default class Login extends BaseHelper {
 
   loginData: LoginData = new LoginData();
+
+  API = {
+    login: 'account/authenticate'
+  }
 
   created() {
 
   }
 
   onClickLogin(): void {
-    this.loginData.time = (this.$moment() as any)._d;
-    localStorage.getItem('loginInfor')
+    const account = new Account({
+      username: this.loginData.username,
+      password: this.loginData.password
+    });
+    const body: AuthRequest = new AuthRequest({
+      account: account
+    });
+    axios.post<AuthResponse>(this.API.login, body)
+      .then(response => {
+        if (response && response.data && response.data.jwt) {
+          const token: string = response.data.jwt;
+          localStorage.setItem('token', token);
+          this.openDialog(dialogTypes.INFORMATION, 'MSG101', () => {
+            this.$router.push({name: 'MainView'});
+          });
+        }
+      })
+      .catch(err => {
+        this.openDialog(dialogTypes.WARNING, 'MSG100');
+      })
     
   }
 }

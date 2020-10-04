@@ -1,9 +1,10 @@
-import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import Axios from 'axios';
 
-const axios = Axios.create({
-  baseURL: `http://localhost:9090/`,
+const axios = Axios.create({  
+  baseURL: `http://localhost:9090/api/`,
   headers: {
-    // Authorization: 'Bearer {token}',
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.token ? `Bearer ${localStorage.token}` : '',
   }
 })
 
