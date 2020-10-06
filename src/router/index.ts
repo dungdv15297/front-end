@@ -4,6 +4,7 @@ import MainView from '@/views/MainView.vue';
 import Login from '@/views/login/Login.vue';
 import Error from '@/views/Error.vue';
 import Register from '@/views/register/Register.vue';
+import PersonalInfor from '@/views/personalInfor/PersonalInfor.vue';
 import BaseHelper from '@/base/BaseHelper.vue';
 import { dialogTypes } from '@/base/enum/dialog-types';
 
@@ -45,6 +46,11 @@ const routes: Array<RouteConfig> = [
     name: 'Error',
     props: true,
     component: Error
+  },
+  {
+    path: '/personal',
+    name: 'Personal',
+    component: PersonalInfor
   }
 ]
 
