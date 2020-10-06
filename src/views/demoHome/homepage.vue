@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-    <a href="/signin"><img src="@/assets/PIS-logo.png" class="logo" /></a>
-    <div class="errorCode" v-html="errorCode"></div>
-    <div class="errorMess" v-html="errorMess"></div>
+    Hello, this is demo site
+    <b-img-lazy :src="require('@/assets/PIS-logo.png')"></b-img-lazy>
   </div>
 </template>
 
@@ -10,13 +9,14 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class Error extends Vue {
+export default class HomePage extends Vue {
   @Prop()
   code!: string;
   @Prop()
   mess!: string;
 
   get errorCode(): string {
+    debugger
     return !!this.code ? this.$t(`errorCode.${this.code}`).toString() : '';
   }
 

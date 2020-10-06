@@ -65,7 +65,6 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
-import LoginData from './login-data';
 import axios from '@/base/customAxios';
 import AuthRequest from '@/base/request/auth-request';
 import AuthResponse from '@/base/response/auth-response';
@@ -79,7 +78,7 @@ import { dialogTypes } from '@/base/enum/dialog-types';
 })
 export default class Login extends BaseHelper {
 
-  loginData: LoginData = new LoginData();
+  loginData: any;
 
   API = {
     login: 'account/authenticate'

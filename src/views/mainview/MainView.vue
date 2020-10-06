@@ -12,9 +12,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
-    SelectLanguage: () => import('@/components/SelectLanguage/SelectLanguage.vue'),
-    PageFooter: () => import('@/components/PageFooter/PageFooter.vue'),
-    HeaderNav: () => import('@/components/HeaderNav/HeaderNav.vue')
+    SelectLanguage: () => import('@/components/language/SelectLanguage.vue'),
+    PageFooter: () => import('@/components/pagefooter/PageFooter.vue'),
+    HeaderNav: () => import('@/components/headernav/HeaderNav.vue')
   }
 })
 export default class MainView extends Vue {

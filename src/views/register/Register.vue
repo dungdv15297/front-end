@@ -78,14 +78,14 @@
       <b-row>
         <b-col class="text-right">
           <!-- Link sign in -->
-          <a href="#" class="text-small">{{ $t('register.signin') }}</a>
+          <a href="" class="text-small" @click="goToLogin">{{ $t('register.signin') }}</a>
         </b-col>
       </b-row>
     </div>
     
     <div class="footer">
       <!-- homepage -->
-      <a href="#" class="cl-white fl-left">
+      <a href="" class="cl-white fl-left" @click="goToHomePage">
         <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('domain') }}
       </a>
       <!-- change language -->
@@ -101,7 +101,7 @@ import RegisterData from './register-data';
 
 @Component({
   components: {
-    SelectLanguage: () => import('@/components/SelectLanguage/SelectLanguage.vue')
+    SelectLanguage: () => import('@/components/language/SelectLanguage.vue')
   }
 })
 export default class Register extends Vue {
@@ -111,9 +111,25 @@ export default class Register extends Vue {
     
   }
 
+  /**
+   * Click button register
+   */
   onClickRegister(): void {
     // TODO
-    debugger
+  }
+
+  /**
+   * Go to login page
+   */
+  goToLogin(): void {
+    this.$router.push({ name: 'Login' });
+  }
+
+  /**
+   * Go to homepage
+   */
+  goToHomePage(): void {
+    this.$router.push({name: 'HomePage'});
   }
 }
 </script>
