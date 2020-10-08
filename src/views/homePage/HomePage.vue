@@ -77,8 +77,65 @@
           </b-col>
         </div>
         <div style="float: left; width: 100%">
-          <h3 style="float: left; font-weight: bold">Tin nổi bật</h3>
+          <h3 style="float: left; font-weight: bold;">Tin nổi bật</h3>
           <a class="my-news">Hiển thị tin của bạn tại đây?</a>
+        </div>
+    </div>
+    <div class="footer">
+        <h2 style="color: red; font-weight: bold;">Tại sao lại chọn PiHomee ?</h2>
+        <span style="font-size: 20px;">Chúng tôi biết bạn có rất nhiều lựa chọn, nhưng PiHomee.com tự hào 
+          là trang web đứng top google về các từ khóa: <span style="font-weight: bold">cho thuê phòng trọ, nhà trọ,
+          thuê nhà nguyên căn, cho thuê căn hộ, tìm người ở ghép...</span>
+          Vì vậy tin của bạn đăng trên website sẽ tiếp cận được 
+          với nhiều khách hàng hơn, do đó giao dịch nhanh hơn, tiết kiệm chi phí hơn
+        </span>
+        <b-row style="margin-left:10px;">
+            <b-col></b-col>
+            <b-col style="margin-left: -5px">
+              <span style="font-size: 25px; font-weight: bold;">20.000+</span>
+            </b-col>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 25px; font-weight: bold;">100.000+</span>
+            </b-col>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 25px; font-weight: bold;">500.000+</span>
+            </b-col>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 25px; font-weight: bold;">2.000.000+</span>
+            </b-col>
+            <b-col></b-col>
+        </b-row>
+        <b-row>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 15px;">Thành viên</span>
+            </b-col>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 15px;">Tin đăng</span>
+            </b-col>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 15px;">lượt truy cập</span>
+            </b-col>
+            <b-col></b-col>
+            <b-col>
+              <span style="font-size: 15px;">lượt xem</span>
+            </b-col>
+            <b-col></b-col>
+        </b-row>
+        <b-row>
+          <h2 style="color: red; 
+                    font-weight: bold;
+                    display: block;
+                    margin-left: 90px;">Chúng tôi luôn mong đem đến hiệu quả tối đa cho khách hàng
+            </h2>
+        </b-row>
+        <div class="image">
+           <b-img-lazy :src="require('@/assets/footer.png')"></b-img-lazy>
         </div>
     </div>
   </b-container>
@@ -112,9 +169,6 @@ export default class HomePage extends Vue {
   width: 1024px;
   margin: 0 auto;
   background-color: white;
-}
-.footer {
-  width: 1024px;
 }
 .title {
   font-size: 2rem !important;
@@ -162,9 +216,7 @@ a:hover {
 .fl-left {
   float: left;
 }
-.footer >>> .lang-position {
-  float: right;
-}
+
 .button-r {
   float: right;
 }
@@ -236,5 +288,13 @@ height: 150px;
   margin-top: 15px;
   float: left;
   margin-left: 30px;
+}
+.footer {
+  width: 1024px;
+  height: 500px;
+  border-top: 1px black;
+  background-color: #ededed;
+  float: left;
+  margin-left: 310px;
 }
 </style>
