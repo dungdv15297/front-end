@@ -10,13 +10,27 @@
       <b-row class="my-3">
         <b-col>
           <!-- Username -->
-          <b-form-input v-model="loginData.username" :placeholder="$t('login.username')"></b-form-input>
+          <b-form-input
+            type="text"
+            v-model="loginData.username"
+            :placeholder="$t('login.username')"
+            :state="validation.username.rule"
+            v-b-tooltip.hover.right.v-danger
+            :title="$t(validation.username.msg())"
+          ></b-form-input>
         </b-col>
       </b-row>
       <b-row class="my-3">
         <b-col>
           <!-- Password -->
-          <b-form-input v-model="loginData.password" :placeholder="$t('login.password')"></b-form-input>
+          <b-form-input
+            type="password"
+            v-model="loginData.password"
+            :placeholder="$t('login.password')"
+            :state="validation.password.rule"
+            v-b-tooltip.hover.right.v-danger
+            :title="$t(validation.password.msg())"
+          ></b-form-input>
         </b-col>
       </b-row>
       <b-row>
@@ -71,6 +85,7 @@ import AuthRequest from '@/base/request/auth-request';
 import AuthResponse from '@/base/response/auth-response';
 import Account from '@/base/domains/account';
 import { dialogTypes } from '@/base/enum/dialog-types';
+import * as validate from './validation-rules';
 
 @Component({
   components: {
@@ -80,25 +95,25 @@ import { dialogTypes } from '@/base/enum/dialog-types';
 export default class Login extends BaseHelper {
 
   loginData: LoginData = new LoginData();
+  validation: any = validate.validation();
 
   API = {
     login: 'account/authenticate'
   }
 
-  created() {
-
-  }
+  created() {}
 
   /**
    * Click button login
    */
   onClickLogin(): void {
-    const account = new Account({
+    this.validation = validate.validation(this.loginData);
+    if (!this.validation.isValid()) {
+      return;
+    }
+    const body: AuthRequest = new AuthRequest({
       username: this.loginData.username,
       password: this.loginData.password
-    });
-    const body: AuthRequest = new AuthRequest({
-      account: account
     });
     axios.post<AuthResponse>(this.API.login, body)
       .then(response => {
@@ -161,7 +176,8 @@ export default class Login extends BaseHelper {
   height: 100vh;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,101,0.9220063025210083) 40%, rgba(0,212,255,1) 100%);
 }
-.btn-login {
+.btn-login
+.btn-login[disabled]:hover {
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,93,1) 0%, rgba(0,212,255,1) 100%);
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }

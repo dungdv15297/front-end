@@ -92,12 +92,9 @@ export default class Login extends BaseHelper {
    * Click button login
    */
   onClickLogin(): void {
-    const account = new Account({
+    const body: AuthRequest = new AuthRequest({
       username: this.loginData.username,
       password: this.loginData.password
-    });
-    const body: AuthRequest = new AuthRequest({
-      account: account
     });
     axios.post<AuthResponse>(this.API.login, body)
       .then(response => {
