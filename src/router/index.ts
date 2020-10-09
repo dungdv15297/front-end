@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig, Route } from 'vue-router';
 import MainView from '@/views/MainView.vue';
 import Login from '@/views/login/Login.vue';
 import Error from '@/views/Error.vue';
+import HomePage from '@/views/homePage/HomePage.vue';
 import Register from '@/views/register/Register.vue';
 import PersonalInfor from '@/views/personalInfor/PersonalInfor.vue';
 import BaseHelper from '@/base/BaseHelper.vue';
@@ -51,6 +52,11 @@ const routes: Array<RouteConfig> = [
     path: '/personal',
     name: 'Personal',
     component: PersonalInfor
+  },
+  {
+    path: '/homePage',
+    name: 'homePage',
+    component: HomePage
   }
 ]
 
