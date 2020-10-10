@@ -15,7 +15,13 @@
             <b-input-group-prepend is-text>
               <b-icon icon="person-badge"></b-icon>
             </b-input-group-prepend>
-            <b-form-input type="text" v-model="registerData.fullname" aria-label="abc" :placeholder="$t('register.name')"></b-form-input>
+            <b-form-input type="text"
+              v-model="registerData.fullname"
+              :placeholder="$t('register.name')"
+              :state="validation.fullname.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.fullname.msg())"
+            ></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -26,7 +32,13 @@
             <b-input-group-prepend is-text>
               <b-icon icon="phone"></b-icon>
             </b-input-group-prepend>
-            <b-form-input type="text" v-model="registerData.phone" :placeholder="$t('register.phone')"></b-form-input>
+            <b-form-input type="text"
+              v-model="registerData.phone"
+              :placeholder="$t('register.phone')"
+              :state="validation.phone.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.phone.msg())"
+            ></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -37,7 +49,13 @@
             <b-input-group-prepend is-text>
               <b-icon icon="person-plus"></b-icon>
             </b-input-group-prepend>
-            <b-form-input type="text" v-model="registerData.username" :placeholder="$t('register.username')"></b-form-input>
+            <b-form-input type="text"
+              v-model="registerData.username"
+              :placeholder="$t('register.username')"
+              :state="validation.username.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.username.msg())"
+            ></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -48,7 +66,13 @@
             <b-input-group-prepend is-text>
               <b-icon icon="lock"></b-icon>
             </b-input-group-prepend>
-            <b-form-input type="password" v-model="registerData.password" :placeholder="$t('register.password')"></b-form-input>
+            <b-form-input type="password"
+              v-model="registerData.password"
+              :placeholder="$t('register.password')"
+              :state="validation.password.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.password.msg())"
+            ></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -59,7 +83,13 @@
             <b-input-group-prepend is-text>
               <b-icon icon="lock-fill"></b-icon>
             </b-input-group-prepend>
-            <b-form-input type="password" v-model="registerData.rePassword" :placeholder="$t('register.rePassword')"></b-form-input>
+            <b-form-input type="password"
+              v-model="registerData.rePassword"
+              :placeholder="$t('register.rePassword')"
+              :state="validation.rePassword.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.rePassword.msg())"
+            ></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -78,14 +108,14 @@
       <b-row>
         <b-col class="text-right">
           <!-- Link sign in -->
-          <a href="#" class="text-small">{{ $t('register.signin') }}</a>
+          <a href="" class="text-small" @click="goToLogin">{{ $t('register.signin') }}</a>
         </b-col>
       </b-row>
     </div>
     
     <div class="footer">
       <!-- homepage -->
-      <a href="#" class="cl-white fl-left">
+      <a href="" class="cl-white fl-left" @click="goToHomePage">
         <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('domain') }}
       </a>
       <!-- change language -->
@@ -98,22 +128,80 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
 import RegisterData from './register-data';
+import RegisterRequest from '@/base/request/register-request';
+import axios from '@/base/customAxios';
+import { dialogTypes } from '@/base/enum/dialog-types';
+import AuthResponse from '@/base/response/auth-response';
+import * as validate from './validation-rules';
 
 @Component({
   components: {
-    SelectLanguage: () => import('@/components/SelectLanguage/SelectLanguage.vue')
+    SelectLanguage: () => import('@/components/language/SelectLanguage.vue')
   }
 })
-export default class Register extends Vue {
+export default class Register extends BaseHelper {
   registerData: RegisterData = new RegisterData();
-  
-  created() {
-    
+  API = {
+    register: 'account/register'
   }
 
+  isValidate: boolean = false;
+
+  get validation(): any {
+    return !this.isValidate ? validate.validation() : validate.validation(this.registerData);
+  }
+
+  created() {}
+
+  /**
+   * Click button register
+   */
   onClickRegister(): void {
-    // TODO
-    debugger
+    this.isValidate = true;
+    if (!this.validation.isValid()) {
+      return;
+    }
+    const body: RegisterRequest = new RegisterRequest({
+      fullname: this.registerData.fullname,
+      phone: this.registerData.phone,
+      username: this.registerData.username,
+      password: this.registerData.password,
+      rePassword: this.registerData.rePassword
+    });
+    axios.post<AuthResponse>(this.API.register, body)
+      .then(response => {
+        if (response && response.data && response.data.jwt) {
+          const token: string = response.data.jwt;
+          localStorage.setItem('token', token);
+          this.openDialog(dialogTypes.INFORMATION, 'MSG102', () => {
+            this.$router.push({name: 'HomePage'});
+          });
+        }
+      })
+      .catch(error => {
+        if (!!error.response && !!error.response && !!error.response.data.errorCode) {
+          this.openDialog(dialogTypes.WARNING, error.response.data.errorCode, () => {
+            if (error.response.data.errorCode === 'ERR005') {
+              this.validation.username.rule = false;
+              this.validation.username.firstRule = false;
+            }
+          })
+        }
+      })
+  }
+
+  /**
+   * Go to login page
+   */
+  goToLogin(): void {
+    this.$router.push({ name: 'Login' });
+  }
+
+  /**
+   * Go to homepage
+   */
+  goToHomePage(): void {
+    this.$router.push({name: 'HomePage'});
   }
 }
 </script>

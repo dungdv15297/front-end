@@ -13,6 +13,14 @@
     "informationDialog": "INFORMATION",
     "warningDialog": "WARNING"
   },
+  "tooltip": {
+    "VALIDATE001": "Username must not be blank and have at least 4 characters",
+    "VALIDATE002": "Password must not be blank and have at least 6 characters",
+    "VALIDATE003": "Fullname must not be blank",
+    "VALIDATE004": "Phone number is not in the correct format",
+    "VALIDATE005": "This username has already existed",
+    "VALIDATE006": "Confirmation must match password"
+  },
   "dialog": {
     "confirm": "Confirm",
     "warning": "Warning",
@@ -28,8 +36,11 @@
     "MSG002": "Success!",
     "MSG100": "Login failed!",
     "MSG101": "Login successful",
+    "MSG102": "Register successful",
     "ERR100": "You must login first as administrator to view this site",
-    "ERR101": "User must be an administrator to view this site"
+    "ERR101": "User must be an administrator to view this site",
+    "ERR004": "The information entered is not valid",
+    "ERR005": "This account has already existed"
   },
   "language": {
     "lang": "Language",

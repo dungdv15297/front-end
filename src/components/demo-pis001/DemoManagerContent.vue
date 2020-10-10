@@ -21,7 +21,7 @@ import * as validate from './validations';
 
 @Component({
   components: {
-    PisInput: () => import('@/components/BaseBiz/PisInput.vue')
+    PisInput: () => import('@/components/basebiz/PisInput.vue')
   }
 })
 export default class DemoManagerContent extends BaseHelper {
