@@ -1,34 +1,21 @@
 import Vue from 'vue';
-import VueRouter, { RouteConfig, Route } from 'vue-router';
-import MainView from '@/views/MainView.vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import MainView from '@/views/mainview/MainView.vue';
 import Login from '@/views/login/Login.vue';
 import Error from '@/views/Error.vue';
 import Register from '@/views/register/Register.vue';
 import PersonalInfor from '@/views/personalInfor/PersonalInfor.vue';
-import BaseHelper from '@/base/BaseHelper.vue';
-import { dialogTypes } from '@/base/enum/dialog-types';
+import ForgotPass from '@/views/forgot/ForgotPass.vue';
+import Views from '@/views/normal-main-view/Views.vue';
+import SearchPage from '@/views/normal-main-view/search-page/SearchPage.vue';
+import HomePage from '@/views/normal-main-view/home-page/HomePage.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/main-view',
-    name: 'MainView',
-    beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('token');
-      const isManaged = localStorage.getItem('isManaged');
-      if (!!token && isManaged) {
-        next();
-      }
-
-      next({
-        name: 'Error',
-        params: {
-          code: 'ERR101',
-          mess: 'ERR101'
-        }
-      });
-    },
+    path: '/manager',
+    name: 'manager',
     component: MainView
   },
   {
@@ -51,6 +38,35 @@ const routes: Array<RouteConfig> = [
     path: '/personal',
     name: 'Personal',
     component: PersonalInfor
+  },
+  {
+    path: '/forgot',
+    name: 'ForgotPass',
+    component: ForgotPass
+  },
+  {
+    path: '/',
+    name: 'Views',
+    component: Views,
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        component: HomePage
+      },
+      {
+        path: '/search',
+        component: SearchPage,
+        props: route => ({
+          type: route.query.type,
+          district: route.query.district,
+          province: route.query.province,
+          street: route.query.street,
+          pr: route.query.pr,
+          sr: route.query.sr
+        })
+      }
+    ]
   }
 ]
 
@@ -61,19 +77,35 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  const isManaged = localStorage.getItem('isManaged');
+  // If go to MainView page, check the condition
   if (to.name === 'MainView') {
-    const token = localStorage.getItem('token');
-    const isManaged = localStorage.getItem('isManaged');
+    // If do not have a token in storage, redirect to Error page with ERR100
     if (token === null) {
-      const helper: BaseHelper = new BaseHelper();
-      (helper as any).openDialog(dialogTypes.WARNING, 'ERR100');
-      return;
+      next({
+        name: 'Error',
+        params: {
+          code: 'ERR100',
+          mess: 'ERR100'
+        }
+      });
+    // If has token but not managed user, redirect to Error page with ERR101
     } else if (isManaged === null || !isManaged) {
-      const helper: BaseHelper = new BaseHelper();
-      (helper as any).openDialog(dialogTypes.WARNING, 'ERR101');
-      return
+      next({
+        name: 'Error',
+        params: {
+          code: 'ERR101',
+          mess: 'ERR101'
+        }
+      });
     }
   }
+  // If go to Login page with a valid token, redirect to Homepage
+  if ((to.name === 'Login' || to.name === 'Register') && !!token) {
+    next({ name: 'HomePage' });
+  }
+
   next();
 })
 

@@ -1,10 +1,7 @@
 .<template>
   <div class="screen-size" ref="screen-size" v-if="isShow">
-    <!-- BizHeader -->
-    <biz-header ref="header" screen-id="PIS002" pw=600 ph=475 @close="closeWindow" />
-    <!-- BizContent -->
+    <biz-header ref="header" screen-id="PIS001" pw=800 ph=800 @close="closeWindow" />
     <biz-content ref="biz-content"/>
-    <!-- BizFooter -->
     <biz-footer />
   </div>
 </template>
@@ -16,20 +13,20 @@ import BaseHelper from '@/base/BaseHelper.vue';
 
 @Component({
   components: {
-    BizHeader: () => import('@/components/BaseBiz/BizHeader.vue'),
-    BizContent: () => import('@/components/PIS002/CourseInformationContent.vue'),
-    BizFooter: () => import('@/components/BaseBiz/BizFooter.vue')
+    BizHeader: () => import('@/components/basebiz/BizHeader.vue'),
+    BizContent: () => import('@/components/demo-pis001/DemoManagerContent.vue'),
+    BizFooter: () => import('@/components/basebiz/BizFooter.vue')
   }
 })
-export default class CourseInformation extends BaseHelper {
+export default class DemoManager extends BaseHelper {
   
 }
 </script>
 
 <style>
 .screen-size {
-  width: 600px;
-  height: 480px;
+  width: 800px;
+  height: 800px;
   position: absolute;
   z-index: 5;
   background-color: #ffffff;

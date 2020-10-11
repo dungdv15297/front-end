@@ -18,7 +18,7 @@ import BaseHelper from '@/base/BaseHelper.vue';
 
 @Component({
   components: {
-    Icons: () => import('@/components/Icons/Icons.vue')
+    Icons: () => import('@/components/icons/Icons.vue')
   }
 })
 export default class BizHeader extends BaseHelper {

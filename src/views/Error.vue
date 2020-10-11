@@ -17,7 +17,6 @@ export default class Error extends Vue {
   mess!: string;
 
   get errorCode(): string {
-    debugger
     return !!this.code ? this.$t(`errorCode.${this.code}`).toString() : '';
   }
 

@@ -63,7 +63,7 @@ import { dialogTypes } from "@/base/enum/dialog-types";
 
 @Component({
   components: {
-    Icons: () => import('@/components/Icons/Icons.vue')
+    Icons: () => import('@/components/icons/Icons.vue')
   }
 })
 export default class Dialog extends Vue {
