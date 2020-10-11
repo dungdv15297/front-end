@@ -86,6 +86,38 @@
 
                     </div>
                  </div>
+
+                 <!--Divtest cua hieu -->
+                   
+                        <div class="card1">
+                            <div style="margin: 10px 10px 10px 10px;">
+                            <b-card no-body class="overflow-hidden" style="max-width: 500px; border: none;">
+                                <b-row no-gutters>
+                                <b-col md="5">
+                                    <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="rounded-0"></b-card-img>
+                                    <img class="iconSao" src="https://www.debtcollectionsagencyhouston.com/wp-content/uploads/2014/03/rating5star1.png" width="70px">
+                                </b-col>
+                                <b-col md="7">
+                                    <div class="textTitle">
+                                        <strong style="font-size:17px;color:red;"><a href="#">Cho thuê phòng mới xây Full nội thất cơ bản, giờ giấc tự do</a></strong><br>
+                                        <p  style="color:green;font-size:19px;margin-top:5px"><strong>4 triệu/tháng</strong></p>
+                                        <p  style="margin-top:5px">
+                                            <strong style="float:left;">20m&sup2;</strong>
+                                            <strong style="clear:both;color: blue; margin-left: 10px;font-size:14px;"><a href="#">Quận Thủ Đức, Hồ Chí Minh</a></strong>
+                                        </p>
+                                        <p style="margin-top:5px">
+                                            <span style="color:black;opacity:60%;">địa chỉ: 25a đường 16, p.linh lan, q.bình thạnh. phòng trọ minh hải...</span>
+                                        </p>
+                                        <img class="iconHot" src="https://hwp.com.vn/wp-content/uploads/2017/02/icon-hot.gif" >
+                                    </div>
+                                </b-col>
+                                </b-row>
+                            </b-card>
+                            </div>
+                        </div>
+                    
+
+
              </b-col>
          </b-row>
     </b-container>
@@ -152,6 +184,33 @@ export default class PersonalInfor extends Vue {
     .iconuser{
         height: 90px;
 
+    }
+
+    /* Css caur divtest hieu */
+    .card1{
+        float:left;
+        margin-right: 30px;
+        border: 1px solid red;
+    }
+    .textTitle{
+        width: 80%;
+        height: auto;
+        margin-left: 15px ;
+    }
+    .textTitle a:hover{
+        color: red;
+    }
+    .iconHot{
+        position: relative;
+        top: -220px;
+        right: -240px;
+    }
+    .rounded-0{
+        position:absolute;
+    }
+    .iconSao{
+        position:relative;
+        left:130px;
     }
 
 </style>
