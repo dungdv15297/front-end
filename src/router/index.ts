@@ -3,19 +3,19 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import MainView from '@/views/mainview/MainView.vue';
 import Login from '@/views/login/Login.vue';
 import Error from '@/views/Error.vue';
-import HomePage from '@/views/homePage/HomePage.vue';
 import Register from '@/views/register/Register.vue';
 import PersonalInfor from '@/views/personalInfor/PersonalInfor.vue';
-import BaseHelper from '@/base/BaseHelper.vue';
-import { dialogTypes } from '@/base/enum/dialog-types';
 import ForgotPass from '@/views/forgot/ForgotPass.vue';
+import Views from '@/views/normal-main-view/Views.vue';
+import SearchPage from '@/views/normal-main-view/search-page/SearchPage.vue';
+import HomePage from '@/views/normal-main-view/home-page/HomePage.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/main-view',
-    name: 'MainView',
+    path: '/manager',
+    name: 'manager',
     component: MainView
   },
   {
@@ -29,11 +29,6 @@ const routes: Array<RouteConfig> = [
     component: Register
   },
   {
-    path: '/homepage',
-    name: 'HomePage',
-    component: HomePage
-  },
-  {
     path: '/404',
     name: 'Error',
     props: true,
@@ -45,14 +40,33 @@ const routes: Array<RouteConfig> = [
     component: PersonalInfor
   },
   {
-    path: '/homePage',
-    name: 'homePage',
-    component: HomePage
-  },
-  {
     path: '/forgot',
     name: 'ForgotPass',
     component: ForgotPass
+  },
+  {
+    path: '/',
+    name: 'Views',
+    component: Views,
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        component: HomePage
+      },
+      {
+        path: '/search',
+        component: SearchPage,
+        props: route => ({
+          type: route.query.type,
+          district: route.query.district,
+          province: route.query.province,
+          street: route.query.street,
+          pr: route.query.pr,
+          sr: route.query.sr
+        })
+      }
+    ]
   }
 ]
 
