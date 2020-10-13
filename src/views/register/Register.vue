@@ -151,7 +151,12 @@ export default class Register extends BaseHelper {
     return !this.isValidate ? validate.validation() : validate.validation(this.registerData);
   }
 
-  created() {}
+  created() {
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      this.$router.push({ path: '/home' });
+    }
+  }
 
   /**
    * Click button register
@@ -174,7 +179,7 @@ export default class Register extends BaseHelper {
           const token: string = response.data.jwt;
           localStorage.setItem('token', token);
           this.openDialog(dialogTypes.INFORMATION, 'MSG102', () => {
-            this.$router.push({name: 'HomePage'});
+            this.$router.push({name: 'Views'});
           });
         }
       })

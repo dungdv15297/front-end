@@ -40,7 +40,10 @@
     "ERR100": "You must login first as administrator to view this site",
     "ERR101": "User must be an administrator to view this site",
     "ERR004": "The information entered is not valid",
-    "ERR005": "This account has already existed"
+    "ERR005": "This account has already existed",
+    "ERR006": "There was a problem with the execution",
+    "ERR007": "Can not find your account information"
+
   },
   "language": {
     "lang": "Language",
@@ -100,5 +103,14 @@
     "register": "REGISTER",
     "slogan": "Pihomee in your account"
   },
-  "domain": "pihomee.herokuapp.com"
+  "domain": "pihomee.herokuapp.com",
+  "views": {
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "news": "New room",
+    "hello": "Hello",
+    "manager": "Manager",
+    "managerAccount": "User Information",
+    "signout": "Sign out"
+  }
 }

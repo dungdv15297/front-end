@@ -7,52 +7,54 @@
           <label class="title"> {{ $t('login.login') }} </label>
         </b-col>
       </b-row>
-      <b-row class="my-3">
-        <b-col>
-          <!-- Username -->
-          <b-form-input
-            type="text"
-            v-model="loginData.username"
-            :placeholder="$t('login.username')"
-            :state="validation.username.rule"
-            v-b-tooltip.hover.right.v-danger
-            :title="$t(validation.username.msg())"
-          ></b-form-input>
-        </b-col>
-      </b-row>
-      <b-row class="my-3">
-        <b-col>
-          <!-- Password -->
-          <b-form-input
-            type="password"
-            v-model="loginData.password"
-            :placeholder="$t('login.password')"
-            :state="validation.password.rule"
-            v-b-tooltip.hover.right.v-danger
-            :title="$t(validation.password.msg())"
-          ></b-form-input>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col class="text-left">
-          <!-- Remember Me -->
-          <b-form-checkbox
-            id="checkbox-1"
-            v-model="loginData.rememberMe"
-            name="checkbox-1"
-            value="accepted"
-            unchecked-value="not_accepted"
-          >
-            {{ $t('login.remember') }}
-          </b-form-checkbox>
-        </b-col>
-      </b-row>
-      <b-row class="my-3">
-        <b-col>
-          <!-- Login button -->
-          <b-button class="btn-login" block variant="info" @click="onClickLogin"> {{ $t('login.loginBtn') }} </b-button>
-        </b-col>
-      </b-row>
+      <b-form>
+        <b-row class="my-3">
+          <b-col>
+            <!-- Username -->
+            <b-form-input
+              type="text"
+              v-model="loginData.username"
+              :placeholder="$t('login.username')"
+              :state="validation.username.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.username.msg())"
+            ></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row class="my-3">
+          <b-col>
+            <!-- Password -->
+            <b-form-input
+              type="password"
+              v-model="loginData.password"
+              :placeholder="$t('login.password')"
+              :state="validation.password.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.password.msg())"
+            ></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left">
+            <!-- Remember Me -->
+            <b-form-checkbox
+              id="checkbox-1"
+              v-model="loginData.rememberMe"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+              {{ $t('login.remember') }}
+            </b-form-checkbox>
+          </b-col>
+        </b-row>
+        <b-row class="my-3">
+          <b-col>
+            <!-- Login button -->
+            <b-button class="btn-login" block variant="info" @click="onClickLogin"> {{ $t('login.loginBtn') }} </b-button>
+          </b-col>
+        </b-row>
+      </b-form>
       <b-row>
         <b-col class="text-left">
           <!-- Link forgot password -->
@@ -101,7 +103,12 @@ export default class Login extends BaseHelper {
     login: 'account/authenticate'
   }
 
-  created() {}
+  created() {
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      this.$router.push({ path: '/home' });
+    }
+  }
 
   /**
    * Click button login
@@ -121,7 +128,8 @@ export default class Login extends BaseHelper {
           const token: string = response.data.jwt;
           localStorage.setItem('token', token);
           this.openDialog(dialogTypes.INFORMATION, 'MSG101', () => {
-            this.$router.push({name: 'HomePage'});
+            const path: any = this.$route.query.from || '';
+            this.$router.push({ path: atob(path)} );
           });
         }
       })
@@ -141,7 +149,7 @@ export default class Login extends BaseHelper {
    * Go to homepage
    */
   goToHomePage(): void {
-    this.$router.push({name: 'HomePage'});
+    this.$router.push({name: 'Views'});
   }
 
   /**
