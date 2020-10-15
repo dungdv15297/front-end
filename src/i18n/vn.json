@@ -13,6 +13,14 @@
     "informationDialog": "INFORMATION",
     "warningDialog": "WARNING"
   },
+  "tooltip": {
+    "VALIDATE001": "Username must not be blank and have at least 4 characters",
+    "VALIDATE002": "Password must not be blank and have at least 6 characters",
+    "VALIDATE003": "Fullname must not be blank",
+    "VALIDATE004": "Phone number is not in the correct format",
+    "VALIDATE005": "This username has already existed",
+    "VALIDATE006": "Confirmation must match password"
+  },
   "dialog": {
     "confirm": "Confirm",
     "warning": "Warning",
@@ -27,7 +35,15 @@
     "MSG001": "Are you sure?",
     "MSG002": "Success!",
     "MSG100": "Login failed!",
-    "MSG101": "Login successful"
+    "MSG101": "Login successful",
+    "MSG102": "Register successful",
+    "ERR100": "You must login first as administrator to view this site",
+    "ERR101": "User must be an administrator to view this site",
+    "ERR004": "The information entered is not valid",
+    "ERR005": "This account has already existed",
+    "ERR006": "There was a problem with the execution",
+    "ERR007": "Can not find your account information"
+
   },
   "language": {
     "lang": "Language",
@@ -35,8 +51,8 @@
     "en": "English"
   },
   "pageFooter": {
-    "created": "Poly Information System",
-    "design": "@2020 Designed by UD-Poly Team"
+    "created": "Pihomee Information System",
+    "design": "@2020 Designed by Pihomee Team"
   },
   "module": {
     "pis01": "Inform Sys 1",
@@ -47,14 +63,10 @@
     "account": "Account"
   },
   "errorMess": {
-    "404": "Sory!! <br/> 404 Page not found!",
-    "ERR100": "Sory!! <br/> You must login first as administrator to view this site",
-    "ERR101": "Sory!! <br/> User must be an administrator to view this site"
+    "404": "Sory!! <br/> 404 Page not found!"
   },
   "errorCode": {
-    "404": "404",
-    "ERR100": "ERR100",
-    "ERR101": "ERR101"
+    "404": "404"
   },
   "pis002": {
     "code": "Code",
@@ -91,5 +103,49 @@
     "register": "REGISTER",
     "slogan": "Pihomee in your account"
   },
-  "domain": "pihomee.herokuapp.com"
+  "domain": "pihomee.herokuapp.com",
+  "views": {
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "news": "New room",
+    "hello": "Hello",
+    "manager": "Manager",
+    "managerAccount": "User Information",
+    "signout": "Sign out"
+  },
+  "personal": {
+    "home": "PIHOMEE",
+    "balance": "Balance: ",
+    "name": "Full name",
+    "birthday": "Birthday",
+    "gender": "Gender",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone number",
+    "title": "Personal Information",
+    "homepage": "Homepage",
+    "room": "Room",
+    "house": "House",
+    "post": "Post news",
+    "news": "My rooms information",
+    "infor": "Personal information",
+    "payment": "Payment history",
+    "signout": "Sign out",
+    "accountTitle": "My account",
+    "edit": "Edit",
+    "update": "Update",
+    "username": "Username",
+    "updated": "Last updated",
+    "changePass": "Change password",
+    "updateInfor": "Update your information",
+    "password": "Password",
+    "newPass": "New password",
+    "confirm": "Confirm new password",
+    "submit": "Submit"
+  },
+  "gender": {
+    "0": "Male",
+    "1": "Female",
+    "2": "Other"
+  }
 }

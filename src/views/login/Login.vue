@@ -106,7 +106,7 @@ export default class Login extends BaseHelper {
   }
 
   created() {
-    const token = localStorage.getItem('token');
+    const token = this.$store.getters['token'];
     if (!!token) {
       this.$router.push({ path: '/home' });
     }
@@ -128,11 +128,9 @@ export default class Login extends BaseHelper {
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;
-          localStorage.setItem('token', token);
-          this.openDialog(dialogTypes.INFORMATION, 'MSG101', () => {
-            const path: any = this.$route.query.from || '';
-            this.$router.push({ path: atob(path)} );
-          });
+          this.$store.dispatch('setToken', token);
+          const path: any = this.$route.query.from || '';
+          this.$router.push({ path: atob(path)} );
         }
       })
       .catch(err => {

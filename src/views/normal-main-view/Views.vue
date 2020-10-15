@@ -138,7 +138,7 @@ export default class Views extends BaseHelper {
       }
     }
     
-    if (localStorage.getItem('token')) {
+    if (this.$store.getters['token']) {
       this.getAccountDetailInfo();
     }
   }
@@ -148,10 +148,12 @@ export default class Views extends BaseHelper {
       .then(response => {
         if (response && response.data) {
           this.accountDetail = response.data;
+          this.$store.dispatch('setAccountId', response.data.id);
         }
       })
       .catch(error => {
-        if (error.response && error.response.data && error.response.errorCode) {
+        if (error.response && error.response.data && error.response.data.errorCode) {
+          this.$store.dispatch('removeToken');
           this.openDialog(dialogTypes.WARNING, error.response.data.errorCode);
         }
       });
@@ -171,9 +173,9 @@ export default class Views extends BaseHelper {
   }
 
   onClickSignOut(): void {
-    const token = localStorage.getItem('token');
+    const token = this.$store.getters['token'];
     if (!!token) {
-      localStorage.removeItem('token');
+      this.$store.dispatch('removeToken');
     }
     this.$router.go(0);
   }

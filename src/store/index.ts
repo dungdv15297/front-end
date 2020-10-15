@@ -28,6 +28,12 @@ export default new Vuex.Store({
     },
     setListScreen(state, listScreen) {
       state.listScreen = listScreen
+    },
+    removeToken() {
+      localStorage.removeItem('vuex.state.token');
+    },
+    removeAccountId() {
+      localStorage.removeItem('vuex.state.accountId')
     }
   },
   //use: this.$store.dispatch(action, data)
@@ -35,7 +41,9 @@ export default new Vuex.Store({
     setToken: ({ commit }, data) => commit('setToken', data),
     setAccountId: ({ commit }, data) => commit('setAccountId', data),
     changeLocale: ({ commit }, data) => commit('changeLocale', data),
-    setListScreen: ({ commit }, data) => commit('setListScreen', data)
+    setListScreen: ({ commit }, data) => commit('setListScreen', data),
+    removeToken: ({ commit }) => commit('removeToken'),
+    removeAccountId: ({ commit }) => commit('removeAccountId')
   },
   modules: {
   },

@@ -1,4 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
+import store from '@/store';
 
 export function axiosCreator(): AxiosInstance {
   return Axios.create({  
@@ -6,7 +7,7 @@ export function axiosCreator(): AxiosInstance {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': localStorage.token ? `Bearer ${localStorage.token}` : ''
+      'Authorization': store.getters['token'] ? `Bearer ${store.getters['token']}` : ''
     }
   });
 }

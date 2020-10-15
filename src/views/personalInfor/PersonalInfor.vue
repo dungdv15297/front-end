@@ -1,43 +1,37 @@
 <template>
-  <!-- Dùng container fluid là full màn -->
-  <b-container fluid>
+  <b-container fluid style="min-width: 500px">
     <b-container fluid>
-      <!-- Chia container thành 2 bên trái phải -->
       <b-row class="rowNav">
         <!-- Left -->
-        <b-col sm="3">
-          <!-- Trong left dung container de chia layout tiep -->
-          <b-container fluid>
-            <!-- Logo -->
-            <b-row>
-              <b-col>
-                <b-nav>
-                  <b-nav-item style="font-size: 18px"
-                    ><strong>Pihomee</strong></b-nav-item
-                  >
-                </b-nav>
-              </b-col>
-            </b-row>
-          </b-container>
+        <b-col style="max-width: 300px; min-width: 200px">
+          <!-- Logo -->
+          <router-link class="router-link" :to="{ path: '/' }">
+            <span>{{ $t("personal.home") }}</span>
+          </router-link>
         </b-col>
 
         <!-- Right -->
-        <b-col cols="9">
-          <b-container fluid>
-            <b-nav>
-              <b-nav-item>Trang chủ</b-nav-item>
-              <b-nav-item>Phòng trọ</b-nav-item>
-              <b-nav-item>Nhà cho thuê</b-nav-item>
-            </b-nav>
+        <b-col>
+          <b-container fluid style="text-align: left">
+            <router-link class="router-link" :to="{ path: '/' }">
+              <span>{{ $t("personal.homepage") }}</span>
+            </router-link>
+            <router-link class="router-link" :to="{ path: '/' }">
+              <span>{{ $t("personal.room") }}</span>
+            </router-link>
+            <router-link class="router-link" :to="{ path: '/' }">
+              <span>{{ $t("personal.house") }}</span>
+            </router-link>
           </b-container>
         </b-col>
       </b-row>
     </b-container>
 
     <b-container fluid>
+      <!-- Account detail -->
       <b-row>
         <!-- Left -->
-        <b-col sm="3" class="colUser">
+        <b-col style="max-width: 300px; min-width: 200px; height: 100vh" class="colUser">
           <b-container fluid>
             <!-- Logo User-->
             <b-row style="margin-top: 20px">
@@ -50,157 +44,178 @@
                 >
                 </b-img>
               </b-col>
-              <b-col md="8"">
-                <strong style="margin-left: 15px; font-size: 18px; color: black"
-                  ><span id="name">Hiển thị tên user</span></strong
-                >
+              <b-col md="8">
+                <strong style="margin-left: 15px; font-size: 18px; color: black">
+                  <span id="name">{{ detailData.name }}</span>
+                </strong>
                 <p>
-                  <span
-                    id="phone"
-                    style="margin-left: 15px; color: black; white-space: nowrap"
-                    >Hiển thị Phone</span
-                  >
+                  <span id="phone" style="margin-left: 15px; color: black; white-space: nowrap">{{ detailData.phone }}</span>
                 </p>
               </b-col>
             </b-row>
             <b-row>
               <h6 style="color: black">
-                Mã thành viên : <strong><span id="userid"></span></strong>
+                {{ $t('personal.balance') }} <strong>{{ detailData.balance }}</strong>
               </h6>
             </b-row>
-            <b-row>
-              <h6 style="color: black">
-                Số dư : <strong><span id="balance"></span></strong>
-              </h6>
-            </b-row>
-            <b-row>
-              <b-button variant="danger">Đăng tin</b-button> </b-row
+            <b-row> <b-button variant="danger">{{ $t('personal.post') }}</b-button> </b-row
             ><br />
             <!-- Navbar -->
             <b-row>
-              <b-list-group style="text-align: left; width:350px;">
-                <b-list-group-item href="#"
-                  ><span style="margin-right: 5px" class="h5 mb-2"
-                    ><b-icon icon="file-earmark-text"></b-icon
-                  ></span>
-                  Quản lý tin đăng</b-list-group-item
-                >
-                <b-list-group-item href="#"
-                  ><span style="margin-right: 5px" class="h5 mb-2"
-                    ><b-icon icon="pencil-square"></b-icon
-                  ></span>
-                  Sửa thông tin cá nhân</b-list-group-item
-                >
-                <b-list-group-item href="#"
-                  ><span style="margin-right: 5px" class="h5 mb-2"
-                    ><b-icon icon="calendar4"></b-icon
-                  ></span>
-                  Lịch sử thanh toán</b-list-group-item
-                >
-                <b-list-group-item href="#"
-                  ><span style="margin-right: 5px" class="h5 mb-2"
-                    ><b-icon icon="box-arrow-right"></b-icon
-                  ></span>
-                  Đăng xuất</b-list-group-item
-                >
+              <b-list-group style="text-align: left; width: 350px">
+                <b-list-group-item href="#">
+                  <span style="margin-right: 5px" class="h5 mb-2">
+                    <b-icon icon="file-earmark-text"></b-icon>
+                  </span>
+                  {{ $t('personal.news') }}
+                </b-list-group-item>
+                <b-list-group-item href="#">
+                  <span style="margin-right: 5px" class="h5 mb-2">
+                    <b-icon icon="pencil-square"></b-icon>
+                  </span>
+                  {{ $t('personal.infor') }}
+                </b-list-group-item>
+                <b-list-group-item href="#">
+                  <span style="margin-right: 5px" class="h5 mb-2">
+                    <b-icon icon="calendar4"></b-icon>
+                  </span>
+                  {{  $t('personal.payment') }}
+                </b-list-group-item>
+                <b-list-group-item href="#">
+                  <span style="margin-right: 5px" class="h5 mb-2">
+                    <b-icon icon="box-arrow-right"></b-icon>
+                  </span>
+                  {{ $t('personal.signout') }}
+                </b-list-group-item>
               </b-list-group>
             </b-row>
           </b-container>
         </b-col>
 
         <!-- Right -->
-        <b-col cols="9" style="text-align: left">
+        <b-col>
+          <!-- Personal Infor -->
           <b-container fluid>
-            <h3>
-              <strong style="line height:30px;"
-                >Cập nhật thông tin thành viên</strong
-              >
-            </h3>
-            <hr />
-            <br />
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Mã thành viên"
-              label-for="input-userid"
-            >
-              <b-form-input id="userid" readonly></b-form-input>
+            <b-row class="title">{{ $t('personal.title') }}</b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.name') }}</b-col>
+              <b-col class="ml-20">{{ detailData.name }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.birthday') }}</b-col>
+              <b-col class="ml-20">{{ detailData.birthday }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.gender') }}</b-col>
+              <b-col class="ml-20">{{ $t(`gender.${detailData.gender}`) }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.address') }}</b-col>
+              <b-col class="ml-20">{{ detailData.address }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.email') }}</b-col>
+              <b-col class="ml-20">{{ detailData.email }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.phone') }}</b-col>
+              <b-col class="ml-20">{{ detailData.phone }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.updated') }}</b-col>
+              <b-col class="ml-20">{{ detailData.updated }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-button variant="primary" v-b-modal.modal-1 style="width: 100%; margin-top: 15px">{{ $t('personal.edit') }}</b-button>
+            </b-row>
+          </b-container>
+          <!-- Account -->
+          <b-container fluid>
+            <b-row class="title">{{ $t('personal.accountTitle') }}</b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.username') }}</b-col>
+              <b-col class="ml-20">{{ detailData.username }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-col class="mw-200 bold">{{ $t('personal.updated') }}</b-col>
+              <b-col class="ml-20">{{ detailData.updatedAc }}</b-col>
+            </b-row>
+            <b-row class="text-left">
+              <b-button variant="primary" v-b-modal.modal-2 style="width: 100%; margin-top: 15px">{{ $t('personal.changePass') }}</b-button>
+            </b-row>
+          </b-container>
+        </b-col>
+        <!-- Modal update information -->
+        <b-modal id="modal-1" size="lg" hide-footer no-close-on-backdrop>
+          <template v-slot:modal-title>
+            <strong>{{ $t('personal.updateInfor') }}</strong>
+          </template>
+          <b-container fluid>
+            <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.name')" label-for="input-name">
+              <b-form-input id="name" v-model="detailData.name"></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Họ tên"
-              label-for="input-name"
-            >
-              <b-form-input id="name"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.birthday')" label-for="input-birthday">
+              <b-form-datepicker id="birthday"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                locale="en"
+                v-model="detailData.birthday">
+              </b-form-datepicker>
             </b-form-group>
 
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Ngày sinh"
-              label-for="input-birthday"
-            >
-              <b-form-input id="birthday"></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              style="border: none"
-              label="Giới tính"
-              label-for="radio-gender"
-            >
+            <b-form-group label-cols="4" label-cols-lg="2" style="border: none" :label="$t('personal.gender')" label-for="radio-gender">
               <b-form-radio-group
                 id="gender"
-                :options="['Nam', 'Nữ', 'Khác']"
-              ></b-form-radio-group>
+                :options="genderOption"
+                v-model="detailData.gender">
+              </b-form-radio-group>
             </b-form-group>
 
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Địa chỉ"
-              label-for="input-default"
-            >
-              <b-form-input id="adress"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.address')" label-for="input-default">
+              <b-form-input id="adress" v-model="detailData.address"></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Email"
-              label-for="input-default"
-            >
+            <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.email')" label-for="input-default">
               <b-form-input
                 id="email"
                 placeholder="nguyenvana@gmail.com"
-              ></b-form-input>
+                v-model="detailData.email">
+              </b-form-input>
             </b-form-group>
 
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Số điện thoại"
-              label-for="input-default"
-            >
-              <b-form-input id="phone"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.phone')" label-for="input-default">
+              <b-form-input id="phone" v-model="detailData.phone"></b-form-input>
             </b-form-group>
-
-            <b-form-group
-              label-cols="4"
-              label-cols-lg="2"
-              label="Trạng thái"
-              label-for="input-default"
-            >
-              <b-form-input id="status"></b-form-input>
-            </b-form-group>
-            <b-button variant="primary" style="width: 100%; margin-top: 15px"
-              >Cập nhật</b-button
-            >
+            <b-button variant="primary" style="width: 100%; margin-top: 15px" @click="onClickUpdateInfor">{{ $t('personal.update') }}</b-button>
           </b-container>
-        </b-col>
+        </b-modal>
+        <!-- Modal change pass -->
+        <b-modal id="modal-2" size="md" hide-footer no-close-on-backdrop>
+          <template v-slot:modal-title>
+            <strong>{{ $t('personal.changePass') }}</strong>
+          </template>
+          <b-container fluid>
+            <!-- Username -->
+            <b-form-group label-cols="5" :label="$t('personal.username')" label-for="input-name">
+              <b-form-input id="username" :value="updateAccount.username" readonly></b-form-input>
+            </b-form-group>
+            <!-- Old password -->
+            <b-form-group label-cols="5" :label="$t('personal.password')" label-for="input-name">
+              <b-form-input id="name" v-model="updateAccount.oldPass"></b-form-input>
+            </b-form-group>
+            <!-- New password -->
+            <b-form-group label-cols="5" :label="$t('personal.newPass')" label-for="input-name">
+              <b-form-input id="name" v-model="updateAccount.newPass"></b-form-input>
+            </b-form-group>
+            <!-- Confirm new password -->
+            <b-form-group label-cols="5" :label="$t('personal.confirm')" label-for="input-name">
+              <b-form-input id="name" v-model="updateAccount.confirm"></b-form-input>
+            </b-form-group>
+            <b-row class="text-left">
+              <b-button variant="primary" style="width: 100%; margin-top: 15px" @click="onClickChangePass">{{ $t('personal.submit') }}</b-button>
+            </b-row>
+          </b-container>
+        </b-modal>
       </b-row>
     </b-container>
   </b-container>
@@ -208,24 +223,112 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { axiosCreator } from '@/base/customAxios';
+import AccountDetail from '@/base/domains/account-detail';
+import AccountDetailResponse from '@/base/response/account-detail-response';
+import PasswordChagneRequest from '@/base/request/password-change-request';
 
 @Component
 export default class PersonalInfor extends Vue {
-  // Phần này là logic
+  axios = axiosCreator();
+  API = {
+    byId: '/account/getById'
+  };
+
+  updateAccount: PasswordChagneRequest = new PasswordChagneRequest();
+
+  detailData: AccountDetail = new AccountDetail();
+  genderOption = [
+    { text: this.$t('gender.0'), value: 0 },
+    { text: this.$t('gender.1'), value: 1 },
+    { text: this.$t('gender.2'), value: 2 }
+  ];
+
+  created() {
+    const token = this.$store.getters['token'];
+    const id = this.$store.getters['accountId'];
+    if (!token && !id) {
+      this.$router.push('/home');
+    }
+    this.getUserInformation(id);
+  }
+
+  mounted() {}
+
+  getUserInformation(id: string): void {
+    this.axios.post<AccountDetailResponse>(this.API.byId, id)
+      .then(response => {
+        if (response && response.data) {
+          this.detailData = new AccountDetail(response.data)
+          this.detailData.birthday = this.$moment(this.detailData.birthday).format('YYYY-MM-DD');
+          this.detailData.updated = this.$moment(this.detailData.updated).format('YYYY-MM-DD');
+          this.detailData.updatedAc = this.$moment(this.detailData.updatedAc).format('YYYY-MM-DD');
+          this.updateAccount.username = this.detailData.username;
+        }
+      });
+  }
+  
+  onClickUpdateInfor(): void {
+    this.$bvModal.hide('modal-1');
+  }
+
+  onClickChangePass(): void {
+    this.$bvModal.hide('modal-2');
+    this.getUserInformation(this.detailData.id);
+  }
+
 }
 </script>
 
 <style scoped>
-/* Phần này là css */
 .rowNav {
   white-space: nowrap;
   background-color: rgb(151, 151, 214);
   line-height: 30px;
   color: #fff;
 }
-
 .colUser {
   background-color: rgba(44, 44, 44, 0.055);
   border-right: 1px solid rgba(29, 29, 29, 0.11);
+}
+.text-left {
+  text-align: left;
+  padding: 10px;
+  padding-left: 20px;
+  font-size: 1.2rem;
+}
+.mw-200 {
+  min-width: 200px;
+  max-width: 200px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.title {
+  margin-top: 20px;
+  padding: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid rgba(29, 29, 29, 0.11);
+  background: rgba(44, 44, 44, 0.055);
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+.bold {
+  font-weight: bold;
+}
+.router-link {
+  line-height: 3;
+  text-align: left;
+  font-size: 1rem;
+  font-family: cursive;
+  margin-right: 30px;
+}
+.router-link:hover {
+  text-decoration: none;
+  font-weight: bolder;
+}
+#modal-2
+#modal-1 {
+  min-width: 500px;
 }
 </style>

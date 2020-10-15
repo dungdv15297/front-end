@@ -91,8 +91,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { dialogTypes } from "@/base/enum/dialog-types";
 import BaseHelper from "@/base/BaseHelper.vue";
 import Conditions from "./conditions";
-import CourseDTO from '@/base/domains/CourseDTO';
-import FilterCourseRequest from '@/base/domains/FilterCourseRequest';
+import CourseDTO from '@/base/domains/course-dto';
+import FilterCourseRequest from '@/base/domains/filter-course-request';
 import { axiosCreator } from '@/base/customAxios';
 import * as validate from "./validations";
 

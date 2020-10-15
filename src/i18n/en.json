@@ -112,5 +112,22 @@
     "manager": "Manager",
     "managerAccount": "User Information",
     "signout": "Sign out"
+  },
+  "personal": {
+    "home": "PIHOMEE",
+    "balance": "Balance: ",
+    "name": "Name",
+    "birthday": "Birthday",
+    "gender": "Gender",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone number",
+    "title": "Personal Information",
+    "accountTitle": "My account"
+  },
+  "gender": {
+    "0": "Male",
+    "1": "Female",
+    "2": "Other"
   }
 }

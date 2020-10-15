@@ -1,6 +1,6 @@
 import BaseDomain from '../domains/base-domain';
 
-export default class AccountDetailResponse extends BaseDomain {
+export default class AccountDetail extends BaseDomain {
   id: string = '';
   name: string = '';
   birthday: string = '';
@@ -13,9 +13,8 @@ export default class AccountDetailResponse extends BaseDomain {
   updated: string = '';
   username: string = '';
   updatedAc: string = '';
-  errorCode: string = '';
 
-  constructor(init?: Partial<AccountDetailResponse>) {
+  constructor(init?: Partial<AccountDetail>) {
     super();
     this.assign(init);
   }

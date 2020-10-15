@@ -40,34 +40,6 @@
       <!-- Room content -->
       <b-row>
         <span>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          a <br>
-          
         </span>
       </b-row>
     </b-container>
