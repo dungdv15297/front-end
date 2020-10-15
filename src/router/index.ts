@@ -9,7 +9,6 @@ import ForgotPass from '@/views/forgot/ForgotPass.vue';
 import Views from '@/views/normal-main-view/Views.vue';
 import SearchPage from '@/views/normal-main-view/search-page/SearchPage.vue';
 import HomePage from '@/views/normal-main-view/home-page/HomePage.vue';
-import { component } from 'vue/types/umd';
 
 Vue.use(VueRouter);
 
@@ -59,8 +58,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Views',
     component: Views,
-    redirect: '/home',
     children: [
+      {
+        path: '',
+        redirect: '/home'
+      },
       {
         path: '/home',
         component: HomePage

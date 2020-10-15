@@ -93,7 +93,7 @@ import BaseHelper from "@/base/BaseHelper.vue";
 import Conditions from "./conditions";
 import CourseDTO from '@/base/domains/CourseDTO';
 import FilterCourseRequest from '@/base/domains/FilterCourseRequest';
-import axios from '@/base/customAxios';
+import { axiosCreator } from '@/base/customAxios';
 import * as validate from "./validations";
 
 @Component
@@ -101,7 +101,7 @@ export default class CourseInformationContent extends BaseHelper {
   validation: any = validate.validation(this);
   conditions: Conditions = new Conditions();
   isBusy: boolean = false;
-  axios = axios;
+  axios = axiosCreator();
   dataTables: CourseDTO[] = [];
   fields: any;
 
@@ -119,13 +119,6 @@ export default class CourseInformationContent extends BaseHelper {
       { key: "lastModifiedDate", label: this.$t("pis002.updated").toString() },
     ];
   }
-
-  // demoValidate(): void {
-  //   this.error = validate.validation(this.conditions);
-  //   if (this.error.isValid()) {
-  //     this.openDialog(dialogTypes.INFORMATION, "Hợp lý thực sự");
-  //   }
-  // }
 
   onSearchCourse(): void {
     this.isBusy = true;

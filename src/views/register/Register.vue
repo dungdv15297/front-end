@@ -129,7 +129,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
 import RegisterData from './register-data';
 import RegisterRequest from '@/base/request/register-request';
-import axios from '@/base/customAxios';
+import * as axios from '@/base/customAxios';
 import { dialogTypes } from '@/base/enum/dialog-types';
 import AuthResponse from '@/base/response/auth-response';
 import * as validate from './validation-rules';
@@ -144,6 +144,7 @@ export default class Register extends BaseHelper {
   API = {
     register: 'account/register'
   }
+  axios = axios.axiosCreator();
 
   isValidate: boolean = false;
 
@@ -173,7 +174,7 @@ export default class Register extends BaseHelper {
       password: this.registerData.password,
       rePassword: this.registerData.rePassword
     });
-    axios.post<AuthResponse>(this.API.register, body)
+    this.axios.post<AuthResponse>(this.API.register, body)
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;

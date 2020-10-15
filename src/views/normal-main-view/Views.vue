@@ -102,10 +102,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import AccountDetailResponse from '@/base/response/account-detail-response';
-import axios from '@/base/customAxios';
+import * as axios from '@/base/customAxios';
 import { dialogTypes } from '@/base/enum/dialog-types';
 import BaseHelper from '@/base/BaseHelper.vue';
 import Account from '@/base/domains/account';
+import { AxiosInstance } from 'axios';
 
 @Component({
   components: {
@@ -117,16 +118,14 @@ import Account from '@/base/domains/account';
 export default class Views extends BaseHelper {
   options: Array<string> = ['Vĩnh Phúc', 'Hà Nội', 'Hải Dương'];
   selected: string = '';
-  axios = axios;
   accountDetail: AccountDetailResponse = new AccountDetailResponse();
+  axios: AxiosInstance = axios.axiosCreator();
 
   API = {
     byToken: 'account/byToken'
   }
 
-  created() {
-    this.getAccountDetailInfo();
-  }
+  created() {}
 
   mounted() {
     const navbar = document.getElementById('navbarId') as any;
@@ -137,6 +136,10 @@ export default class Views extends BaseHelper {
       } else {
         navbar.classList.remove("sticky");
       }
+    }
+    
+    if (localStorage.getItem('token')) {
+      this.getAccountDetailInfo();
     }
   }
 
@@ -155,15 +158,16 @@ export default class Views extends BaseHelper {
   }
 
   openSignInPage(): void {
-    this.$router.push({ path: '/login'});
+    const home = btoa('home');
+    this.$router.push({ path: `/login?from=${home}`});
   }
 
   openSignUpPage(): void {
-    this.$router.push({ path: '/register'});
+    this.$router.push({ path: '/register' });
   }
 
   onClickGoManager(): void {
-
+    this.$router.push({ path: '/personal' });
   }
 
   onClickSignOut(): void {

@@ -82,12 +82,13 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
 import LoginData from './login-data';
-import axios from '@/base/customAxios';
+import * as axios from '@/base/customAxios';
 import AuthRequest from '@/base/request/auth-request';
 import AuthResponse from '@/base/response/auth-response';
 import Account from '@/base/domains/account';
 import { dialogTypes } from '@/base/enum/dialog-types';
 import * as validate from './validation-rules';
+import { AxiosInstance } from 'axios';
 
 @Component({
   components: {
@@ -98,6 +99,7 @@ export default class Login extends BaseHelper {
 
   loginData: LoginData = new LoginData();
   validation: any = validate.validation();
+  axios: AxiosInstance = axios.axiosCreator();
 
   API = {
     login: 'account/authenticate'
@@ -122,7 +124,7 @@ export default class Login extends BaseHelper {
       username: this.loginData.username,
       password: this.loginData.password
     });
-    axios.post<AuthResponse>(this.API.login, body)
+    this.axios.post<AuthResponse>(this.API.login, body)
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;
