@@ -7,52 +7,54 @@
           <label class="title"> {{ $t('login.login') }} </label>
         </b-col>
       </b-row>
-      <b-row class="my-3">
-        <b-col>
-          <!-- Username -->
-          <b-form-input
-            type="text"
-            v-model="loginData.username"
-            :placeholder="$t('login.username')"
-            :state="validation.username.rule"
-            v-b-tooltip.hover.right.v-danger
-            :title="$t(validation.username.msg())"
-          ></b-form-input>
-        </b-col>
-      </b-row>
-      <b-row class="my-3">
-        <b-col>
-          <!-- Password -->
-          <b-form-input
-            type="password"
-            v-model="loginData.password"
-            :placeholder="$t('login.password')"
-            :state="validation.password.rule"
-            v-b-tooltip.hover.right.v-danger
-            :title="$t(validation.password.msg())"
-          ></b-form-input>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col class="text-left">
-          <!-- Remember Me -->
-          <b-form-checkbox
-            id="checkbox-1"
-            v-model="loginData.rememberMe"
-            name="checkbox-1"
-            value="accepted"
-            unchecked-value="not_accepted"
-          >
-            {{ $t('login.remember') }}
-          </b-form-checkbox>
-        </b-col>
-      </b-row>
-      <b-row class="my-3">
-        <b-col>
-          <!-- Login button -->
-          <b-button class="btn-login" block variant="info" @click="onClickLogin"> {{ $t('login.loginBtn') }} </b-button>
-        </b-col>
-      </b-row>
+      <b-form>
+        <b-row class="my-3">
+          <b-col>
+            <!-- Username -->
+            <b-form-input
+              type="text"
+              v-model="loginData.username"
+              :placeholder="$t('login.username')"
+              :state="validation.username.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.username.msg())"
+            ></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row class="my-3">
+          <b-col>
+            <!-- Password -->
+            <b-form-input
+              type="password"
+              v-model="loginData.password"
+              :placeholder="$t('login.password')"
+              :state="validation.password.rule"
+              v-b-tooltip.hover.right.v-danger
+              :title="$t(validation.password.msg())"
+            ></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left">
+            <!-- Remember Me -->
+            <b-form-checkbox
+              id="checkbox-1"
+              v-model="loginData.rememberMe"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+              {{ $t('login.remember') }}
+            </b-form-checkbox>
+          </b-col>
+        </b-row>
+        <b-row class="my-3">
+          <b-col>
+            <!-- Login button -->
+            <b-button class="btn-login" block variant="info" @click="onClickLogin"> {{ $t('login.loginBtn') }} </b-button>
+          </b-col>
+        </b-row>
+      </b-form>
       <b-row>
         <b-col class="text-left">
           <!-- Link forgot password -->
@@ -80,12 +82,13 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BaseHelper from '@/base/BaseHelper.vue';
 import LoginData from './login-data';
-import axios from '@/base/customAxios';
+import * as axios from '@/base/customAxios';
 import AuthRequest from '@/base/request/auth-request';
 import AuthResponse from '@/base/response/auth-response';
 import Account from '@/base/domains/account';
 import { dialogTypes } from '@/base/enum/dialog-types';
 import * as validate from './validation-rules';
+import { AxiosInstance } from 'axios';
 
 @Component({
   components: {
@@ -96,12 +99,18 @@ export default class Login extends BaseHelper {
 
   loginData: LoginData = new LoginData();
   validation: any = validate.validation();
+  axios: AxiosInstance = axios.axiosCreator();
 
   API = {
     login: 'account/authenticate'
   }
 
-  created() {}
+  created() {
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      this.$router.push({ path: '/home' });
+    }
+  }
 
   /**
    * Click button login
@@ -115,13 +124,14 @@ export default class Login extends BaseHelper {
       username: this.loginData.username,
       password: this.loginData.password
     });
-    axios.post<AuthResponse>(this.API.login, body)
+    this.axios.post<AuthResponse>(this.API.login, body)
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;
           localStorage.setItem('token', token);
           this.openDialog(dialogTypes.INFORMATION, 'MSG101', () => {
-            this.$router.push({name: 'HomePage'});
+            const path: any = this.$route.query.from || '';
+            this.$router.push({ path: atob(path)} );
           });
         }
       })
@@ -141,7 +151,7 @@ export default class Login extends BaseHelper {
    * Go to homepage
    */
   goToHomePage(): void {
-    this.$router.push({name: 'HomePage'});
+    this.$router.push({name: 'Views'});
   }
 
   /**

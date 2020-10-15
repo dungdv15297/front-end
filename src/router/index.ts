@@ -21,6 +21,16 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'Login',
+    children: [
+      {
+        path: '/login?*',
+        component: Login
+      },
+      {
+        path: '/login/*',
+        component: Login
+      }
+    ],
     component: Login
   },
   {
@@ -48,8 +58,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Views',
     component: Views,
-    redirect: '/home',
     children: [
+      {
+        path: '',
+        redirect: '/home'
+      },
       {
         path: '/home',
         component: HomePage
@@ -67,6 +80,10 @@ const routes: Array<RouteConfig> = [
         })
       }
     ]
+  },
+  {
+    path: '/*',
+    redirect: '/home'
   }
 ]
 
@@ -78,7 +95,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
-  const isManaged = localStorage.getItem('isManaged');
   // If go to MainView page, check the condition
   if (to.name === 'MainView') {
     // If do not have a token in storage, redirect to Error page with ERR100
@@ -90,23 +106,15 @@ router.beforeEach((to, from, next) => {
           mess: 'ERR100'
         }
       });
-    // If has token but not managed user, redirect to Error page with ERR101
-    } else if (isManaged === null || !isManaged) {
-      next({
-        name: 'Error',
-        params: {
-          code: 'ERR101',
-          mess: 'ERR101'
-        }
-      });
     }
+  } else if (to.fullPath === '/login' || to.fullPath === '/redirect') {
+    next({
+      path: to.fullPath,
+      query: { from: btoa(from.path) }
+    });
+  } else {
+    next();
   }
-  // If go to Login page with a valid token, redirect to Homepage
-  if ((to.name === 'Login' || to.name === 'Register') && !!token) {
-    next({ name: 'HomePage' });
-  }
-
-  next();
 })
 
 export default router

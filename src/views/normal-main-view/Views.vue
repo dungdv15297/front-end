@@ -5,9 +5,16 @@
         <b-container>
         <b-row class="float-right">
             <b-col>
-            <b-button class="m5">Đăng nhập</b-button>
-            <b-button class="m5">Đăng ký</b-button>
-            <b-button variant="primary" class="m5">Đăng tin mới</b-button>
+              <label v-if="accountDetail.name !== ''">
+                <b-dropdown v-if="accountDetail.name !== ''" id="dropdown-1" :text="accountDetail.name" class="m-md-2">
+                  <b-dropdown-item class="activeCss" @click="onClickGoManager">{{ $t('views.managerAccount') }}</b-dropdown-item>
+                  <b-dropdown-item class="activeCss" @click="onClickSignOut">{{ $t('views.signout') }}</b-dropdown-item>
+                </b-dropdown>
+              </label>
+              <b-button v-if="accountDetail.name === ''" class="m5" size="sm" @click="openSignInPage">{{ $t('views.signin') }}</b-button>
+              <b-button v-if="accountDetail.name === ''" class="m5" size="sm" @click="openSignUpPage">{{ $t('views.signup') }}</b-button>
+              <b-button variant="primary" size="sm" class="m5">{{ $t('views.news') }}</b-button>
+              <select-language />
             </b-col>  
         </b-row>
         </b-container>
@@ -94,6 +101,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import AccountDetailResponse from '@/base/response/account-detail-response';
+import * as axios from '@/base/customAxios';
+import { dialogTypes } from '@/base/enum/dialog-types';
+import BaseHelper from '@/base/BaseHelper.vue';
+import Account from '@/base/domains/account';
+import { AxiosInstance } from 'axios';
 
 @Component({
   components: {
@@ -102,9 +115,17 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
     HeaderNav: () => import('@/components/headernav/HeaderNav.vue')
   }
 })
-export default class Views extends Vue {
+export default class Views extends BaseHelper {
   options: Array<string> = ['Vĩnh Phúc', 'Hà Nội', 'Hải Dương'];
   selected: string = '';
+  accountDetail: AccountDetailResponse = new AccountDetailResponse();
+  axios: AxiosInstance = axios.axiosCreator();
+
+  API = {
+    byToken: 'account/byToken'
+  }
+
+  created() {}
 
   mounted() {
     const navbar = document.getElementById('navbarId') as any;
@@ -116,10 +137,52 @@ export default class Views extends Vue {
         navbar.classList.remove("sticky");
       }
     }
+    
+    if (localStorage.getItem('token')) {
+      this.getAccountDetailInfo();
+    }
+  }
+
+  getAccountDetailInfo(): void {
+    this.axios.get<AccountDetailResponse>(this.API.byToken)
+      .then(response => {
+        if (response && response.data) {
+          this.accountDetail = response.data;
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.errorCode) {
+          this.openDialog(dialogTypes.WARNING, error.response.data.errorCode);
+        }
+      });
+  }
+
+  openSignInPage(): void {
+    const home = btoa('home');
+    this.$router.push({ path: `/login?from=${home}`});
+  }
+
+  openSignUpPage(): void {
+    this.$router.push({ path: '/register' });
+  }
+
+  onClickGoManager(): void {
+    this.$router.push({ path: '/personal' });
+  }
+
+  onClickSignOut(): void {
+    const token = localStorage.getItem('token');
+    if (!!token) {
+      localStorage.removeItem('token');
+    }
+    this.$router.go(0);
   }
 }
 </script>
 <style scoped>
+.float-right >>>.activeCss:hover {
+  background: #faebd7;
+}
 .btn-search {
   background: #f1bd00;
   color: #000000;
@@ -214,5 +277,15 @@ export default class Views extends Vue {
   position: fixed;
   top: 0;
   z-index: 1000000;
+}
+.m-md-2 >>> .btn {
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  border: none;
+}
+
+.m-md-2 >>> li:hover {
+  background: red !important;
 }
 </style>
