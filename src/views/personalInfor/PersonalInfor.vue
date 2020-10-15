@@ -50,7 +50,7 @@
                 >
                 </b-img>
               </b-col>
-              <b-col md="8">
+              <b-col md="8"">
                 <strong style="margin-left: 15px; font-size: 18px; color: black"
                   ><span id="name">Hiển thị tên user</span></strong
                 >
@@ -78,7 +78,7 @@
             ><br />
             <!-- Navbar -->
             <b-row>
-              <b-list-group style="text-align: left">
+              <b-list-group style="text-align: left; width:350px;">
                 <b-list-group-item href="#"
                   ><span style="margin-right: 5px" class="h5 mb-2"
                     ><b-icon icon="file-earmark-text"></b-icon
