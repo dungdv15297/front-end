@@ -153,7 +153,7 @@ export default class Register extends BaseHelper {
   }
 
   created() {
-    const token = localStorage.getItem('token');
+    const token = this.$store.getters['token'];
     if (!!token) {
       this.$router.push({ path: '/home' });
     }
@@ -178,7 +178,7 @@ export default class Register extends BaseHelper {
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;
-          localStorage.setItem('token', token);
+          this.$store.dispatch('setToken', token);
           this.openDialog(dialogTypes.INFORMATION, 'MSG102', () => {
             this.$router.push({name: 'Views'});
           });
