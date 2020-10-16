@@ -7,7 +7,7 @@ export function axiosCreator(): AxiosInstance {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': store.getters['token'] ? `Bearer ${store.getters['token']}` : ''
+      'Authorization': !!localStorage.getItem('vuex.state.token') ? `Bearer ${store.getters['token']}` : ''
     }
   });
 }

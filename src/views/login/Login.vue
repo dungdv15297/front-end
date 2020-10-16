@@ -98,7 +98,11 @@ import { AxiosInstance } from 'axios';
 export default class Login extends BaseHelper {
 
   loginData: LoginData = new LoginData();
-  validation: any = validate.validation();
+  isValidate: boolean = false;
+
+  get validation(): any {
+    return !this.isValidate ? validate.validation() : validate.validation(this.loginData);
+  }
   axios: AxiosInstance = axios.axiosCreator();
 
   API = {
@@ -116,7 +120,7 @@ export default class Login extends BaseHelper {
    * Click button login
    */
   onClickLogin(): void {
-    this.validation = validate.validation(this.loginData);
+    this.isValidate = true;
     if (!this.validation.isValid()) {
       return;
     }
@@ -149,7 +153,7 @@ export default class Login extends BaseHelper {
    * Go to homepage
    */
   goToHomePage(): void {
-    this.$router.push({name: 'Views'});
+    this.$router.push({name: 'DefaultViews'});
   }
 
   /**

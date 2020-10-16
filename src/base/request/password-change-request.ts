@@ -1,12 +1,12 @@
 import BaseDomain from '../domains/base-domain';
 
-export default class PasswordChagneRequest extends BaseDomain {
+export default class PasswordChangeRequest extends BaseDomain {
   username: string = '';
   password: string = '';
   newPassword: string = '';
   confirm: string = '';
 
-  constructor(init?: Partial<PasswordChagneRequest>) {
+  constructor(init?: Partial<PasswordChangeRequest>) {
     super();
     this.assign(init);
   }

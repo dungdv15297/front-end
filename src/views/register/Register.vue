@@ -180,7 +180,7 @@ export default class Register extends BaseHelper {
           const token: string = response.data.jwt;
           this.$store.dispatch('setToken', token);
           this.openDialog(dialogTypes.INFORMATION, 'MSG102', () => {
-            this.$router.push({name: 'Views'});
+            this.$router.push({name: 'DefaultViews'});
           });
         }
       })

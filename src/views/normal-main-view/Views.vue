@@ -102,7 +102,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import AccountDetailResponse from '@/base/response/account-detail-response';
-import * as axios from '@/base/customAxios';
+import { axiosCreator } from '@/base/customAxios';
 import { dialogTypes } from '@/base/enum/dialog-types';
 import BaseHelper from '@/base/BaseHelper.vue';
 import Account from '@/base/domains/account';
@@ -119,7 +119,6 @@ export default class Views extends BaseHelper {
   options: Array<string> = ['Vĩnh Phúc', 'Hà Nội', 'Hải Dương'];
   selected: string = '';
   accountDetail: AccountDetailResponse = new AccountDetailResponse();
-  axios: AxiosInstance = axios.axiosCreator();
 
   API = {
     byToken: 'account/byToken'
@@ -137,14 +136,14 @@ export default class Views extends BaseHelper {
         navbar.classList.remove("sticky");
       }
     }
-    
-    if (this.$store.getters['token']) {
+    if (!!this.$store.getters['token']) {
       this.getAccountDetailInfo();
     }
   }
 
-  getAccountDetailInfo(): void {
-    this.axios.get<AccountDetailResponse>(this.API.byToken)
+  async getAccountDetailInfo(): Promise<void> {
+    const axios: AxiosInstance = axiosCreator();
+    await axios.get<AccountDetailResponse>(this.API.byToken)
       .then(response => {
         if (response && response.data) {
           this.accountDetail = response.data;
@@ -153,7 +152,8 @@ export default class Views extends BaseHelper {
       })
       .catch(error => {
         if (error.response && error.response.data && error.response.data.errorCode) {
-          this.$store.dispatch('removeToken');
+          this.$store.dispatch('setToken', null);
+          this.$store.dispatch('setAccountId', null);
           this.openDialog(dialogTypes.WARNING, error.response.data.errorCode);
         }
       });
@@ -175,7 +175,8 @@ export default class Views extends BaseHelper {
   onClickSignOut(): void {
     const token = this.$store.getters['token'];
     if (!!token) {
-      this.$store.dispatch('removeToken');
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setAccountId', null);
     }
     this.$router.go(0);
   }

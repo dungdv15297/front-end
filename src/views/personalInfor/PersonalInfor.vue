@@ -81,7 +81,7 @@
                   </span>
                   {{  $t('personal.payment') }}
                 </b-list-group-item>
-                <b-list-group-item href="#">
+                <b-list-group-item href="#" @click="onClickSignOut">
                   <span style="margin-right: 5px" class="h5 mb-2">
                     <b-icon icon="box-arrow-right"></b-icon>
                   </span>
@@ -146,13 +146,13 @@
           </b-container>
         </b-col>
         <!-- Modal update information -->
-        <b-modal id="modal-1" size="lg" hide-footer no-close-on-backdrop>
+        <b-modal id="modal-1" centered size="lg" hide-footer no-close-on-backdrop>
           <template v-slot:modal-title>
             <strong>{{ $t('personal.updateInfor') }}</strong>
           </template>
           <b-container fluid>
             <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.name')" label-for="input-name">
-              <b-form-input id="name" v-model="detailData.name"></b-form-input>
+              <b-form-input v-model="detailData.name"></b-form-input>
             </b-form-group>
 
             <b-form-group label-cols="4" label-cols-lg="2" :label="$t('personal.birthday')" label-for="input-birthday">
@@ -190,7 +190,7 @@
           </b-container>
         </b-modal>
         <!-- Modal change pass -->
-        <b-modal id="modal-2" size="md" hide-footer no-close-on-backdrop>
+        <b-modal id="modal-2" size="md" centered hide-footer no-close-on-backdrop>
           <template v-slot:modal-title>
             <strong>{{ $t('personal.changePass') }}</strong>
           </template>
@@ -201,15 +201,27 @@
             </b-form-group>
             <!-- Old password -->
             <b-form-group label-cols="5" :label="$t('personal.password')" label-for="input-name">
-              <b-form-input id="name" v-model="updateAccount.oldPass"></b-form-input>
+              <b-form-input v-model="updateAccount.password"
+                type="password"
+                :state="valChangePass.password.rule"
+                v-b-tooltip.hover.right.v-danger
+                :title="$t(valChangePass.password.msg())"></b-form-input>
             </b-form-group>
             <!-- New password -->
             <b-form-group label-cols="5" :label="$t('personal.newPass')" label-for="input-name">
-              <b-form-input id="name" v-model="updateAccount.newPass"></b-form-input>
+              <b-form-input v-model="updateAccount.newPassword"
+                type="password"
+                :state="valChangePass.newPassword.rule"
+                v-b-tooltip.hover.right.v-danger
+                :title="$t(valChangePass.newPassword.msg())"></b-form-input>
             </b-form-group>
             <!-- Confirm new password -->
             <b-form-group label-cols="5" :label="$t('personal.confirm')" label-for="input-name">
-              <b-form-input id="name" v-model="updateAccount.confirm"></b-form-input>
+              <b-form-input v-model="updateAccount.confirm"
+                type="password"
+                :state="valChangePass.confirm.rule"
+                v-b-tooltip.hover.right.v-danger
+                :title="$t(valChangePass.confirm.msg())"></b-form-input>
             </b-form-group>
             <b-row class="text-left">
               <b-button variant="primary" style="width: 100%; margin-top: 15px" @click="onClickChangePass">{{ $t('personal.submit') }}</b-button>
@@ -226,18 +238,30 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { axiosCreator } from '@/base/customAxios';
 import AccountDetail from '@/base/domains/account-detail';
 import AccountDetailResponse from '@/base/response/account-detail-response';
-import PasswordChagneRequest from '@/base/request/password-change-request';
-
+import PasswordChangeRequest from '@/base/request/password-change-request';
+import { validationUpdateInfor, validationChangePass } from './validation-rules';
 @Component
 export default class PersonalInfor extends Vue {
   axios = axiosCreator();
   API = {
-    byId: '/account/getById'
+    byId: '/account/getById',
+    logout: '/account/logout',
+    update: '/account/update'
   };
 
-  updateAccount: PasswordChagneRequest = new PasswordChagneRequest();
-
+  updateAccount: PasswordChangeRequest = new PasswordChangeRequest();
   detailData: AccountDetail = new AccountDetail();
+
+  isValUpdateInfo: boolean = false;
+  get valUpdateInfo(): any {
+    return !this.isValUpdateInfo ? validationUpdateInfor() : validationUpdateInfor(this.detailData);
+  }
+
+  isValChangePass: boolean = false;
+  get valChangePass(): any {
+    return !this.isValChangePass ? validationChangePass() : validationChangePass(this.updateAccount);
+  }
+
   genderOption = [
     { text: this.$t('gender.0'), value: 0 },
     { text: this.$t('gender.1'), value: 1 },
@@ -265,16 +289,55 @@ export default class PersonalInfor extends Vue {
           this.detailData.updatedAc = this.$moment(this.detailData.updatedAc).format('YYYY-MM-DD');
           this.updateAccount.username = this.detailData.username;
         }
-      });
+      })
+      .catch(() => this.$router.push({path: '/home'}));
   }
   
   onClickUpdateInfor(): void {
+    this.isValUpdateInfo = true;
+    if (!this.valUpdateInfo.isValid()) {
+      return;
+    }
     this.$bvModal.hide('modal-1');
   }
 
   onClickChangePass(): void {
-    this.$bvModal.hide('modal-2');
-    this.getUserInformation(this.detailData.id);
+    this.isValChangePass = true;
+    if (!this.valChangePass.isValid()) {
+      return;
+    }
+    this.axios.post(this.API.update, this.updateAccount)
+      .then(response => {
+        this.$bvModal.msgBoxOk(this.$t('message.MSG003').toString(), {
+          title: this.$t('message.success').toString(),
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'success',
+          centered: true
+        }).then(() => {
+          this.$bvModal.hide('modal-2');
+          this.getUserInformation(this.detailData.id);
+        })
+      })
+      .catch(err => {
+        this.$bvModal.msgBoxOk(this.$t(`message.${err.response.data.responseCode}`).toString(), {
+          title: this.$t('message.error').toString(),
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
+          centered: true
+        })
+      })
+  }
+
+  async onClickSignOut(): Promise<void> {
+    await this.axios.post<void>(this.API.logout)
+      .then(response => {
+        this.$store.dispatch('setToken', null);
+        this.$store.dispatch('setAccountId', null);
+      });
+
+    this.$router.push({ path: '/home' })
   }
 
 }

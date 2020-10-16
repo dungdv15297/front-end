@@ -56,11 +56,11 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/',
-    name: 'Views',
     component: Views,
     children: [
       {
         path: '',
+        name: 'DefaultViews',
         redirect: '/home'
       },
       {

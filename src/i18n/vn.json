@@ -34,6 +34,7 @@
     "cantPrint": "Don't have the reference to print",
     "MSG001": "Are you sure?",
     "MSG002": "Success!",
+    "MSG003": "Update password successfully",
     "MSG100": "Login failed!",
     "MSG101": "Login successful",
     "MSG102": "Register successful",
@@ -42,8 +43,12 @@
     "ERR004": "The information entered is not valid",
     "ERR005": "This account has already existed",
     "ERR006": "There was a problem with the execution",
-    "ERR007": "Can not find your account information"
-
+    "ERR007": "Can not find your account information",
+    "ERR010": "Account not found",
+    "ERR011": "Password is invalid",
+    "ERR012": "New password and confirm password not be compared",
+    "success": "Successfully",
+    "error": "Error"
   },
   "language": {
     "lang": "Language",
