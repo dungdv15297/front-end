@@ -15,7 +15,7 @@
               <b-button v-if="accountDetail.name === ''" class="m5" size="sm" @click="openSignUpPage">{{ $t('views.signup') }}</b-button>
               <b-button variant="primary" size="sm" class="m5">{{ $t('views.news') }}</b-button>
               <select-language />
-            </b-col>  
+            </b-col>
         </b-row>
         </b-container>
     </b-container>
@@ -103,8 +103,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import AccountDetailResponse from '@/base/response/account-detail-response';
 import { axiosCreator } from '@/base/customAxios';
-import { dialogTypes } from '@/base/enum/dialog-types';
-import BaseHelper from '@/base/BaseHelper.vue';
 import Account from '@/base/domains/account';
 import { AxiosInstance } from 'axios';
 
@@ -115,7 +113,7 @@ import { AxiosInstance } from 'axios';
     HeaderNav: () => import('@/components/headernav/HeaderNav.vue')
   }
 })
-export default class Views extends BaseHelper {
+export default class Views extends Vue {
   options: Array<string> = ['Vĩnh Phúc', 'Hà Nội', 'Hải Dương'];
   selected: string = '';
   accountDetail: AccountDetailResponse = new AccountDetailResponse();
@@ -154,7 +152,7 @@ export default class Views extends BaseHelper {
         if (error.response && error.response.data && error.response.data.errorCode) {
           this.$store.dispatch('setToken', null);
           this.$store.dispatch('setAccountId', null);
-          this.openDialog(dialogTypes.WARNING, error.response.data.errorCode);
+          // this.openDialog(dialogTypes.WARNING, error.response.data.errorCode);
         }
       });
   }

@@ -9,10 +9,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import BaseHelper from "@/base/BaseHelper.vue";
 
 @Component
-export default class SelectLanguage extends BaseHelper {
+export default class SelectLanguage extends Vue {
   selected: string = '';
 
   created() {

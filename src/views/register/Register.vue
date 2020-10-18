@@ -102,7 +102,7 @@
       <b-row class="my-3">
         <b-col>
           <!-- register button -->
-          <b-button class="btn-register" block variant="info" @click="onClickRegister">{{ $t('register.registerBtn') }}</b-button>
+          <b-button class="btn" block variant="info" @click="onClickRegister">{{ $t('register.registerBtn') }}</b-button>
         </b-col>
       </b-row>
       <b-row>
@@ -118,28 +118,20 @@
       <a href="" class="cl-white fl-left" @click="goToHomePage">
         <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('domain') }}
       </a>
-      <!-- change language -->
-      <select-language/>
     </div>
   </b-container>
 </template>
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import BaseHelper from '@/base/BaseHelper.vue';
 import RegisterData from './register-data';
 import RegisterRequest from '@/base/request/register-request';
 import * as axios from '@/base/customAxios';
-import { dialogTypes } from '@/base/enum/dialog-types';
 import AuthResponse from '@/base/response/auth-response';
 import * as validate from './validation-rules';
 
-@Component({
-  components: {
-    SelectLanguage: () => import('@/components/language/SelectLanguage.vue')
-  }
-})
-export default class Register extends BaseHelper {
+@Component
+export default class Register extends Vue {
   registerData: RegisterData = new RegisterData();
   API = {
     register: 'account/register'
@@ -179,19 +171,14 @@ export default class Register extends BaseHelper {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;
           this.$store.dispatch('setToken', token);
-          this.openDialog(dialogTypes.INFORMATION, 'MSG102', () => {
-            this.$router.push({name: 'DefaultViews'});
-          });
+          // show MSG102
         }
       })
       .catch(error => {
         if (!!error.response && !!error.response && !!error.response.data.errorCode) {
-          this.openDialog(dialogTypes.WARNING, error.response.data.errorCode, () => {
-            if (error.response.data.errorCode === 'ERR005') {
-              this.validation.username.rule = false;
-              this.validation.username.firstRule = false;
-            }
-          })
+          // show error code and validate
+          this.validation.username.rule = false;
+          this.validation.username.firstRule = false;
         }
       })
   }
@@ -233,15 +220,10 @@ export default class Register extends BaseHelper {
   font-family: cursive;
 }
 .bg-gradient {
+  font-family: cursive;
   height: 100vh;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,101,0.9220063025210083) 40%, rgba(0,212,255,1) 100%);
-}
-.btn-register {
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,93,1) 0%, rgba(0,212,255,1) 100%);
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-.btn-register:hover {
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(14,182,140,1) 100%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/h1_hero.jpg') no-repeat;
+  background-size: cover;
 }
 .text-small {
   font-size: small;
@@ -262,8 +244,5 @@ a:hover {
 }
 .fl-left {
   float: left;
-}
-.footer >>> .lang-position {
-  float: right;
 }
 </style>

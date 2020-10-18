@@ -1,22 +1,30 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import MainView from '@/views/mainview/MainView.vue';
 import Login from '@/views/login/Login.vue';
-import Error from '@/views/Error.vue';
 import Register from '@/views/register/Register.vue';
-import PersonalInfor from '@/views/personalInfor/PersonalInfor.vue';
-import ForgotPass from '@/views/forgot/ForgotPass.vue';
-import Views from '@/views/normal-main-view/Views.vue';
-import SearchPage from '@/views/normal-main-view/search-page/SearchPage.vue';
-import HomePage from '@/views/normal-main-view/home-page/HomePage.vue';
+
+// New template here
+import MainView from '@/views/pihomee/MainView.vue';
+import Homepage from '@/views/pihomee/homepage/Homepage.vue';
+import Personal from '@/views/pihomee/personal/Personal.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/manager',
-    name: 'manager',
-    component: MainView
+    path: '/',
+    component: MainView,
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        component: Homepage
+      },
+      {
+        path: '/personal',
+        component: Personal
+      }
+    ]
   },
   {
     path: '/login',
@@ -37,53 +45,6 @@ const routes: Array<RouteConfig> = [
     path: '/register',
     name: 'Register',
     component: Register
-  },
-  {
-    path: '/404',
-    name: 'Error',
-    props: true,
-    component: Error
-  },
-  {
-    path: '/personal',
-    name: 'Personal',
-    component: PersonalInfor
-  },
-  {
-    path: '/forgot',
-    name: 'ForgotPass',
-    component: ForgotPass
-  },
-  {
-    path: '/',
-    component: Views,
-    children: [
-      {
-        path: '',
-        name: 'DefaultViews',
-        redirect: '/home'
-      },
-      {
-        path: '/home',
-        component: HomePage
-      },
-      {
-        path: '/search',
-        component: SearchPage,
-        props: route => ({
-          type: route.query.type,
-          district: route.query.district,
-          province: route.query.province,
-          street: route.query.street,
-          pr: route.query.pr,
-          sr: route.query.sr
-        })
-      }
-    ]
-  },
-  {
-    path: '/*',
-    redirect: '/home'
   }
 ]
 
