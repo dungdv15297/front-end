@@ -6,7 +6,7 @@ import Register from '@/views/register/Register.vue';
 // New template here
 import MainView from '@/views/pihomee/MainView.vue';
 import Homepage from '@/views/pihomee/homepage/Homepage.vue';
-import Personal from '@/views/pihomee/personal/Personal.vue';
+import Personal from '@/views/personal/Personal.vue';
 
 Vue.use(VueRouter);
 
@@ -19,12 +19,13 @@ const routes: Array<RouteConfig> = [
       {
         path: '/home',
         component: Homepage
-      },
-      {
-        path: '/personal',
-        component: Personal
       }
     ]
+  },
+  {
+    path: '/personal',
+    name: 'Personal',
+    component: Personal,
   },
   {
     path: '/login',
