@@ -3,7 +3,8 @@
     <Preloader />
     <Sidebar @toggleSidebar="toggleSidebar"/>
     <Navbar :mini="mini"/>
-    <Information :mini="mini"/>
+    <Information :mini="mini" v-if="showInfor"/>
+    <RoomManager :mini="mini" v-if="showRoom"/>
     <Footer :mini="mini"/>
     <section class="w100vw"></section>
   </div>
@@ -18,11 +19,27 @@ import { Component, Prop, Vue } from "vue-property-decorator";
     Footer: () => import('./template/Footer.vue'),
     Sidebar: () => import('./template/Sidebar.vue'),
     Navbar: () => import('./template/Navbar.vue'),
-    Information: () => import('./information/Information.vue')
+    Information: () => import('./information/Information.vue'),
+    RoomManager: () => import('./room-manager/RoomManager.vue')
   }
 })
 export default class Personal extends Vue {
+  @Prop()
+  mode?: number;
+
+  showInfor: boolean = false;
+  showRoom: boolean = false;
+
   mini: boolean = true;
+
+  created() {
+    if (this.mode === 1) { // show information personal
+      this.showInfor = true;
+    }
+    if (this.mode === 2) { //show room manager
+      this.showRoom = true;
+    }
+  }
 
   toggleSidebar(mini:boolean) {
     this.mini = mini;
@@ -68,7 +85,7 @@ a {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background: linear-gradient(#000 0%, #888 100%);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;

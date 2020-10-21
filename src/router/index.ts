@@ -24,8 +24,13 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/personal',
-    name: 'Personal',
     component: Personal,
+    props: { mode: 1 }
+  },
+  {
+    path: '/room-manager',
+    component: Personal,
+    props: { mode: 2 }
   },
   {
     path: '/login',
@@ -46,6 +51,10 @@ const routes: Array<RouteConfig> = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/*',
+    redirect: '/home'
   }
 ]
 

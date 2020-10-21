@@ -32,13 +32,19 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
+          <div class="col-md-2 col-sm-3 col-xs-12">
+            <a>
+              <SelectLanguage/>
+            </a>
+          </div>
+          <div class="col-md-6 col-sm-5 col-xs-12">
+            <p class="copyright-text">
+              Copyright &copy; 2020 All Rights Reserved by 
               <a href="#">Pihomee</a>.
             </p>
           </div>
 
-          <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <ul class="social-icons">
               <li><a class="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
               <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -56,7 +62,11 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
-@Component
+@Component({
+  components: {
+    SelectLanguage: () => import('@/components/language/SelectLanguage.vue')
+  }
+})
 export default class Footer extends Vue {
   @Prop()
   mini!:boolean;

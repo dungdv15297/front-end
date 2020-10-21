@@ -7,17 +7,17 @@
       @mouseover="toggleSidebar"
       @mouseout="toggleSidebar"
     >
-      <a href="#" class="inline-flex">
+      <a href="/home" class="inline-flex">
         <i class="material-icons">home</i>
         <span class="icon-text">Trang chủ</span>
       </a>
 
-      <a href="#" class="inline-flex">
+      <a href="/personal" class="inline-flex">
         <i class="material-icons">info</i>
         <span class="icon-text">Thông tin cá nhân</span>
       </a>
 
-      <a href="#" class="inline-flex">
+      <a href="/room-manager" class="inline-flex">
         <i class="material-icons">museum</i>
         <span class="icon-text">Quản lý phòng đăng</span>
       </a>
