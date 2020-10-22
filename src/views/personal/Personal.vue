@@ -5,6 +5,7 @@
     <Navbar :mini="mini"/>
     <Information :mini="mini" v-if="showInfor"/>
     <RoomManager :mini="mini" v-if="showRoom"/>
+    <RoomAdd :mini="mini" v-if="showAddRoom"/>
     <Footer :mini="mini"/>
     <section class="w100vw"></section>
   </div>
@@ -20,7 +21,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
     Sidebar: () => import('./template/Sidebar.vue'),
     Navbar: () => import('./template/Navbar.vue'),
     Information: () => import('./information/Information.vue'),
-    RoomManager: () => import('./room-manager/RoomManager.vue')
+    RoomManager: () => import('./room-manager/RoomManager.vue'),
+    RoomAdd: () => import('./room-add/RoomAdd.vue')
   }
 })
 export default class Personal extends Vue {
@@ -29,6 +31,7 @@ export default class Personal extends Vue {
 
   showInfor: boolean = false;
   showRoom: boolean = false;
+  showAddRoom: boolean = false;
 
   mini: boolean = true;
 
@@ -38,6 +41,9 @@ export default class Personal extends Vue {
     }
     if (this.mode === 2) { //show room manager
       this.showRoom = true;
+    }
+    if (this.mode === 3) { //show room add
+      this.showAddRoom = true;
     }
   }
 

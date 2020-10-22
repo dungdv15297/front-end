@@ -34,9 +34,8 @@
             ></b-form-input>
           </b-col>
         </b-row>
-        <b-row>
+        <!-- <b-row>
           <b-col class="text-left">
-            <!-- Remember Me -->
             <b-form-checkbox
               id="checkbox-1"
               v-model="loginData.rememberMe"
@@ -47,7 +46,7 @@
               {{ $t('login.remember') }}
             </b-form-checkbox>
           </b-col>
-        </b-row>
+        </b-row> -->
         <b-row class="my-3">
           <b-col>
             <!-- Login button -->

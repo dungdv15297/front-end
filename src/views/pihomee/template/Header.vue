@@ -40,8 +40,14 @@
             </div>
             <div class="col-xl-2 col-lg-2">
               <!-- header-btn -->
-              <div class="">
-                <a href="#" class="btn">Đăng nhập</a>
+              <div>
+                <a v-if="isShowLogin" href="/login" class="btn">Đăng nhập</a>
+                <span v-if="!isShowLogin">
+                  <a href="/personal" class="account" v-b-tooltip.hover title="Xin chào Dũng">
+                    <span class="material-icons">person</span>
+                  </a>
+                  <a href="#" @click="onClickSignOut" v-b-tooltip.hover title="Đăng xuất" class="material-icons">exit_to_app</a>
+                </span>
               </div>
             </div>
           </div>
@@ -53,14 +59,67 @@
 </template>
 
 <script lang="ts">
+import { axiosCreator } from '@/base/customAxios';
+import AccountDetailResponse from '@/base/response/account-detail-response';
+import { AxiosInstance } from 'axios';
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class Header extends Vue {}
+export default class Header extends Vue {
+  accountDetail: AccountDetailResponse = new AccountDetailResponse();
+  get isShowLogin(): boolean {
+    return this.accountDetail.name === '';
+  }
+
+  API = {
+    byToken: 'account/byToken'
+  }
+
+  mounted() {
+    if (!!this.$store.getters['token']) {
+      this.getAccountDetailInfo();
+    }
+  }
+
+  async getAccountDetailInfo(): Promise<void> {
+    const axios: AxiosInstance = axiosCreator();
+    await axios.get<AccountDetailResponse>(this.API.byToken)
+      .then(response => {
+        if (response && response.data) {
+          this.accountDetail = response.data;
+          this.$store.dispatch('setAccountId', response.data.id);
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data && error.response.data.errorCode) {
+          this.$store.dispatch('setToken', null);
+          this.$store.dispatch('setAccountId', null);
+        }
+      });
+  }
+
+  onClickSignOut(): void {
+    const token = this.$store.getters['token'];
+    if (!!token) {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setAccountId', null);
+    }
+    this.$router.go(0);
+  }
+}
 </script>
 
 <style scoped>
 ul li {
   text-align: left;
+}
+.account {
+  color: #dca73a;
+  margin-right: 10px;
+}
+.account:hover {
+  color: #fd7e14;
+  font-weight: 400;
+  font-size: 16px;
 }
 </style>

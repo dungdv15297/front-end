@@ -43,6 +43,11 @@ const routes: Array<RouteConfig> = [
     props: { mode: 2 }
   },
   {
+    path: '/room-add',
+    component: Personal,
+    props: { mode: 3 }
+  },
+  {
     path: '/login',
     name: 'Login',
     children: [

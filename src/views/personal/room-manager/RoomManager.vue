@@ -44,7 +44,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
-export default class Sidebar extends Vue {
+export default class RoomManager extends Vue {
   @Prop()
   mini!: boolean;
 

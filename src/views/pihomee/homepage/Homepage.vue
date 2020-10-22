@@ -69,7 +69,7 @@
     <!-- Trend Hồ Chí Minh End -->
 
     <!-- Trend Đà Nẵng Start -->
-    <section class="room-area border-groove mt-5 pt-5">
+    <section class="room-area border-groove mt-5 pt-5" style="padding-bottom:40px;border-bottom:1px groove;">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-8">
@@ -143,7 +143,6 @@
                   <div class="archivment-front">
                     <img src="assets/img/logo/testimonial.png" alt="" />
                   </div>
-                  <h3 class="archivment-back">Testimonial</h3>
                 </div>
                 <!-- Testimonial Content -->
                 <div class="testimonial-caption text-center">
