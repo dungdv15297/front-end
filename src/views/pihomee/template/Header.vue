@@ -30,8 +30,8 @@
                     <li>
                       <a href="#">Về chúng tôi</a>
                       <ul class="submenu">
-                        <li><a href="rooms.html">Giới thiệu</a></li>
-                        <li><a href="elements.html">Liên lạc</a></li>
+                        <li><a href="/about">Giới thiệu</a></li>
+                        <li><a href="/contact">Liên lạc</a></li>
                       </ul>
                     </li>
                   </ul>

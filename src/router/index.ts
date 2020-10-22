@@ -6,9 +6,9 @@ import Register from '@/views/register/Register.vue';
 // New template here
 import MainView from '@/views/pihomee/MainView.vue';
 import Homepage from '@/views/pihomee/homepage/Homepage.vue';
-import Personal from '@/views/pihomee/personal/Personal.vue';
 import Contact from '@/views/pihomee/contact/Contact.vue'; // import vào, rồi giờ tạo component nhá
 import About from '@/views/pihomee/about/About.vue';
+import Personal from '@/views/personal/Personal.vue';
 
 Vue.use(VueRouter);
 
@@ -23,11 +23,6 @@ const routes: Array<RouteConfig> = [
         component: Homepage
       },
       {
-        path: '/personal',
-        component: Personal
-      },
-      // Chỉ sửa link trong phần này thôi nhé, ở đúng chỗ này thôi
-      {
         path: '/contact',
         component: Contact
       },
@@ -36,6 +31,16 @@ const routes: Array<RouteConfig> = [
         component: About
       }
     ]
+  },
+  {
+    path: '/personal',
+    component: Personal,
+    props: { mode: 1 }
+  },
+  {
+    path: '/room-manager',
+    component: Personal,
+    props: { mode: 2 }
   },
   {
     path: '/login',
@@ -56,6 +61,10 @@ const routes: Array<RouteConfig> = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/*',
+    redirect: '/home'
   }
 ]
 
