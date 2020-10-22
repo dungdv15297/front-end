@@ -7,6 +7,8 @@ import Register from '@/views/register/Register.vue';
 import MainView from '@/views/pihomee/MainView.vue';
 import Homepage from '@/views/pihomee/homepage/Homepage.vue';
 import Personal from '@/views/pihomee/personal/Personal.vue';
+import Contact from '@/views/pihomee/contact/Contact.vue'; // import vào, rồi giờ tạo component nhá
+import About from '@/views/pihomee/about/About.vue';
 
 Vue.use(VueRouter);
 
@@ -23,6 +25,15 @@ const routes: Array<RouteConfig> = [
       {
         path: '/personal',
         component: Personal
+      },
+      // Chỉ sửa link trong phần này thôi nhé, ở đúng chỗ này thôi
+      {
+        path: '/contact',
+        component: Contact
+      },
+      {
+        path: '/about',
+        component: About
       }
     ]
   },
