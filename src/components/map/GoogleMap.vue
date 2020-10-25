@@ -1,0 +1,81 @@
+<template>
+  <div class="row">
+    <div class="col-sm-12" v-if="!hiddenSearch">
+      <gmap-place-input @place_changed="setPlace"
+        :options="{fields: ['geometry', 'formatted_address', 'address_components']}"
+        :select-first-on-enter="true" class="map-input">
+      </gmap-place-input>
+    </div>
+    <div class="col-sm-12">
+      <gmap-map :center="position" :zoom="12" map-type-id="terrain" style="width: 100%;padding-top:100%">
+        <gmap-marker
+          :draggable="draggable"
+          :position="position"
+        ></gmap-marker>
+      </gmap-map>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+
+@Component
+export default class GoogleMap extends Vue {
+
+  @Prop()
+  staticCenter: any;
+
+  @Prop()
+  hiddenSearch!: boolean;
+  
+  @Prop()
+  draggable!: boolean;
+
+  value: any = '';
+
+  position: any = { lat: 1, lng: 1 };
+
+  @Watch('position')
+  changePosition() {
+    this.$emit('changePlace', this.position);
+  }
+
+  created() {
+    if (!!this.staticCenter) {
+      this.position = this.staticCenter;
+    }
+  }
+
+  setPlace(place: any) {
+    if (place && place.geometry.location) {
+      this.position = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng()
+      }
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+.map-input {
+  width: 100%;
+}
+.map-input >>> input {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+</style>

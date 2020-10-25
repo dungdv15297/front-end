@@ -56,7 +56,7 @@
           <div class="row">
             <div class="col-sm-12">
               <b-form-group label="Nội dung mô tả" label-align="left">
-                <b-form-textarea rows="6" max-rows="100"></b-form-textarea>
+                <b-form-textarea rows="6" max-rows="20"></b-form-textarea>
               </b-form-group>
             </div>
           </div>
@@ -109,8 +109,10 @@
 
         <!-- Content right -->
         <div class="col-md-4">
+          <div class="row title mt-20 mb-20">Bản đồ</div>
 
-          AIzaSyAbgEA1vpzx8RZvd_rthfLQ1f2w-M0o_Bk
+          <google-map :hidden-search="false" :draggable="true" @changePlace="changePlace"/>
+          
           <div class="row title mt-20 mb-20">Hình ảnh</div>
           <div class="row">
             <div class="col-sm-12">
@@ -118,7 +120,7 @@
                 <div class="choose-file" @click="openChooseFile">
                   <h1><b-icon icon="upload" aria-hidden="true"></b-icon></h1>
                 </div>
-                <input ref="file-input" type="file" accept=".jpg,.png,.jpeg" style="display:none" @change="uploadImage">
+                <input ref="file-input" type="file" accept=".jpg,.png,.jpeg" :value="image" style="display:none" @change="uploadImage">
               </b-form-group>
             </div>
           </div>
@@ -143,7 +145,11 @@
 import BaseDomain from '@/base/domains/base-domain';
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
-@Component
+@Component({
+  components: {
+    GoogleMap: () => import('@/components/map/GoogleMap.vue')
+  }
+})
 export default class RoomAdd extends Vue {
   @Prop()
   mini!: boolean;
@@ -165,6 +171,10 @@ export default class RoomAdd extends Vue {
   ];
 
   images: any[] = [];
+  image: any = null;
+
+  changePlace(place: any): void {
+  }
 
   openChooseFile(): void {
     (this.$refs['file-input'] as any).click();
@@ -178,6 +188,7 @@ export default class RoomAdd extends Vue {
         if (this.images.length < 6) {
           this.images.push(event.target.result);
         }
+        this.image = null;
       }
     }
   }
@@ -214,7 +225,8 @@ export default class RoomAdd extends Vue {
 .image-upload {
   width: 100%;
   padding-top: 100%;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .remove-link {
   cursor: pointer;

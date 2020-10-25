@@ -1,7 +1,7 @@
 <template>
   <div ref="main" id="main">
     <div class="content">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <nav class="navbar navbar-expand-md navbar-light">
         <a class="navbar-brand" href="#">
           <img src="assets/img/logo/logo.png" alt="" />
         </a>
