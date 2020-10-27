@@ -7,8 +7,11 @@
                     <div class="row ">
                         <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
                             <div class="hero-caption">
-                                <span>About</span>
-                                <h2>About</h2>
+                                <!-- sang bên này gọi thế này mã.nội dung ý-->
+                                <!-- nó chưa hiện vì ngôn ngữ đang được chọn là vn, file vừa thêm mới có en thôi -->
+                                <!-- Hiện rồi đấy, hiểu cách làm ko bạn.ok -->
+                                <span>{{ $t('about.introduce') }}</span>
+                                <h2> {{ $t('about.introduce2') }} </h2>
                             </div>
                         </div>
                     </div>
@@ -27,18 +30,18 @@
                             <img src="assets/img/customer/customar1.png" class="customar-img1" alt="">
                             <img src="assets/img/customer/customar2.png" class="customar-img2" alt="">
                             <div class="service-experience heartbeat">
-                                <h3>25 Years of Service<br>Experience</h3>
+                                <h3>5 Năm Kinh Doanh<br>Dịch Vụ</h3>
                             </div>
                         </div>
                    </div>
                     <div class=" col-xl-4 col-lg-4">
                         <div class="customer-caption">
-                            <span>About our company</span>
-                            <h2>Make the customer the hero of your story</h2>
+                            <span>Về công ty chúng tôi</span>
+                            <h2>Pihomee - Cung Cấp Dịch Vụ Cho Khách Hàng An Toàn Và Chu Đáo </h2>
                             <div class="caption-details">
-                                <p class="pera-dtails">Lorem ipsum dolor sit amet, consectetur adipisic- ing elit, sed do eiusmod tempor inc. </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
-                                <a href="#" class="btn more-btn1">Learn More <i class="ti-angle-right"></i> </a>
+                                <p class="pera-dtails">Khách hàng được tham khảo thông tin, địa chỉ, hình ảnh và giá phòng. </p>
+                                <p>Cá nhân hoặc doanh nghiệp cho thuê phòng cung cấp đầy đủ thông tin sản phẩm và hình ảnh về các loại phòng cho thuê: căn hộ, chung cư,...</p>
+                                <a href="#" class="btn more-btn1">Tìm Hiểu Thêm <i class="ti-angle-right"></i> </a>
                             </div>
                         </div>
                     </div>
@@ -49,37 +52,39 @@
 
 
         <!-- Gallery img Start  -->
-        <div class="gallery-area g-padding fix">
+         <div class="gallery-area g-padding fix">
             <div class="container-fluid p-0">
                 <div class="row">
                     <div class="col-md-12">
 
-
- <!--   <b-carousel id="carousel-1" v-model="slide" :interval="4000" controls indicators background="#ababab" img-width="500" img-height="200" style="text-shadow: 1px 1px 2px #333;" @sliding-start="onSlideStart" @sliding-end="onSlideEnd" >
-       Slides with image only 
-      <b-carousel-slide img-src="assets/img/gallery/gallery1.jpg"></b-carousel-slide>
-      <b-carousel-slide img-src="assets/img/gallery/gallery2.jpg"></b-carousel-slide>
-      <b-carousel-slide img-src="assets/img/gallery/gallery3.jpg"></b-carousel-slide>
-        </b-carousel> -->
-
-
-
-                         <div class="owl-carousel gallery-active">
-                            <div class="gallery-img">
-                                <a href="#"><img src="assets/img/gallery/gallery1.jpg" alt="gallery1"></a>
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="../../../assets/header.png" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="../../../assets/h1_hero.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="../../../assets/h1_hero.jpg" alt="Third slide">
+                                </div>
                             </div>
-                            <div class="gallery-img">
-                                <a href="#"><img src="assets/img/gallery/gallery2.jpg" alt="gallery2"></a>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                             </div>
-                            <div class="gallery-img">
-                                <a href="#"><img src="assets/img/gallery/gallery3.jpg" alt="gallery3"></a>
-                            </div>
-                        </div> 
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Gallery img End-->
+        <!-- Gallery img End--> 
+        <!-- mình bảo nhé. Bạn ấn ctrl + P điền en.json để tìm file. Có file en và vn là 2 file ngôn ngữ. -->
+        <!-- Xong rồi thì thêm vào phần cuối cùng của file nội dung trong màn của bạn. -->
 
         <!-- Dining Start -->
         <div class="dining-area d-padding">
@@ -89,10 +94,10 @@
                     <div class="row justify-content-end">
                         <div class="col-lg-8 col-md-8">
                             <div class="dining-caption">
-                                <span>Our resturent</span>
-                                <h3>Dining & Drinks</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim <br>veniam, quis nostrud.</p>
-                                <a href="#" class="btn border-btn">Learn More <i class="ti-angle-right"></i> </a>
+                                <span>Loại Hình Kinh Doanh</span>
+                                <h3>Loại Hình Cho Thuê Đa Dạng Phong Phú</h3>
+                                <p>Bên cạnh những loại hình kinh doanh cho thuê phòng trọ da dạng khách hàng và chủ phòng cũng có thể tham khảo những loại hình cho thuê khác như : văn phòng, cửa hàng, nhà hàng...</p>
+                                <a href="#" class="btn border-btn">Tìm Hiểu Thêm <i class="ti-angle-right"></i> </a>
                             </div>
                         </div>
                     </div>
@@ -104,10 +109,10 @@
                     <div class="row justify-content-start">
                         <div class="col-lg-8 col-md-8">
                             <div class="dining-caption text-right">
-                                <span>Our Pool</span>
-                                <h3>Swimming Pool</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim <br>veniam, quis nostrud.</p>
-                                <a href="#" class="btn border-btn">Learn More  <i class="ti-angle-right"></i></a>
+                                <span>Pihomee, Kết Nối Lợi Ích Chung</span>
+                                <h3>Cầu Nối Giữa Chủ Phòng Và Khách Hàng</h3>
+                                <p>Thay vì các loại hình quảng cáo truyền thống, tốn kém và không hiệu quả, chủ phòng có thể dễ dàng đăng tin các sản phẩm kinh doanh của mình lên Pihomee và khách hàng cũng có thể dễ dàng tìm kiếm thông tin theo nhu cầu thuê.</p>
+                                <a href="#" class="btn border-btn">Tìm Hiểu Thêm  <i class="ti-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +138,11 @@
                                 </div>
                                 <!-- Testimonial Content -->
                                 <div class="testimonial-caption text-center">
-                                    <p>Yorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
+                                    <p>
+                                        Trước khi biết Pihomee, mình phải tốn nhiều công sức và chi phí cho việc đăng tin cho thuê:
+                                        từ việc phát tờ rơi, dán giấy, và đăng lên các website khác nhưng hiệu quả không cao.
+                                        Từ khi biết Pihomee, mình đã thử đăng tin lên và đánh giá hiệu quả khá cao
+                                        trong khi chi phí khá thấp, không còn tình trạng phòng trống kéo dài.
                                     </p>
                                     <!-- Rattion -->
                                     <div class="testimonial-ratting">
@@ -144,7 +153,7 @@
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="rattiong-caption">
-                                        <span>Clifford Frazier, <span>Regular Client</span> </span>
+                                        <span>Đàm Văn Dũng, <span>Chủ Phòng</span> </span>
                                     </div>
                                 </div>
                             </div>

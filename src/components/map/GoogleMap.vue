@@ -7,7 +7,7 @@
       </gmap-place-input>
     </div>
     <div class="col-sm-12">
-      <gmap-map :center="position" :zoom="12" map-type-id="terrain" style="width: 100%;padding-top:100%">
+      <gmap-map :center="position" :zoom="zoomNo" map-type-id="terrain" style="width: 100%;padding-top:100%">
         <gmap-marker
           :draggable="draggable"
           :position="position"
@@ -24,6 +24,9 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 export default class GoogleMap extends Vue {
 
   @Prop()
+  zoom!: number
+
+  @Prop()
   staticCenter: any;
 
   @Prop()
@@ -31,6 +34,10 @@ export default class GoogleMap extends Vue {
   
   @Prop()
   draggable!: boolean;
+
+  get zoomNo(): number {
+    return !!this.zoom ? this.zoom : 12;
+  }
 
   value: any = '';
 

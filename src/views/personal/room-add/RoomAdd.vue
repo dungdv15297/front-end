@@ -174,6 +174,7 @@ export default class RoomAdd extends Vue {
   image: any = null;
 
   changePlace(place: any): void {
+    debugger
   }
 
   openChooseFile(): void {

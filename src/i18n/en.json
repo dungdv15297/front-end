@@ -129,5 +129,9 @@
     "0": "Male",
     "1": "Female",
     "2": "Other"
+  },
+  "about": {
+    "introduce": "Introduce",
+    "introduce2": "INTRODUCE"
   }
 }

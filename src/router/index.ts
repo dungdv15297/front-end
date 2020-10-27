@@ -10,6 +10,7 @@ import Contact from '@/views/pihomee/contact/Contact.vue';
 import About from '@/views/pihomee/about/About.vue';
 import Personal from '@/views/personal/Personal.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
+import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,10 @@ const routes: Array<RouteConfig> = [
       {
         path: '/about',
         component: About
+      },
+      {
+        path: '/details-room',
+        component: DetailsRoom
       }
     ]
   },

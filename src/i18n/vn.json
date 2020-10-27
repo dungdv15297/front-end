@@ -152,5 +152,9 @@
     "0": "Male",
     "1": "Female",
     "2": "Other"
+  },
+  "about": {
+    "introduce": "Giới thiệu",
+    "introduce2": "GIỚI THIỆU"
   }
 }

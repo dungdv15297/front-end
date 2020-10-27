@@ -18,6 +18,9 @@
                 <a href="#"><i class="fas fa-globe"></i></a>
                 <a href="#"><i class="fab fa-behance"></i></a>
               </div>
+              <div class="footer-social footer-social2">
+                <Language/>
+              </div>
             </div>
           </div>
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5">
@@ -66,7 +69,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component
+@Component({
+  components: {
+    Language:() => import('@/components/language/SelectLanguage.vue')
+  }
+})
 export default class Footer extends Vue {}
 </script>
 
