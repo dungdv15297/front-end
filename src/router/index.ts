@@ -6,9 +6,10 @@ import Register from '@/views/register/Register.vue';
 // New template here
 import MainView from '@/views/pihomee/MainView.vue';
 import Homepage from '@/views/pihomee/homepage/Homepage.vue';
-import Contact from '@/views/pihomee/contact/Contact.vue'; // import vào, rồi giờ tạo component nhá
+import Contact from '@/views/pihomee/contact/Contact.vue';
 import About from '@/views/pihomee/about/About.vue';
 import Personal from '@/views/personal/Personal.vue';
+import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,10 @@ const routes: Array<RouteConfig> = [
       {
         path: '/home',
         component: Homepage
+      },
+      {
+        path: '/room',
+        component: SearchPage
       },
       {
         path: '/contact',

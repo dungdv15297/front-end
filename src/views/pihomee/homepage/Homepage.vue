@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <search-room @searchContent="searchContent"/>
+    <search-room @search="onSearch"/>
     <!-- Trend Hà Nội Start -->
     <section class="room-area border-groove mt-5 pt-5">
       <div class="container">
@@ -185,7 +185,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class Homepage extends Vue {
   dataSearch: SearchValue = new SearchValue();
 
-  searchContent(data: SearchValue) {
+  onSearch(data: SearchValue) {
     this.dataSearch = data;
   }
 }

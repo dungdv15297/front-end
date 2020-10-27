@@ -1,7 +1,7 @@
 <template>
   <!-- Booking Room Start-->
   <div class="booking-area">
-    <div class="container">
+    <div :class="container">
       <div class="row">
         <div class="col-12">
           <div
@@ -92,6 +92,14 @@ import SearchValue from './search-value';
 
 @Component
 export default class SearchRoom extends Vue {
+
+  @Prop()
+  fluid!: boolean;
+
+  get container(): string {
+    return this.fluid ? 'container-fluid' : 'container';
+  }
+
   searchValue: SearchValue = new SearchValue();
   types: SelectType[] = [ new SelectType(0, '') ];
   provinces: SelectType[] = [ new SelectType(0, '') ];
@@ -104,7 +112,7 @@ export default class SearchRoom extends Vue {
   }
 
   emitData() {
-    this.$emit('searchContent', this.searchValue);
+    this.$emit('search', this.searchValue);
   }
 }
 
