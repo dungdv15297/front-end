@@ -1,11 +1,15 @@
 import AccountDetail from '@/base/domains/account-detail';
 import PasswordChangeRequest from '@/base/request/password-change-request';
 
+const emailRegx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 export function validationUpdateInfor(detailData?: AccountDetail): any {
   const result = {
-    
+    email: {
+      rule: !detailData || detailData.email.match(emailRegx) ? null : false,
+      msg: () => { return result.email.rule === false ? 'tooltip.VALIDATE007' : '' }
+    },
     isValid: () => {
-      return true;
+      return result.email.rule === null;
     }
   }
   return result;
@@ -30,9 +34,9 @@ export function validationChangePass(updateAccount?: PasswordChangeRequest): any
       msg: () => {
         return result.confirm.rule === null
           ? ''
-          : !result.confirm.firstRule
+          : result.confirm.firstRule === false
             ? 'tooltip.VALIDATE002'
-            : !result.confirm.secondRule
+            : result.confirm.secondRule === false
               ? 'tooltip.VALIDATE006'
               : ''
       } 

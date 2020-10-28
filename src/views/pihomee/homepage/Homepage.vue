@@ -205,6 +205,6 @@ class SearchValue {
   border-top: 1px groove;
 }
 .single-slider {
-  background-image: url('./roomspage_hero.jpg');
+  background-image: url('../../../assets/img/hero/roomspage_hero.jpg');
 }
 </style>

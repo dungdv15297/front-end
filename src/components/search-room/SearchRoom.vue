@@ -131,4 +131,8 @@ class SelectType {
 .booking-wrap {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+.booking-area {
+  max-width: 1400px;
+  margin: auto;
+}
 </style>

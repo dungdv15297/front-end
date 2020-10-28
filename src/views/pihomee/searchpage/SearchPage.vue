@@ -252,7 +252,6 @@ main >>> .nice-select {
 main >>> .select-btn {
   padding: 20px 50px;
 }
-
 .single-room h4 {
   font-family: 'Noto Serif', serif !important;
 }

@@ -2,7 +2,7 @@
   <div ref="main" id="main">
     <div class="content">
       <nav class="navbar navbar-expand-md navbar-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/home">
           <img src="assets/img/logo/logo.png" alt="" />
         </a>
         <button
@@ -42,7 +42,7 @@
                     <img src="@/assets/img/team/3.png" class="avatar" />
                   </a>
                   <span style="font-family: cursive; margin-left: 10px"
-                    ><strong>Username</strong></span
+                    ><strong>{{ accountDetail.name }}</strong></span
                   >
                   <div
                     class="dropdown-menu"
@@ -68,12 +68,17 @@
 </template>
 
 <script lang='ts'>
+import { axiosCreator } from '@/base/customAxios';
+import AccountDetailResponse from '@/base/response/account-detail-response';
+import { AxiosInstance } from 'axios';
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
 export default class Navbar extends Vue {
   @Prop()
   mini!: boolean;
+
+  accountDetail: AccountDetailResponse = new AccountDetailResponse();
 
   @Watch("mini")
   toggleSidebar() {
@@ -82,6 +87,21 @@ export default class Navbar extends Vue {
     } else {
       (this.$refs["main"] as any).style.marginLeft = "250px";
     }
+  }
+
+  created() {
+    const axios: AxiosInstance = axiosCreator();
+    axios.get<AccountDetailResponse>('account/byToken')
+      .then(response => {
+        if (response && response.data) {
+          this.accountDetail = response.data;
+          this.$store.dispatch('setAccountId', response.data.id);
+        }
+      })
+      .catch(error => {
+        this.$store.dispatch('setToken', null);
+        this.$store.dispatch('setAccountId', null);
+      });
   }
 }
 </script>

@@ -399,7 +399,28 @@ label {
   vertical-align: middle;
   white-space: nowrap;
 }
-
+.btn-sucess {
+  background: #28a745 !important;
+  border-color: #28a745 !important;
+}
+.btn-sucess:hover {
+  background: #028621 !important;
+  border-color: #028621 !important;
+}
+.btn-sm {
+  padding: .25rem .5rem !important;
+  font-size: .875rem !important;
+  line-height: 1.5 !important;
+  border-radius: .2rem !important;
+}
+.btn-danger {
+  background: #c82333 !important;
+  border-color: #c82333 !important;
+}
+.btn-danger:hover {
+  background: #a80011 !important;
+  border-color: #a80011 !important;
+}
 /* line 196, C:/Users/SPN Graphics/Desktop/hotel_up/Hotel_HTML/assets/scss/_common.scss */
 .btn:hover {
   background: #f1b233;

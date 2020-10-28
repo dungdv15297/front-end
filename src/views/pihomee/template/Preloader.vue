@@ -1,13 +1,6 @@
 <template>
-  <div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-      <div class="preloader-inner position-relative">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img pere-text">
-          <strong>Pihomee</strong>
-        </div>
-      </div>
-    </div>
+  <div class="loader-wrapper" v-if="show">
+    <span class="loader"><span class="loader-inner"></span></span>
   </div>
 </template>
 
@@ -15,8 +8,59 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class Preloader extends Vue {}
+export default class Preloader extends Vue {
+  show = true;
+  mounted() {
+    setTimeout(() => {
+      this.show = false;
+    }, 1000)
+  }
+}
 </script>
 
 <style scoped>
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #242f3f;
+  display:flex;
+  justify-content: center;
+  z-index: 99999999;
+  padding-top: 50vh;
+  animation: fade-animation 3s;
+  transition: ease-in;
+}
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+@keyframes loader {
+  0% { transform: rotate(0deg);}
+  25% { transform: rotate(180deg);}
+  50% { transform: rotate(180deg);}
+  75% { transform: rotate(360deg);}
+  100% { transform: rotate(360deg);}
+}
+@keyframes loader-inner {
+  0% { height: 0%;}
+  25% { height: 0%;}
+  50% { height: 100%;}
+  75% { height: 100%;}
+  100% { height: 0%;}
+}
+
 </style>

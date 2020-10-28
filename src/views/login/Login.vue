@@ -18,6 +18,7 @@
               :state="validation.username.rule"
               v-b-tooltip.hover.right.v-danger
               :title="$t(validation.username.msg())"
+              v-on:keyup.enter="onClickLogin"
             ></b-form-input>
           </b-col>
         </b-row>
@@ -31,22 +32,11 @@
               :state="validation.password.rule"
               v-b-tooltip.hover.right.v-danger
               :title="$t(validation.password.msg())"
+              v-on:keyup.enter="onClickLogin"
             ></b-form-input>
           </b-col>
         </b-row>
-        <!-- <b-row>
-          <b-col class="text-left">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="loginData.rememberMe"
-              name="checkbox-1"
-              value="accepted"
-              unchecked-value="not_accepted"
-            >
-              {{ $t('login.remember') }}
-            </b-form-checkbox>
-          </b-col>
-        </b-row> -->
+        
         <b-row class="my-3">
           <b-col>
             <!-- Login button -->
@@ -129,7 +119,15 @@ export default class Login extends Vue {
         }
       })
       .catch(err => {
-        // show MSG100
+        this.$bvModal.msgBoxOk(this.$t('login.error').toString(), {
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true,
+          noCloseOnBackdrop: true
+        })
       })
   }
 

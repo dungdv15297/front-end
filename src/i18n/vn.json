@@ -19,7 +19,8 @@
     "VALIDATE003": "Fullname must not be blank",
     "VALIDATE004": "Phone number is not in the correct format",
     "VALIDATE005": "This username has already existed",
-    "VALIDATE006": "Confirmation must match password"
+    "VALIDATE006": "Confirmation must match password",
+    "VALIDATE007": "The email is not in the correct format"
   },
   "dialog": {
     "confirm": "Confirm",
@@ -31,28 +32,27 @@
   },
   "message": {
     "hasScreenBefore": "This screen has now been opened",
+    "hasBeenUpdated": "Your information has been updated",
     "cantPrint": "Don't have the reference to print",
+    "success": "Successfully",
     "MSG001": "Are you sure?",
     "MSG002": "Success!",
-    "MSG003": "Update password successfully",
     "MSG100": "Login failed!",
     "MSG101": "Login successful",
     "MSG102": "Register successful",
+    "MSG003": "Your password has been changed",
     "ERR100": "You must login first as administrator to view this site",
     "ERR101": "User must be an administrator to view this site",
     "ERR004": "The information entered is not valid",
     "ERR005": "This account has already existed",
     "ERR006": "There was a problem with the execution",
     "ERR007": "Can not find your account information",
-    "ERR010": "Account not found",
-    "ERR011": "Password is invalid",
-    "ERR012": "New password and confirm password not be compared",
-    "success": "Successfully",
-    "error": "Error"
+    "ERR011": "Your old password is incorrect",
+    "error": "Something wrong"
   },
   "language": {
     "lang": "Language",
-    "vn": "Vietnamese",
+    "vn": "Việt Nam",
     "en": "English"
   },
   "pageFooter": {
@@ -94,7 +94,8 @@
     "loginBtn": "Login",
     "remember": "Remember Me",
     "forgot": "Forgot password",
-    "signUp": "Sign up now"
+    "signUp": "Sign up now",
+    "error": "Account or password is incorrect"
   },
   "register": {
     "username": "Username",
@@ -121,32 +122,14 @@
   "personal": {
     "home": "PIHOMEE",
     "balance": "Balance: ",
-    "name": "Full name",
+    "name": "Name",
     "birthday": "Birthday",
     "gender": "Gender",
     "address": "Address",
     "email": "Email",
     "phone": "Phone number",
     "title": "Personal Information",
-    "homepage": "Homepage",
-    "room": "Room",
-    "house": "House",
-    "post": "Post news",
-    "news": "My rooms information",
-    "infor": "Personal information",
-    "payment": "Payment history",
-    "signout": "Sign out",
-    "accountTitle": "My account",
-    "edit": "Edit",
-    "update": "Update",
-    "username": "Username",
-    "updated": "Last updated",
-    "changePass": "Change password",
-    "updateInfor": "Update your information",
-    "password": "Password",
-    "newPass": "New password",
-    "confirm": "Confirm new password",
-    "submit": "Submit"
+    "accountTitle": "My account"
   },
   "gender": {
     "0": "Male",
@@ -154,7 +137,42 @@
     "2": "Other"
   },
   "about": {
-    "introduce": "Giới thiệu",
-    "introduce2": "GIỚI THIỆU"
+    "introduce": "Introduce",
+    "introduce2": "INTRODUCE"
+  },
+  "header": {
+    "homepage": "Homepage",
+    "searchRoom": "Search room",
+    "room": "Motel room",
+    "apartment": "Apartment",
+    "house": "House",
+    "office": "Office",
+    "post": "Rental post",
+    "aboutUs": "About us",
+    "introduce": "Introduce",
+    "contact": "Contact",
+    "signin": "Sign in",
+    "signout": "Sign out",
+    "hello": "Hello",
+    "success": "Success",
+    "successful": "Register account successfully"
+  },
+  "information": {
+    "updateInfor": "Personal information editor",
+    "updatePassword": "Change password",
+    "btnPassword": "Submit",
+    "accountCode": "Account code",
+    "phone": "Phone number",
+    "fullName": "Full name",
+    "birthday": "Birthday",
+    "gender": "Gender",
+    "address": "Address",
+    "email": "Email",
+    "updated": "Last modified",
+    "update": "Update your information",
+    "username": "Username",
+    "oldPass": "Old password",
+    "newPass": "New password",
+    "confirmPass": "Confirm new password"
   }
 }

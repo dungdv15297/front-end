@@ -108,14 +108,14 @@
       <b-row>
         <b-col class="text-right">
           <!-- Link sign in -->
-          <a href="" class="text-small" @click="goToLogin">{{ $t('register.signin') }}</a>
+          <a href="/login" class="text-small">{{ $t('register.signin') }}</a>
         </b-col>
       </b-row>
     </div>
     
     <div class="footer">
       <!-- homepage -->
-      <a href="" class="cl-white fl-left" @click="goToHomePage">
+      <a href="/home" class="cl-white fl-left">
         <b-icon icon="house-fill" aria-hidden="true"></b-icon> {{ $t('domain') }}
       </a>
     </div>
@@ -155,6 +155,7 @@ export default class Register extends Vue {
    * Click button register
    */
   onClickRegister(): void {
+    debugger
     this.isValidate = true;
     if (!this.validation.isValid()) {
       return;
@@ -171,7 +172,20 @@ export default class Register extends Vue {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;
           this.$store.dispatch('setToken', token);
-          // show MSG102
+          
+          this.$bvModal.msgBoxOk(this.$t('header.successful').toString(), {
+            title: this.$t('header.success').toString(),
+            size: 'sm',
+            buttonSize: 'sm',
+            okVariant: 'success',
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+            noCloseOnBackdrop: true
+          })
+          .then(value => {
+            
+          })
         }
       })
       .catch(error => {
@@ -183,19 +197,6 @@ export default class Register extends Vue {
       })
   }
 
-  /**
-   * Go to login page
-   */
-  goToLogin(): void {
-    this.$router.push({ name: 'Login' });
-  }
-
-  /**
-   * Go to homepage
-   */
-  goToHomePage(): void {
-    this.$router.push({name: 'HomePage'});
-  }
 }
 </script>
 <style scoped>

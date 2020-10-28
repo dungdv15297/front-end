@@ -231,7 +231,7 @@ export default class RoomManager extends Vue {
   margin-right: 0px !important;
 }
 .row >>> .btn {
-  background: none;
+  background: none !important;
   color: #dc3545;
   padding: .375rem .75rem;
 }
