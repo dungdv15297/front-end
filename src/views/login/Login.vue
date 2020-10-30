@@ -87,13 +87,24 @@ export default class Login extends Vue {
   axios: AxiosInstance = axios.axiosCreator();
 
   API = {
-    login: 'account/authenticate'
+    login: 'account/authenticate',
+    byToken: 'account/byToken'
   }
 
   created() {
     const token = this.$store.getters['token'];
     if (!!token) {
-      this.$router.push({ path: '/home' });
+      this.axios.get<any>(this.API.byToken)
+        .then(response => {
+          if (response && response.data) {
+            this.$router.push({ path: '/home' });
+          }
+        })
+        .catch(error => {
+          this.$store.dispatch('setToken', null);
+          this.$store.dispatch('setAccountId', null);
+        });
+
     }
   }
 

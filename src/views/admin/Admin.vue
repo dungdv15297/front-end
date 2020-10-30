@@ -6,6 +6,7 @@
     <Information :mini="mini" v-if="showInfor"/>
     <RoomManager :mini="mini" v-if="showRoom"/>
     <RoomAdd :mini="mini" v-if="showAddRoom"/>
+    <MasterTable :mini="mini" v-if="showMasterTable"/>
     <Footer :mini="mini"/>
     <section class="w100vw"></section>
   </div>
@@ -22,16 +23,18 @@ import { Component, Prop, Vue } from "vue-property-decorator";
     Navbar: () => import('./template/Navbar.vue'),
     Information: () => import('./information/Information.vue'),
     RoomManager: () => import('./room-manager/RoomManager.vue'),
-    RoomAdd: () => import('./room-add/RoomAdd.vue')
+    RoomAdd: () => import('./room-add/RoomAdd.vue'),
+    MasterTable: () => import('./master-table/MasterTable.vue')
   }
 })
-export default class Personal extends Vue {
+export default class Admin extends Vue {
   @Prop()
   mode?: number;
 
   showInfor: boolean = false;
   showRoom: boolean = false;
   showAddRoom: boolean = false;
+  showMasterTable: boolean = false;
 
   mini: boolean = true;
 
@@ -44,6 +47,9 @@ export default class Personal extends Vue {
     }
     if (this.mode === 3) { //show room add
       this.showAddRoom = true;
+    }
+    if (this.mode === 4) { //show master table
+      this.showMasterTable = true;
     }
   }
 

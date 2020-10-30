@@ -101,6 +101,7 @@ export default class Navbar extends Vue {
       .catch(error => {
         this.$store.dispatch('setToken', null);
         this.$store.dispatch('setAccountId', null);
+        this.$router.push('/home');
       });
   }
 }

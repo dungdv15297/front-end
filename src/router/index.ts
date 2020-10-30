@@ -8,7 +8,7 @@ import MainView from '@/views/pihomee/MainView.vue';
 import Homepage from '@/views/pihomee/homepage/Homepage.vue';
 import Contact from '@/views/pihomee/contact/Contact.vue';
 import About from '@/views/pihomee/about/About.vue';
-import Personal from '@/views/personal/Personal.vue';
+import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
 
@@ -44,18 +44,23 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/personal',
-    component: Personal,
+    component: Admin,
     props: { mode: 1 }
   },
   {
     path: '/room-manager',
-    component: Personal,
+    component: Admin,
     props: { mode: 2 }
   },
   {
     path: '/room-add',
-    component: Personal,
+    component: Admin,
     props: { mode: 3 }
+  },
+  {
+    path: '/manager/master-table',
+    component: Admin,
+    props: { mode: 4 }
   },
   {
     path: '/login',

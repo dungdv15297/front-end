@@ -1,34 +1,34 @@
 <template>
   <div ref="roomManager" id="main">
     <div class="content">
-      <div class="row title mt-20 mb-20">Đăng tin mới</div>
+      <div class="row title mt-20 mb-20"> {{ $t('roomadd.newpost') }} </div>
       <div class="row">
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-4">
-              <b-form-group label="Tỉnh/Thành phố" label-align="left">
+              <b-form-group :label="$t('roomadd.province')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-md-4">
-              <b-form-group label="Quận/Huyện" label-align="left">
+              <b-form-group :label="$t('roomadd.district')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-md-4">
-              <b-form-group label="Phường/Xã" label-align="left">
+              <b-form-group :label="$t('roomadd.ward')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-md-4">
-              <b-form-group label="Đường/Phố" label-align="left">
+              <b-form-group :label="$t('roomadd.street')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-md-8">
-              <b-form-group label="Chi tiết" label-align="left">
+              <b-form-group :label="$t('roomadd.detail')" label-align="left">
                 <b-form-input trim></b-form-input>
               </b-form-group>
             </div>
@@ -38,85 +38,85 @@
               <b-form-input trim disabled></b-form-input>
             </div>
           </div>
-          <div class="row title mt-20 mb-20">Thông tin mô tả</div>
+          <div class="row title mt-20 mb-20">{{ $t('roomadd.description') }}</div>
           <div class="row">
             <div class="col-md-4 col-sm-12">
-              <b-form-group label="Loại phòng" label-align="left">
+              <b-form-group :label="$t('roomadd.type')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <b-form-group label="Tiêu đề" label-align="left">
+              <b-form-group :label="$t('roomadd.title')" label-align="left">
                 <b-form-input trim></b-form-input>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <b-form-group label="Nội dung mô tả" label-align="left">
+              <b-form-group :label="$t('roomadd.content')" label-align="left">
                 <b-form-textarea rows="6" max-rows="20"></b-form-textarea>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group label="Khoảng giá" label-align="left">
+              <b-form-group :label="$t('roomadd.priceRange')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-sm-12 col-md-4">
-              <b-form-group label="Giá phòng" label-align="left">
+              <b-form-group :label="$t('roomadd.price')" label-align="left">
                 <b-form-input trim></b-form-input>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group label="Diện tích" label-align="left">
+              <b-form-group :label="$t('roomadd.acreageRange')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-sm-12 col-md-4">
-              <b-form-group label="Chi tiết" label-align="left">
+              <b-form-group :label="$t('roomadd.acreage')" label-align="left">
                 <b-form-input trim></b-form-input>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group label="Đối tượng cho thuê" label-align="left">
+              <b-form-group :label="$t('roomadd.customer')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
           </div>
 
-          <div class="row title mt-20 mb-20">Chọn hình thức đăng tin</div>
+          <div class="row title mt-20 mb-20">{{ $t('roomadd.posting') }}</div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group label="Chọn loại tin" label-align="left">
+              <b-form-group :label="$t('roomadd.postingType')" label-align="left">
                 <b-form-select size="md" :options="options"></b-form-select>
               </b-form-group>
             </div>
           </div>
           <div class="row mb-20 mt-20">
             <div class="col-sm-12">
-              <a class="btn m-auto w-100">Hoàn tất</a>
+              <a class="btn m-auto w-100">{{ $t('roomadd.submit') }}</a>
             </div>
           </div>
         </div>
 
         <!-- Content right -->
         <div class="col-md-4">
-          <div class="row title mt-20 mb-20">Bản đồ</div>
+          <div class="row title mt-20 mb-20">{{ $t('roomadd.map') }}</div>
 
           <google-map :hidden-search="false" :draggable="true" @changePlace="changePlace"/>
           
-          <div class="row title mt-20 mb-20">Hình ảnh</div>
+          <div class="row title mt-20 mb-20">{{ $t('roomadd.picture') }}</div>
           <div class="row">
             <div class="col-sm-12">
-              <b-form-group label="Thêm hình ảnh cho phòng của bạn" label-align="left">
+              <b-form-group :label="$t('roomadd.addPic')" label-align="left">
                 <div class="choose-file" @click="openChooseFile">
                   <h1><b-icon icon="upload" aria-hidden="true"></b-icon></h1>
                 </div>
@@ -134,15 +134,13 @@
         </div>
       </div>
     </div>
-
-    <b-modal id="modal-delete" modal-class="modal-delete" static title="Xác nhận xóa" size="sm" centered no-close-on-backdrop>
-      <label>Bạn có muốn xóa bản ghi này?</label>
-    </b-modal>
   </div>
 </template>
 
 <script lang="ts">
+import { axiosCreator } from '@/base/customAxios';
 import BaseDomain from '@/base/domains/base-domain';
+import { AxiosInstance } from 'axios';
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component({
@@ -172,6 +170,12 @@ export default class RoomAdd extends Vue {
 
   images: any[] = [];
   image: any = null;
+
+  axios: AxiosInstance = axiosCreator();
+  
+  created() {
+
+  }
 
   changePlace(place: any): void {
     debugger

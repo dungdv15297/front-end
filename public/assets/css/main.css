@@ -8047,5 +8047,22 @@ h6 {
 .switch-wrap {
   margin-bottom: 10px;
 }
-
+.btn-secondary {
+  background: #6c757d !important;
+}
+.btn-secondary:hover {
+  background: #919aa0 !important;
+}
+.btn-primary {
+  background:#007bff !important;
+}
+.btn-primary:hover {
+  background:#005ab9 !important;
+}
+.btn-success {
+  background:#0a8630 !important;
+}
+.btn-success:hover {
+  background:#19af46 !important;
+}
 /*# sourceMappingURL=main.css.map */

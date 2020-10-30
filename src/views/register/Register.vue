@@ -134,7 +134,8 @@ import * as validate from './validation-rules';
 export default class Register extends Vue {
   registerData: RegisterData = new RegisterData();
   API = {
-    register: 'account/register'
+    register: 'account/register',
+    byToken: 'account/byToken'
   }
   axios = axios.axiosCreator();
 
@@ -147,7 +148,18 @@ export default class Register extends Vue {
   created() {
     const token = this.$store.getters['token'];
     if (!!token) {
-      this.$router.push({ path: '/home' });
+      if (!!token) {
+        this.axios.get<any>(this.API.byToken)
+          .then(response => {
+            if (response && response.data) {
+              this.$router.push({ path: '/home' });
+            }
+          })
+          .catch(error => {
+            this.$store.dispatch('setToken', null);
+            this.$store.dispatch('setAccountId', null);
+          });
+      }
     }
   }
 

@@ -32,6 +32,11 @@
         <span class="icon-text">Nạp tiền tài khoản</span>
       </a>
 
+      <a href="/manager/master-table" class="inline-flex">
+        <i class="material-icons">attach_money</i>
+        <span class="icon-text">Nạp tiền tài khoản</span>
+      </a>
+
       <a href="#" class="inline-flex">
         <i class="material-icons">exit_to_app</i>
         <span class="icon-text">Đăng xuất</span>
