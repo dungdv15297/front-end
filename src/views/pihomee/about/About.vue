@@ -7,9 +7,6 @@
                     <div class="row ">
                         <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
                             <div class="hero-caption">
-                                <!-- sang bên này gọi thế này mã.nội dung ý-->
-                                <!-- nó chưa hiện vì ngôn ngữ đang được chọn là vn, file vừa thêm mới có en thôi -->
-                                <!-- Hiện rồi đấy, hiểu cách làm ko bạn.ok -->
                                 <span>{{ $t('about.introduce') }}</span>
                                 <h2> {{ $t('about.introduce2') }} </h2>
                             </div>
@@ -30,18 +27,18 @@
                             <img src="assets/img/customer/customar1.png" class="customar-img1" alt="">
                             <img src="assets/img/customer/customar2.png" class="customar-img2" alt="">
                             <div class="service-experience heartbeat">
-                                <h3>5 Năm Kinh Doanh<br>Dịch Vụ</h3>
+                                <h3>{{ $t('about.title1') }}</h3>
                             </div>
                         </div>
                    </div>
                     <div class=" col-xl-4 col-lg-4">
                         <div class="customer-caption">
-                            <span>Về công ty chúng tôi</span>
-                            <h2>Pihomee - Cung Cấp Dịch Vụ Cho Khách Hàng An Toàn Và Chu Đáo </h2>
+                            <span>{{ $t('about.aboutCompany1') }}</span>
+                            <h2>{{ $t('about.aboutTitle1') }}</h2>
                             <div class="caption-details">
-                                <p class="pera-dtails">Khách hàng được tham khảo thông tin, địa chỉ, hình ảnh và giá phòng. </p>
-                                <p>Cá nhân hoặc doanh nghiệp cho thuê phòng cung cấp đầy đủ thông tin sản phẩm và hình ảnh về các loại phòng cho thuê: căn hộ, chung cư,...</p>
-                                <a href="#" class="btn more-btn1">Tìm Hiểu Thêm <i class="ti-angle-right"></i> </a>
+                                <p class="pera-dtails">{{ $t('about.content1') }} </p>
+                                <p>{{ $t('about.contentt1') }}</p>
+                                <a href="#" class="btn more-btn1">{{$t('about.btn1')}} <i class="ti-angle-right"></i> </a>
                             </div>
                         </div>
                     </div>
@@ -60,13 +57,13 @@
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                <img class="d-block w-100" src="../../../assets/header.png" alt="First slide">
+                                <img class="d-block w-100" src="../../../assets/img/hero/servicespage_hero.jpg" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
-                                <img class="d-block w-100" src="../../../assets/h1_hero.jpg" alt="Second slide">
+                                <img class="d-block w-100" src="../../../assets/img/hero/contact_hero.jpg" alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
-                                <img class="d-block w-100" src="../../../assets/h1_hero.jpg" alt="Third slide">
+                                <img class="d-block w-100" src="../../../assets/img/hero/roomspage_hero.jpg" alt="Third slide">
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -83,8 +80,7 @@
             </div>
         </div>
         <!-- Gallery img End--> 
-        <!-- mình bảo nhé. Bạn ấn ctrl + P điền en.json để tìm file. Có file en và vn là 2 file ngôn ngữ. -->
-        <!-- Xong rồi thì thêm vào phần cuối cùng của file nội dung trong màn của bạn. -->
+        <!-- Bạn ấn ctrl + P. Tìm có file en và vn là 2 file ngôn ngữ. -->
 
         <!-- Dining Start -->
         <div class="dining-area d-padding">
@@ -94,10 +90,10 @@
                     <div class="row justify-content-end">
                         <div class="col-lg-8 col-md-8">
                             <div class="dining-caption">
-                                <span>Loại Hình Kinh Doanh</span>
-                                <h3>Loại Hình Cho Thuê Đa Dạng Phong Phú</h3>
-                                <p>Bên cạnh những loại hình kinh doanh cho thuê phòng trọ da dạng khách hàng và chủ phòng cũng có thể tham khảo những loại hình cho thuê khác như : văn phòng, cửa hàng, nhà hàng...</p>
-                                <a href="#" class="btn border-btn">Tìm Hiểu Thêm <i class="ti-angle-right"></i> </a>
+                                <span>{{ $t('about.aboutCompany2') }}</span>
+                                <h3>{{$t('about.abouttitle2')}}</h3>
+                                <p>{{$t('about.content2')}}</p>
+                                <a href="#" class="btn border-btn">{{$t('about.btn1')}}<i class="ti-angle-right"></i> </a>
                             </div>
                         </div>
                     </div>
@@ -109,10 +105,10 @@
                     <div class="row justify-content-start">
                         <div class="col-lg-8 col-md-8">
                             <div class="dining-caption text-right">
-                                <span>Pihomee, Kết Nối Lợi Ích Chung</span>
-                                <h3>Cầu Nối Giữa Chủ Phòng Và Khách Hàng</h3>
-                                <p>Thay vì các loại hình quảng cáo truyền thống, tốn kém và không hiệu quả, chủ phòng có thể dễ dàng đăng tin các sản phẩm kinh doanh của mình lên Pihomee và khách hàng cũng có thể dễ dàng tìm kiếm thông tin theo nhu cầu thuê.</p>
-                                <a href="#" class="btn border-btn">Tìm Hiểu Thêm  <i class="ti-angle-right"></i></a>
+                                <span>{{$t('about.aboutCompany3')}}</span>
+                                <h3>{{$t('about.content3')}}</h3>
+                                <p>{{$t('about.contentt3')}}</p>
+                                <a href="#" class="btn border-btn">{{$t('about.btn1')}}<i class="ti-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -134,15 +130,12 @@
                                     <div class="archivment-front">
                                         <img src="assets/img/logo/testimonial.png" alt="">
                                     </div>
-                                    <h3 class="archivment-back">Testimonial</h3>
+                                    <h3 class="archivment-back"></h3>
                                 </div>
                                 <!-- Testimonial Content -->
                                 <div class="testimonial-caption text-center">
                                     <p>
-                                        Trước khi biết Pihomee, mình phải tốn nhiều công sức và chi phí cho việc đăng tin cho thuê:
-                                        từ việc phát tờ rơi, dán giấy, và đăng lên các website khác nhưng hiệu quả không cao.
-                                        Từ khi biết Pihomee, mình đã thử đăng tin lên và đánh giá hiệu quả khá cao
-                                        trong khi chi phí khá thấp, không còn tình trạng phòng trống kéo dài.
+                                        {{$t('about.textcmt')}}
                                     </p>
                                     <!-- Rattion -->
                                     <div class="testimonial-ratting">
@@ -153,7 +146,7 @@
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="rattiong-caption">
-                                        <span>Đàm Văn Dũng, <span>Chủ Phòng</span> </span>
+                                        <span>{{$t('about.textUser')}}, <span>{{$t('about.textRole')}}</span> </span>
                                     </div>
                                 </div>
                             </div>

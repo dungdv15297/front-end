@@ -8,8 +8,8 @@
                 <div class="row">
                     <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
                         <div class="hero-caption">
-                            <span>Details Room</span>
-                            <h2>DETAILS ROOM</h2>
+                            <span>{{$t('detailsRoom.title1')}}</span>
+                            <h2>{{$t('detailsRoom.title2')}}</h2>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                                </tr>
                            </tbody>                        
                        </table>
-                       <br>  
+                       <br>  <br>
                        <!-- Mo ta -->
                        <div class="discription">
                            <div style="margin-top:10px;margin-left:10px;">
@@ -83,35 +83,57 @@
                        <div class="picture">
                            <p><strong>Hình ảnh</strong></p>
                            <div class="slidePic">
-                              
+
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                              <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="../../../assets/img/gallery/gallery1.jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="../../../assets/img/gallery/gallery2.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="../../../assets/img/gallery/gallery3.jpg" alt="Third slide">
+                                </div>
+                              </div>
+                              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </div>
+
                            </div>
                        </div><br>
                         <!-- map -->
-                        <div class="d-none d-sm-block mb-5 pb-4">
+                        <div class="d-none d-sm-block mb-5 pb-4 mapgg">
                             <p><strong>Bản đồ</strong></p>
-                            <google-map :hidden-search="true" :draggable="false" :static-center="staticCenter"/>
+                            <google-map: hidden-search="true" :draggable="false" :static-center="staticCenter"/>
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-home"></i></span>
                             <div class="media-body">
-                                <h3>Cầu Giấy Hà Nội.</h3>
-                                <p>Số 18 đường Khúc Thừa Dụ</p>
+                                <h3>{{$t('detailsRoom.text1')}}</h3>
+                                <p>{{$t('detailsRoom.text2')}}</p>
                             </div>
                         </div>
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                             <div class="media-body">
                                 <h3>+84 987654321</h3>
-                                <p>Từ thứ 2 tới thứ 6, 8 giờ tới 17 giờ</p>
+                                <p>{{$t('detailsRoom.text3')}}</p>
                             </div>
                         </div>
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
                                 <h3>support@colorlib.com</h3>
-                                <p>Gửi câu hỏi bất cứ lúc nào cho chúng tôi!</p>
+                                <p>{{$t('detailsRoom.text4')}}</p>
                             </div>
                         </div>
                     </div>
@@ -183,8 +205,14 @@ table{
 }
 .slidePic{
     width: 100%;
-    height: 380px;
+    height: auto;
     border:2px solid rgba(100, 100, 100, 0.521) ;
+}
+.mapgg{
+    text-align: left;
+}
+.mapgg >>> .vue-map-container {
+    height: 400px !important;
 }
 
 

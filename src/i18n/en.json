@@ -138,7 +138,41 @@
   },
   "about": {
     "introduce": "Introduce",
-    "introduce2": "INTRODUCE"
+    "introduce2": "INTRODUCE",
+    "title1": "5 Years Service Business",
+    "aboutCompany1": "About our company",
+    "aboutTitle1": "Pihomee - Providing Service to Customers Safe and Careful",
+    "content1": "Customers are consulted with information, address, photos and room rates.",
+    "contentt1": "Individuals or room rental businesses provide complete product information and images about the types of rooms for rent: apartments, apartments, ...",
+    "btn1": "Learn More",
+    "aboutCompany2": "Business type",
+    "abouttitle2": "Diverse Leasing Types",
+    "content2": "In addition to the different types of accommodation rental business, the owner can also refer to other types of rent such as: offices, shops, restaurants ...",
+    "aboutCompany3": "Pihomee, Connecting the Public Interest",
+    "content3": "Bridge Between Room Owner and Customer",
+    "contentt3": "Instead of traditional, costly and ineffective advertising types, owners can easily post their business products on Pihomee and customers can easily find information according to rental needs. .",
+    "textcmt": "Before I knew Pihomee, I had to spend a lot of effort and cost for posting rental information: from distributing leaflets, pasting paper, and posting on other websites, but the effect is not high. Since I knew Pihomee, I have tried to post it and rated it quite high while the cost is quite low, there is no prolonged availability of vacancies.",
+    "textUser": "Dam Van Dung",
+    "textRole": "Room master"
+
+  },
+  "contact":{
+    "introduce": "Contact",
+    "introduce2": "CONTACT",
+    "title": "Contact",
+    "btn":"Send",
+    "text1": "Cau Giay District, Hanoi.",
+    "text2": "No. 63 Tran Quoc Vuong Street",
+    "text3": "From Monday to Friday, 8:00 am to 5:00 pm",
+    "text4": "Send us questions at any time!"
+  },
+  "detailsRoom":{
+    "text1": "Cau Giay District, Hanoi.",
+    "text2": "No. 63 Tran Quoc Vuong Street",
+    "text3": "From Monday to Friday, 8:00 am to 5:00 pm",
+    "text4": "Send us questions at any time!",
+    "title1": "Details Room",
+    "title2": "DETAILS ROOM"
   },
   "header": {
     "homepage": "Homepage",

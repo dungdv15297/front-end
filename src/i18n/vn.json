@@ -138,7 +138,40 @@
   },
   "about": {
     "introduce": "Introduce",
-    "introduce2": "INTRODUCE"
+    "introduce2": "GIỚI THIỆU",
+    "title1": "5 Năm Kinh Doanh Ngành Dịch Vụ",
+    "aboutCompany1": "Về công ty chúng tôi",
+    "aboutTitle1": "Pihomee - Cung Cấp Dịch Vụ Cho Khách Hàng An Toàn Và Chu Đáo",
+    "content1": "Khách hàng được tham khảo thông tin, địa chỉ, hình ảnh và giá phòng.",
+    "contentt1":"Cá nhân hoặc doanh nghiệp cho thuê phòng cung cấp đầy đủ thông tin sản phẩm và hình ảnh về các loại phòng cho thuê: căn hộ, chung cư,...",
+    "btn1": "Tìm Hiểu Thêm",
+    "aboutCompany2" :"Loại Hình Kinh Doanh",
+    "abouttitle2": "Loại Hình Cho Thuê Đa Dạng Phong Phú",
+    "content2":"Bên cạnh những loại hình kinh doanh cho thuê phòng trọ da dạng khách hàng và chủ phòng cũng có thể tham khảo những loại hình cho thuê khác như : văn phòng, cửa hàng, nhà hàng...",
+    "aboutCompany3": "Pihomee, Kết Nối Lợi Ích Chung",
+    "content3": "Cầu Nối Giữa Chủ Phòng Và Khách Hàng",
+    "contentt3": "Thay vì các loại hình quảng cáo truyền thống, tốn kém và không hiệu quả, chủ phòng có thể dễ dàng đăng tin các sản phẩm kinh doanh của mình lên Pihomee và khách hàng cũng có thể dễ dàng tìm kiếm thông tin theo nhu cầu thuê.",
+    "textcmt": "Trước khi biết Pihomee, mình phải tốn nhiều công sức và chi phí cho việc đăng tin cho thuê: từ việc phát tờ rơi, dán giấy, và đăng lên các website khác nhưng hiệu quả không cao. Từ khi biết Pihomee, mình đã thử đăng tin lên và đánh giá hiệu quả khá cao trong khi chi phí khá thấp, không còn tình trạng phòng trống kéo dài.",
+    "textUser": "Đàm Văn Dũng",
+    "textRole": "Chủ phòng"
+  },
+  "contact":{
+    "introduce": "Liên Hệ",
+    "introduce2": "LIÊN HỆ",
+    "btn": "Gửi",
+    "title": "Liên Lạc",
+    "text1": "Cầu Giấy Hà Nội.",
+    "text2": "Số 63 đường Trần Quốc Vượng",
+    "text3": "Từ thứ 2 tới thứ 6, 8 giờ tới 17 giờ",
+    "text4": "Gửi câu hỏi bất cứ lúc nào cho chúng tôi!"
+  },
+  "detailsRoom":{
+    "text1": "Cầu Giấy Hà Nội.",
+    "text2": "Số 63 đường Trần Quốc Vượng",
+    "text3": "Từ thứ 2 tới thứ 6, 8 giờ tới 17 giờ",
+    "text4": "Gửi câu hỏi bất cứ lúc nào cho chúng tôi!",
+    "title1": "Chi Tiết Phòng",
+    "title2": "CHI TIẾT PHÒNG"
   },
   "header": {
     "homepage": "Homepage",
