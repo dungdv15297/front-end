@@ -33,8 +33,8 @@
       </a>
 
       <a href="/manager/master-table" class="inline-flex">
-        <i class="material-icons">attach_money</i>
-        <span class="icon-text">Nạp tiền tài khoản</span>
+        <i class="material-icons">menu_book</i>
+        <span class="icon-text">Giá & diện tích</span>
       </a>
 
       <a href="#" class="inline-flex">

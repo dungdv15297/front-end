@@ -7,12 +7,12 @@
           <div class="row">
             <div class="col-md-4">
               <b-form-group :label="$t('roomadd.province')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+                <b-form-select size="md" v-model="provinceSelected" :options="provinceOptions"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-md-4">
               <b-form-group :label="$t('roomadd.district')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+                <b-form-select size="md" v-model="districtSelected" :options="districtOptions"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-md-4">
@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-md-4">
               <b-form-group :label="$t('roomadd.street')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+                <b-form-select size="md" v-model="streetSelected" :options="streetOptions"></b-form-select>
               </b-form-group>
             </div>
             <div class="col-md-8">
@@ -67,8 +67,11 @@
               </b-form-group>
             </div>
             <div class="col-sm-12 col-md-4">
+              
               <b-form-group :label="$t('roomadd.price')" label-align="left">
-                <b-form-input trim></b-form-input>
+                <b-input-group size="md" :append="$t('roomadd.money')">
+                  <b-form-input trim type="number"></b-form-input>
+                </b-input-group>
               </b-form-group>
             </div>
           </div>
@@ -80,7 +83,9 @@
             </div>
             <div class="col-sm-12 col-md-4">
               <b-form-group :label="$t('roomadd.acreage')" label-align="left">
-                <b-form-input trim></b-form-input>
+                <b-input-group size="md" :append="$t('roomadd.m2')">
+                  <b-form-input trim type="number"></b-form-input>
+                </b-input-group>
               </b-form-group>
             </div>
           </div>
@@ -142,6 +147,9 @@ import { axiosCreator } from '@/base/customAxios';
 import BaseDomain from '@/base/domains/base-domain';
 import { AxiosInstance } from 'axios';
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import ProvinceResponse from '@/base/response/province-response';
+import DistrictResponse from '@/base/response/district-response';
+import Options from '@/base/options';
 
 @Component({
   components: {
@@ -160,6 +168,55 @@ export default class RoomAdd extends Vue {
       (this.$refs["roomManager"] as any).style.marginLeft = "250px";
     }
   }
+  defaultOption: Options = new Options({
+    value: null,
+    text: this.$t('roomadd.defaultOption').toString()
+  });
+
+  provinceSelected: any = null;
+  provinceOptions: Options[] = [];
+  @Watch('provinceSelected')
+  onChangeProvinceSelected() {
+    if (this.provinceSelected === null) {
+      this.districtOptions = [this.defaultOption];
+      this.districtSelected = null;
+      return;
+    }
+    this.axios.get<DistrictResponse[]>(`/district/getByProvinceId?provinceId=${this.provinceSelected}`)
+    .then(res => {
+      if (res && res.data) {
+        this.districtOptions = res.data.map(x => new Options({
+          value: x.id,
+          text: x.prefix + ' ' + x.name
+        }));
+        this.districtOptions.unshift(this.defaultOption);
+      }
+    })
+  }
+
+  districtSelected: any = null;
+  districtOptions: Options[] = [this.defaultOption];
+  @Watch('districtSelected')
+  onChangeDistrictSelected() {
+    if (this.districtSelected === null) {
+      this.streetSelected = null;
+      this.streetOptions = [this.defaultOption];
+      return;
+    }
+    this.axios.get<DistrictResponse[]>(`/street/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`)
+    .then(res => {
+      if (res && res.data) {
+        this.streetOptions = res.data.map(x => new Options({
+          value: x.id,
+          text: x.prefix + ' ' + x.name
+        }));
+        this.streetOptions.unshift(this.defaultOption);
+      }
+    })
+  }
+
+  streetSelected: any = null;
+  streetOptions: Options[] = [this.defaultOption];
 
   options = [
     { value: null, text: "Select a Fruit" },
@@ -174,7 +231,15 @@ export default class RoomAdd extends Vue {
   axios: AxiosInstance = axiosCreator();
   
   created() {
-
+    this.axios.get<ProvinceResponse[]>('province/getAll').then(res => {
+      if (res && res.data) {
+        this.provinceOptions = res.data.map(x => new Options({
+          value: x.id,
+          text: x.name
+        }));
+        this.provinceOptions.unshift(this.defaultOption);
+      }
+    });
   }
 
   changePlace(place: any): void {

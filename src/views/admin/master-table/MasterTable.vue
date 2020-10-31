@@ -191,6 +191,11 @@ export default class MasterTable extends Vue {
     this.getAllPrice();
   }
 
+  @Watch('acreCurrentPage')
+  findAcreaPage(): void {
+    this.getAllAcre();
+  }
+
   created() {
     this.getAllPrice();
     this.getAllAcre();
@@ -202,7 +207,7 @@ export default class MasterTable extends Vue {
         const data: any = response.data;
         this.priceItems = data.content;
         this.priceItems.forEach(item => item.status = !!item.status ? this.$t('masterTable.active').toString() : '')
-        this.priceTotal = data.totalPages;
+        this.priceTotal = data.totalElements;
       }
     })
     .catch(error =>
@@ -215,12 +220,12 @@ export default class MasterTable extends Vue {
   }
 
   getAllAcre(): void {
-    this.axios.get<any>(`/master/acreage-range/getAll?page=${this.priceCurrentPage - 1}&size=${this.priceSize}`).then(response => {
+    this.axios.get<any>(`/master/acreage-range/getAll?page=${this.acreCurrentPage - 1}&size=${this.acreSize}`).then(response => {
       if (response && response.data) {
         const data: any = response.data;
         this.acreItems = data.content;
         this.acreItems.forEach(item => item.status = !!item.status ? this.$t('masterTable.active').toString() : '')
-        this.acreTotal = data.totalPages;
+        this.acreTotal = data.totalElements;
       }
     })
     .catch(error =>

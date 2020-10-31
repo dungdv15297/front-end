@@ -188,6 +188,8 @@
     "content": "Content",
     "priceRange": "Price range",
     "price": "Price",
+    "m2": "m²",
+    "money": "VND",
     "acreageRange": "Acreage range",
     "acreage": "Acreage",
     "customer": "Customers",
@@ -216,6 +218,10 @@
     "submit": "Submit",
     "inValid": "This data is invalid",
     "rule1": "❖ The price must be non-zero<br/>❖ The price must be a multiple of 10000<br/>❖ Min must be less than max",
-    "rule2": "❖ The acreage must be non-zero<br/>❖ Min must be less than max"
+    "rule2": "❖ The acreage must be non-zero<br/>❖ Min must be less than max",
+    "exists": "Data already exists",
+    "success": "Successfully",
+    "confirm1": "Deactivate this record?",
+    "confirm2": "Activate this record?"
   }
 }

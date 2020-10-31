@@ -188,6 +188,8 @@
     "content": "Content",
     "priceRange": "Price range",
     "price": "Price",
+    "m2": "m²",
+    "money": "VND",
     "acreageRange": "Acreage range",
     "acreage": "Acreage",
     "customer": "Customers",
@@ -196,7 +198,8 @@
     "submit": "Submit",
     "map": "Map",
     "picture": "Picture description",
-    "addPic": "Add pictures for your room"
+    "addPic": "Add pictures for your room",
+    "defaultOption": "---- Select ----"
   },
   "masterTable": {
     "active": "◯",
