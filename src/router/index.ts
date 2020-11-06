@@ -95,26 +95,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
-  // If go to MainView page, check the condition
-  if (to.name === 'MainView') {
-    // If do not have a token in storage, redirect to Error page with ERR100
-    if (token === null) {
-      next({
-        name: 'Error',
-        params: {
-          code: 'ERR100',
-          mess: 'ERR100'
-        }
-      });
-    }
-  } else if (to.fullPath === '/login' || to.fullPath === '/redirect') {
+  if (to.fullPath === '/login') {
     next({
       path: to.fullPath,
       query: { from: btoa(from.path) }
     });
   } else {
-    next();
+    next()
   }
 })
 

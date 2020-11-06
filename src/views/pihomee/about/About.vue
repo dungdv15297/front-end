@@ -80,8 +80,6 @@
             </div>
         </div>
         <!-- Gallery img End--> 
-        <!-- Bạn ấn ctrl + P. Tìm có file en và vn là 2 file ngôn ngữ. -->
-
         <!-- Dining Start -->
         <div class="dining-area d-padding">
             <!-- Single Left img -->

@@ -44,17 +44,6 @@
             <!-- Single Select Box -->
             <div class="single-select-box mb-30">
               <div class="boking-tittle">
-                <span class="float-left">Đường</span>
-              </div>
-              <b-form-select
-                v-model="searchValue.street"
-                class="nice-select"
-                :options="streets"
-              ></b-form-select>
-            </div>
-            <!-- Single Select Box -->
-            <div class="single-select-box mb-30">
-              <div class="boking-tittle">
                 <span class="float-left">Diện tích</span>
               </div>
               <b-form-select

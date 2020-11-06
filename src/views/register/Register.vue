@@ -196,7 +196,7 @@ export default class Register extends Vue {
             noCloseOnBackdrop: true
           })
           .then(value => {
-            
+            this.$router.push({ path: '/home' });
           })
         }
       })

@@ -26,7 +26,7 @@
                         <li><a href="blog.html">{{ $t('header.office') }}</a></li>
                       </ul>
                     </li>
-                    <li><a href="/home">{{ $t('header.post') }}</a></li>
+                    <li><a href="/room-add">{{ $t('header.post') }}</a></li>
                     <li>
                       <a href="#">{{ $t('header.aboutUs') }}</a>
                       <ul class="submenu">
@@ -112,6 +112,7 @@ export default class Header extends Vue {
       this.$router.go(0);
     });
   }
+
 }
 </script>
 

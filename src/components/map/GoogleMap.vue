@@ -9,8 +9,10 @@
     <div class="col-sm-12">
       <gmap-map :center="position" :zoom="zoomNo" map-type-id="terrain" style="width: 100%;padding-top:100%">
         <gmap-marker
+          :formatted_address="address"
           :draggable="draggable"
           :position="position"
+          @drag="dragMarker"
         ></gmap-marker>
       </gmap-map>
     </div>
@@ -35,18 +37,13 @@ export default class GoogleMap extends Vue {
   @Prop()
   draggable!: boolean;
 
+  address: string = '';
+
   get zoomNo(): number {
     return !!this.zoom ? this.zoom : 12;
   }
 
-  value: any = '';
-
-  position: any = { lat: 1, lng: 1 };
-
-  @Watch('position')
-  changePosition() {
-    this.$emit('changePlace', this.position);
-  }
+  position: any = { lat: 20.9885852, lng: 105.8058151 };
 
   created() {
     if (!!this.staticCenter) {
@@ -55,14 +52,28 @@ export default class GoogleMap extends Vue {
   }
 
   setPlace(place: any) {
-    if (place && place.geometry.location) {
+    if (place && place.geometry && place.geometry.location) {
       this.position = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       }
+    } else {
+      this.$bvModal.msgBoxOk(this.$t('message.wrongAddress').toString(), {
+        buttonSize: 'sm',
+        okVariant: 'danger',
+        centered: true,
+        noCloseOnBackdrop: true
+      });
     }
   }
-
+  
+  dragMarker(value: any) {
+    this.position = {
+      lat: value.latLng.lat(),
+      lng: value.latLng.lng()
+    }
+    this.$emit('changePlace', this.position);
+  }
 }
 </script>
 

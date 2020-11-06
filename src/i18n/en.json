@@ -48,7 +48,8 @@
     "ERR006": "There was a problem with the execution",
     "ERR007": "Can not find your account information",
     "ERR011": "Your old password is incorrect",
-    "error": "Something wrong"
+    "error": "Something wrong",
+    "wrongAddress": "Can not find your address"
   },
   "language": {
     "lang": "Language",
@@ -221,18 +222,26 @@
     "title": "Title",
     "content": "Content",
     "priceRange": "Price range",
-    "price": "Price",
+    "price1": "Min of price",
+    "price2": "Max of price",
     "m2": "m²",
     "money": "VND",
     "acreageRange": "Acreage range",
-    "acreage": "Acreage",
+    "acreage1": "Min of acreage",
+    "acreage2": "Max of acreage",
     "customer": "Customers",
     "posting": "Choose a posting type",
     "postingType": "Posting type",
     "submit": "Submit",
     "map": "Map",
     "picture": "Picture description",
-    "addPic": "Add pictures for your room"
+    "addPic": "Add pictures for your room",
+    "postType1": "Normal (Free)",
+    "postType2": "On top (10.000 VND)",
+    "roomType1": "Motel room",
+    "roomType2": "Department",
+    "roomType3": "House",
+    "roomType4": "Office"
   },
   "masterTable": {
     "active": "◯",

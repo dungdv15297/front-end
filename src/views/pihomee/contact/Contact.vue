@@ -22,7 +22,7 @@
                 <div class="d-none d-sm-block mb-5 pb-4">
 
                     <div id="map">
-                        <google-map: zoom="16" :hidden-search="true" :draggable="false" :static-center="staticCenter"/>
+                        <google-map :zoom="16" :hidden-search="true" :draggable="false" :static-center="staticCenter"/>
                     </div>   
 
                 </div> 
