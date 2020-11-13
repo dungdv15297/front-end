@@ -11,6 +11,7 @@ import About from '@/views/pihomee/about/About.vue';
 import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
+import Pay from '@/views/pihomee/Vnpay/Pay.vue';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,10 @@ const routes: Array<RouteConfig> = [
       {
         path: '/details-room',
         component: DetailsRoom
+      },
+      {
+        path: '/Vnpay',
+        component: Pay
       }
     ]
   },
@@ -95,26 +100,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
-  // If go to MainView page, check the condition
-  if (to.name === 'MainView') {
-    // If do not have a token in storage, redirect to Error page with ERR100
-    if (token === null) {
-      next({
-        name: 'Error',
-        params: {
-          code: 'ERR100',
-          mess: 'ERR100'
-        }
-      });
-    }
-  } else if (to.fullPath === '/login' || to.fullPath === '/redirect') {
+  if (to.fullPath === '/login') {
     next({
       path: to.fullPath,
       query: { from: btoa(from.path) }
     });
   } else {
-    next();
+    next()
   }
 })
 

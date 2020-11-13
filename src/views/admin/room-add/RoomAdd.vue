@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-4">
               <b-form-group :label="$t('roomadd.ward')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+                <b-form-select size="md" v-model="wardSelected" :options="wardOptions"></b-form-select>
               </b-form-group>
             </div>
           </div>
@@ -29,70 +29,67 @@
             </div>
             <div class="col-md-8">
               <b-form-group :label="$t('roomadd.detail')" label-align="left">
-                <b-form-input trim></b-form-input>
+                <b-form-input v-model="detailInformation" :disabled="!enabledDetail" trim @blur="focusOutDetail"></b-form-input>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <b-form-input trim disabled></b-form-input>
+              <b-form-input trim disabled v-model="information"></b-form-input>
             </div>
           </div>
           <div class="row title mt-20 mb-20">{{ $t('roomadd.description') }}</div>
           <div class="row">
             <div class="col-md-4 col-sm-12">
               <b-form-group :label="$t('roomadd.type')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+                <b-form-select size="md" v-model="selectedTypeOfRoom" :options="typeOfRoom"></b-form-select>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12">
               <b-form-group :label="$t('roomadd.title')" label-align="left">
-                <b-form-input trim></b-form-input>
+                <b-form-input v-model="title" trim></b-form-input>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12">
               <b-form-group :label="$t('roomadd.content')" label-align="left">
-                <b-form-textarea rows="6" max-rows="20"></b-form-textarea>
+                <b-form-textarea v-model="description" rows="6" max-rows="20"></b-form-textarea>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group :label="$t('roomadd.priceRange')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+              <b-form-group :label="$t('roomadd.price1')" label-align="left">
+                <b-input-group size="md" :append="$t('roomadd.money')">
+                  <b-form-input v-model="minPrice" trim type="number"></b-form-input>
+                </b-input-group>
               </b-form-group>
             </div>
             <div class="col-sm-12 col-md-4">
               
-              <b-form-group :label="$t('roomadd.price')" label-align="left">
+              <b-form-group :label="$t('roomadd.price2')" label-align="left">
                 <b-input-group size="md" :append="$t('roomadd.money')">
-                  <b-form-input trim type="number"></b-form-input>
+                  <b-form-input v-model="maxPrice" trim type="number"></b-form-input>
                 </b-input-group>
               </b-form-group>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group :label="$t('roomadd.acreageRange')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
-              </b-form-group>
-            </div>
-            <div class="col-sm-12 col-md-4">
-              <b-form-group :label="$t('roomadd.acreage')" label-align="left">
+              <b-form-group :label="$t('roomadd.acreage1')" label-align="left">
                 <b-input-group size="md" :append="$t('roomadd.m2')">
-                  <b-form-input trim type="number"></b-form-input>
+                  <b-form-input v-model="minAcreage" trim type="number"></b-form-input>
                 </b-input-group>
               </b-form-group>
             </div>
-          </div>
-          <div class="row">
             <div class="col-sm-12 col-md-4">
-              <b-form-group :label="$t('roomadd.customer')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+              <b-form-group :label="$t('roomadd.acreage2')" label-align="left">
+                <b-input-group size="md" :append="$t('roomadd.m2')">
+                  <b-form-input v-model="maxAcreage" trim type="number"></b-form-input>
+                </b-input-group>
               </b-form-group>
             </div>
           </div>
@@ -101,13 +98,13 @@
           <div class="row">
             <div class="col-sm-12 col-md-4">
               <b-form-group :label="$t('roomadd.postingType')" label-align="left">
-                <b-form-select size="md" :options="options"></b-form-select>
+                <b-form-select size="md" v-model="selectedPosting" :options="postingOptions"></b-form-select>
               </b-form-group>
             </div>
           </div>
           <div class="row mb-20 mt-20">
             <div class="col-sm-12">
-              <a class="btn m-auto w-100">{{ $t('roomadd.submit') }}</a>
+              <a class="btn m-auto w-100" @click="addRoom">{{ $t('roomadd.submit') }}</a>
             </div>
           </div>
         </div>
@@ -143,13 +140,16 @@
 </template>
 
 <script lang="ts">
-import { axiosCreator } from '@/base/customAxios';
+import { axiosCreator, axiosCreatorWithMultipart } from '@/base/customAxios';
 import BaseDomain from '@/base/domains/base-domain';
 import { AxiosInstance } from 'axios';
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import ProvinceResponse from '@/base/response/province-response';
 import DistrictResponse from '@/base/response/district-response';
+import WardResponse from '@/base/response/ward-response';
 import Options from '@/base/options';
+import {TypeOfRoom} from '@/base/enum/type-of-room';
+import RoomRequest from '@/base/request/room-request';
 
 @Component({
   components: {
@@ -160,6 +160,14 @@ export default class RoomAdd extends Vue {
   @Prop()
   mini!: boolean;
 
+  title: string = '';
+  description: string = '';
+  minPrice: number = 0;
+  maxPrice: number = 0;
+  minAcreage: number = 0;
+  maxAcreage: number = 0;
+  position: any = { lat: 20.9885852, lng: 105.8058151 };
+
   @Watch("mini")
   toggleSidebar() {
     if (this.mini) {
@@ -168,6 +176,16 @@ export default class RoomAdd extends Vue {
       (this.$refs["roomManager"] as any).style.marginLeft = "250px";
     }
   }
+
+  get enabledDetail(): boolean {
+    const result: boolean = !!this.streetSelected && !!this.provinceSelected && !!this.districtSelected && !!this.wardSelected;
+    if (!result) {
+      this.information = '';
+      this.detailInformation = '';
+    }
+    return result;
+  }
+
   defaultOption: Options = new Options({
     value: null,
     text: this.$t('roomadd.defaultOption').toString()
@@ -192,6 +210,7 @@ export default class RoomAdd extends Vue {
         this.districtOptions.unshift(this.defaultOption);
       }
     })
+    .finally(() => this.districtSelected = null);
   }
 
   districtSelected: any = null;
@@ -199,8 +218,11 @@ export default class RoomAdd extends Vue {
   @Watch('districtSelected')
   onChangeDistrictSelected() {
     if (this.districtSelected === null) {
-      this.streetSelected = null;
+      this.wardOptions = [this.defaultOption];
+      this.wardSelected = null;
       this.streetOptions = [this.defaultOption];
+      this.streetSelected = null;
+      this.detailInformation = '';
       return;
     }
     this.axios.get<DistrictResponse[]>(`/street/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`)
@@ -213,19 +235,46 @@ export default class RoomAdd extends Vue {
         this.streetOptions.unshift(this.defaultOption);
       }
     })
+    .finally(() => this.streetSelected = null);
+
+    this.axios.get<WardResponse[]>(`/ward/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`)
+    .then(res => {
+      if (res && res.data) {
+        this.wardOptions = res.data.map(x => new Options({
+          value: x.id,
+          text: x.prefix + ' ' + x.name
+        }));
+        this.wardOptions.unshift(this.defaultOption);
+      }
+    })
+    .finally(() => this.wardSelected = null);
   }
 
+  wardSelected: any = null;
+  wardOptions: Options[] = [this.defaultOption];
   streetSelected: any = null;
   streetOptions: Options[] = [this.defaultOption];
 
-  options = [
-    { value: null, text: "Select a Fruit" },
-    { value: "orange", text: "Orange" },
-    { value: "grape", text: "Grape" },
-    { value: "apple", text: "Apple" }
+  detailInformation: string = '';
+  information: string = '';
+
+  selectedTypeOfRoom: any = null;
+  typeOfRoom: Options[] = [
+    this.defaultOption,
+    new Options({ value: TypeOfRoom.MOTEL_ROOM, text: this.$t('roomadd.roomType1').toString() }),
+    new Options({ value: TypeOfRoom.MOTEL_ROOM, text: this.$t('roomadd.roomType2').toString() }),
+    new Options({ value: TypeOfRoom.MOTEL_ROOM, text: this.$t('roomadd.roomType3').toString() }),
+    new Options({ value: TypeOfRoom.MOTEL_ROOM, text: this.$t('roomadd.roomType4').toString() })
+  ];
+
+  selectedPosting: any = 0;
+  postingOptions: Options[] = [
+    new Options({ value: 0, text: this.$t('roomadd.postType1').toString() }),
+    new Options({ value: 1, text: this.$t('roomadd.postType2').toString() })
   ];
 
   images: any[] = [];
+  imagesBase64: any[] = [];
   image: any = null;
 
   axios: AxiosInstance = axiosCreator();
@@ -243,7 +292,7 @@ export default class RoomAdd extends Vue {
   }
 
   changePlace(place: any): void {
-    debugger
+    this.position = place;
   }
 
   openChooseFile(): void {
@@ -252,20 +301,60 @@ export default class RoomAdd extends Vue {
 
   uploadImage(input: any): void {
     if (input.target.files && input.target.files[0]) {
+      const vm = this;
       const reader:FileReader = new FileReader();
       reader.readAsDataURL(input.target.files[0]);
       reader.onload = (event: any) => {
-        if (this.images.length < 6) {
-          this.images.push(event.target.result);
+        if (vm.images.length < 6) {
+          vm.images.push(event.target.result);
         }
-        this.image = null;
+        vm.image = null;
       }
+      reader.onloadend = () => {
+        if (vm.imagesBase64.length < 6) {
+          const b64 = (reader as any).result.replace(/^data:.+;base64,/, '');
+          vm.imagesBase64.push(b64);
+        }
+      };
     }
   }
 
   removeImage(image: any): void {
     const index = this.images.indexOf(image);
     this.images.splice(index, 1);
+    this.imagesBase64.splice(index, 1);
+  }
+
+  focusOutDetail(): void {
+    if (this.detailInformation === '' || this.streetSelected === null || this.districtSelected === null || this.provinceSelected === null || this.wardSelected === null) {
+      return;
+    }
+    const street = (this.streetOptions.find(x => x.value === this.streetSelected) as Options).text;
+    const ward = (this.wardOptions.find(x => x.value === this.wardSelected) as Options).text;
+    const district = (this.districtOptions.find(x => x.value === this.districtSelected) as Options).text;
+    const province = (this.provinceOptions.find(x => x.value === this.provinceSelected) as Options).text;
+    this.information = `${this.detailInformation} ${street}, ${ward}, ${district}, ${province}`.trim();
+  }
+
+  addRoom(): void {
+    const param: RoomRequest = new RoomRequest({
+      address: this.information,
+      description: this.description,
+      priceMin: this.minPrice,
+      priceMax: this.maxPrice,
+      acreageMin: this.minAcreage,
+      acreageMax: this.maxAcreage,
+      longtitude: this.position.lng,
+      latitude: this.position.lat,
+      accountId: this.$store.getters['accountId'],
+      streetId: this.streetSelected,
+      account: { id: this.$store.getters['accountId'] },
+      street: { id: this.streetSelected },
+      upTopStatus: this.selectedPosting,
+      title: this.title,
+      typeOfRoom: this.selectedTypeOfRoom
+    });
+    this.axios.post('/room/add-room', { body: {room: param} });
   }
 
 }

@@ -14,10 +14,9 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
-
 @Component({
   components: {
-    Preloader: () => import('./template/Preloader.vue'),
+    Preloader: () => import('@/views/pihomee/template/Preloader.vue'),
     Footer: () => import('./template/Footer.vue'),
     Sidebar: () => import('./template/Sidebar.vue'),
     Navbar: () => import('./template/Navbar.vue'),

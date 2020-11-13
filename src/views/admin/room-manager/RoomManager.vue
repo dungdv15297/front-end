@@ -42,6 +42,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { axiosCreator, axiosCreatorWithMultipart } from '@/base/customAxios';
 
 @Component
 export default class RoomManager extends Vue {
@@ -212,6 +213,11 @@ export default class RoomManager extends Vue {
     } else {
       (this.$refs["roomManager"] as any).style.marginLeft = "250px";
     }
+  }
+
+  created() {
+    const axios = axiosCreator();
+    axios.get(`/room/getPageRoom?accountId=${this.$store.getters['accountId']}&page=0&size=10`)
   }
 
   onDelete(item: any) {

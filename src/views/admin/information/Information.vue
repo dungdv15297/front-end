@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <div class="form-group">
                 <label>{{ $t('information.gender') }}</label>
                 <b-form-radio-group
@@ -49,6 +49,12 @@
                 </b-form-radio-group>
               </div>
               
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>{{ $t('information.balance') }}</label>
+                <input type="text" class="form-control" :value="detailData.balance" disabled>
+              </div>
             </div>
           </div>
           <div class="row">

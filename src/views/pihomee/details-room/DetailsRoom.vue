@@ -111,7 +111,7 @@
                         <!-- map -->
                         <div class="d-none d-sm-block mb-5 pb-4 mapgg">
                             <p><strong>Bản đồ</strong></p>
-                            <google-map: hidden-search="true" :draggable="false" :static-center="staticCenter"/>
+                            <google-map :hidden-search="true" :draggable="false" :static-center="staticCenter"/>
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">

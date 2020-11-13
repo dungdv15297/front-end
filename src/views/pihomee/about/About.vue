@@ -202,7 +202,6 @@
           </div>
         </div>
       </div>
-      <button @click="onClickPay">Buy</button>
     </div>
     <!-- Testimonial End -->
     <section class="w100vw"></section>
@@ -211,31 +210,12 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { axiosCreator } from "@/base/customAxios";
-import router from '@/router';
+
 
 @Component
 export default class Contact extends Vue {
   
-  axios = axiosCreator();
-  API = {
-    pay: "/pay/checkout",
-  };
-  created() {
-    if(window.location.search !== ''){
-      let data = window.location.search.split('vnp_ResponseCode=')[1].substring(0,2)
-      if(data === '00'){
-        window.alert('Thanh toan thanh cong');
-      }
-    }
-  }
-  onClickPay() {
-    this.axios.post<string>(this.API.pay).then((res) => {
-      let link = res.data;
-      window.location.href = link;
-    });
-      
-  }
+  
 }
 </script>
 

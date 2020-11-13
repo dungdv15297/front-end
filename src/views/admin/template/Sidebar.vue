@@ -27,7 +27,7 @@
         <span class="icon-text">Cho thuê phòng</span>
       </a>
 
-      <a href="#" class="inline-flex">
+      <a href="/Vnpay" class="inline-flex">
         <i class="material-icons">attach_money</i>
         <span class="icon-text">Nạp tiền tài khoản</span>
       </a>
@@ -37,7 +37,7 @@
         <span class="icon-text">Giá & diện tích</span>
       </a>
 
-      <a href="#" class="inline-flex">
+      <a href="#" class="inline-flex" @click="onSignOut">
         <i class="material-icons">exit_to_app</i>
         <span class="icon-text">Đăng xuất</span>
       </a>
@@ -46,6 +46,8 @@
 </template>
 
 <script lang="ts">
+import { axiosCreator } from '@/base/customAxios';
+import { AxiosInstance } from 'axios';
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
@@ -61,6 +63,16 @@ export default class Sidebar extends Vue {
       this.mini = true;
     }
     this.$emit('toggleSidebar', this.mini);
+  }
+
+  onSignOut(): void {
+    const axios: AxiosInstance = axiosCreator();
+    const token = this.$store.getters['token'];
+    axios.post('account/logout').then(() => {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setAccountId', null);
+      this.$router.push('/home');
+    });
   }
 }
 </script>

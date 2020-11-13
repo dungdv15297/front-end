@@ -206,7 +206,8 @@
     "username": "Username",
     "oldPass": "Old password",
     "newPass": "New password",
-    "confirmPass": "Confirm new password"
+    "confirmPass": "Confirm new password",
+    "balance": "Account balance"
   },
   "roomadd": {
     "newpost": "Create new post",

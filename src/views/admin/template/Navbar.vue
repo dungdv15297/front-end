@@ -3,7 +3,7 @@
     <div class="content">
       <nav class="navbar navbar-expand-md navbar-light">
         <a class="navbar-brand" href="/home">
-          <img src="assets/img/logo/logo.png" alt="" />
+          <img src="../../../assets/img/logo/logo.png" alt="" />
         </a>
         <button
           class="navbar-toggler"
@@ -52,7 +52,7 @@
                       <i class="material-icons">notifications_none</i>
                       <i class="pl-10">Thông báo</i>
                     </a>
-                    <a class="dropdown-item inline-flex" href="#">
+                    <a class="dropdown-item inline-flex" href="#" @click="onSignOut">
                       <i class="material-icons">exit_to_app</i>
                       <i class="pl-10">Đăng xuất</i>
                     </a>
@@ -101,8 +101,18 @@ export default class Navbar extends Vue {
       .catch(error => {
         this.$store.dispatch('setToken', null);
         this.$store.dispatch('setAccountId', null);
-        this.$router.push('/home');
+        this.$router.push('/login');
       });
+  }
+
+  onSignOut(): void {
+    const axios: AxiosInstance = axiosCreator();
+    const token = this.$store.getters['token'];
+    axios.post('account/logout').then(() => {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setAccountId', null);
+      this.$router.push('/home');
+    });
   }
 }
 </script>
