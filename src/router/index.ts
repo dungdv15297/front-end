@@ -11,6 +11,7 @@ import About from '@/views/pihomee/about/About.vue';
 import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
+import Pay from '@/views/pihomee/Vnpay/Pay.vue';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,10 @@ const routes: Array<RouteConfig> = [
       {
         path: '/details-room',
         component: DetailsRoom
+      },
+      {
+        path: '/Vnpay',
+        component: Pay
       }
     ]
   },

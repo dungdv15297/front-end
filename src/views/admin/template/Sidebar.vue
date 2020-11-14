@@ -27,7 +27,7 @@
         <span class="icon-text">Cho thuê phòng</span>
       </a>
 
-      <a href="#" class="inline-flex">
+      <a href="/Vnpay" class="inline-flex">
         <i class="material-icons">attach_money</i>
         <span class="icon-text">Nạp tiền tài khoản</span>
       </a>
