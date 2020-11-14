@@ -19,6 +19,7 @@ export default class RoomRequest extends BaseDomain {
   pictures: File[] = [];
   title: string = '';
   typeOfRoom: number = -1;
+  wardId: number = -1;
 
   constructor(init?: Partial<RoomRequest>) {
     super();

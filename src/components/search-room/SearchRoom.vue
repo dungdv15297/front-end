@@ -14,8 +14,8 @@
               </div>
               <b-form-select
                 class="nice-select"
-                v-model="searchValue.type"
-                :options="types"
+                v-model="selectedTypeOfRoom"
+                :options="typeOfRoom"
               ></b-form-select>
             </div>
             <!-- Single Select Box -->
@@ -26,8 +26,8 @@
               </div>
               <b-form-select
                 class="nice-select"
-                v-model="searchValue.province"
-                :options="provinces"
+                v-model="provinceSelected"
+                :options="provinceOptions"
               ></b-form-select>
             </div>
             <!-- Single Select Box -->
@@ -36,9 +36,9 @@
                 <span class="float-left">Quận huyện</span>
               </div>
               <b-form-select
-                v-model="searchValue.district"
+                v-model="districtSelected"
                 class="nice-select"
-                :options="districts"
+                :options="districtOptions"
               ></b-form-select>
             </div>
             <!-- Single Select Box -->
@@ -76,7 +76,14 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { axiosCreator } from '@/base/customAxios';
+import { TypeOfRoom } from '@/base/enum/type-of-room';
+import Options from '@/base/options';
+import DistrictResponse from '@/base/response/district-response';
+import ProvinceResponse from '@/base/response/province-response';
+import WardResponse from '@/base/response/ward-response';
+import { AxiosInstance } from 'axios';
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SearchValue from './search-value';
 
 @Component
@@ -90,14 +97,110 @@ export default class SearchRoom extends Vue {
   }
 
   searchValue: SearchValue = new SearchValue();
-  types: SelectType[] = [ new SelectType(0, '') ];
-  provinces: SelectType[] = [ new SelectType(0, '') ];
-  districts: SelectType[] = [ new SelectType(0, '') ];
-  streets: SelectType[] = [ new SelectType(0, '') ];
-  acreages: SelectType[] = [ new SelectType(0, '') ];
-  prices: SelectType[] = [ new SelectType(0, '') ];
+  acreageSelected: any = null;
+  acreageOptions: SelectType[] = [ new SelectType(0, '') ];
+  priceSelected: any = null;
+  priceOptions: SelectType[] = [ new SelectType(0, '') ];
+
+  defaultOption: Options = new Options({
+    value: null,
+    text: this.$t("roomadd.defaultOption").toString(),
+  });
+  typeOfRoom: Options[] = [
+    this.defaultOption,
+    new Options({
+      value: TypeOfRoom.MOTEL_ROOM,
+      text: this.$t("roomadd.roomType1").toString(),
+    }),
+    new Options({
+      value: TypeOfRoom.MOTEL_ROOM,
+      text: this.$t("roomadd.roomType2").toString(),
+    }),
+    new Options({
+      value: TypeOfRoom.MOTEL_ROOM,
+      text: this.$t("roomadd.roomType3").toString(),
+    }),
+    new Options({
+      value: TypeOfRoom.MOTEL_ROOM,
+      text: this.$t("roomadd.roomType4").toString(),
+    }),
+  ];
+
+  provinceSelected: any = null;
+  provinceOptions: Options[] = [];
+  districtSelected: any = null;
+  districtOptions: Options[] = [this.defaultOption];
+  wardSelected: any = null;
+  wardOptions: Options[] = [this.defaultOption];
+  selectedTypeOfRoom: any = null;
+
+  @Watch("provinceSelected")
+  onChangeProvinceSelected() {
+    if (this.provinceSelected === null) {
+      this.districtOptions = [this.defaultOption];
+      this.districtSelected = null;
+      return;
+    }
+    this.axios
+      .get<DistrictResponse[]>(
+        `/district/getByProvinceId?provinceId=${this.provinceSelected}`
+      )
+      .then((res) => {
+        if (res && res.data) {
+          this.districtOptions = res.data.map(
+            (x) =>
+              new Options({
+                value: x.id,
+                text: x.prefix + " " + x.name,
+              })
+          );
+          this.districtOptions.unshift(this.defaultOption);
+        }
+      })
+      .finally(() => (this.districtSelected = null));
+  }
+
+  @Watch("districtSelected")
+  onChangeDistrictSelected() {
+    if (this.districtSelected === null) {
+      this.wardOptions = [this.defaultOption];
+      this.wardSelected = null;
+      return;
+    }
+    this.axios
+      .get<WardResponse[]>(
+        `/ward/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`
+      )
+      .then((res) => {
+        if (res && res.data) {
+          this.wardOptions = res.data.map(
+            (x) =>
+              new Options({
+                value: x.id,
+                text: x.prefix + " " + x.name,
+              })
+          );
+          this.wardOptions.unshift(this.defaultOption);
+        }
+      })
+      .finally(() => (this.wardSelected = null));
+  }
+
+  axios: AxiosInstance = axiosCreator();
 
   created() {
+    this.axios.get<ProvinceResponse[]>("province/getAll").then((res) => {
+      if (res && res.data) {
+        this.provinceOptions = res.data.map(
+          (x) =>
+            new Options({
+              value: x.id,
+              text: x.name,
+            })
+        );
+        this.provinceOptions.unshift(this.defaultOption);
+      }
+    });
   }
 
   emitData() {
