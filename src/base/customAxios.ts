@@ -3,7 +3,7 @@ import store from '@/store';
 
 export function axiosCreator(): AxiosInstance {
   return Axios.create({  
-    baseURL: `http://localhost:9090/api/`,
+    baseURL: `https://dungdvapp.herokuapp.com/api/`,
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
