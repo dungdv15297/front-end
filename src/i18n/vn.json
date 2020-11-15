@@ -137,7 +137,7 @@
     "2": "Other"
   },
   "about": {
-    "introduce": "Introduce",
+    "introduce": "Giới Thiệu",
     "introduce2": "GIỚI THIỆU",
     "title1": "5 Năm Kinh Doanh Ngành Dịch Vụ",
     "aboutCompany1": "Về công ty chúng tôi",
@@ -258,5 +258,8 @@
     "success": "Successfully",
     "confirm1": "Deactivate this record?",
     "confirm2": "Activate this record?"
+  },
+  "roomManager": {
+
   }
 }

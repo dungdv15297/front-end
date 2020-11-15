@@ -267,5 +267,25 @@
     "success": "Successfully",
     "confirm1": "Deactivate this record?",
     "confirm2": "Activate this record?"
+  },
+  "roomManager": {
+    "titleR":"Manage posting rooms",
+    "colTitle":"Title",
+    "province": "Province",
+    "district" : "District",
+    "ward" : "Ward",
+    "street": "Street",
+    "typeroom":"Type of room",
+    "title":"Title",
+    "content":"Content",
+    "minprice":"Min of price",
+    "maxprice":"Max of price",
+    "minacreage":"Min of acreage",
+    "maxacreage":"Max of acreage",
+    "posttype":"Posting type",
+    "picture":"Image Update",
+    "submit":"Submit",
+    "delete":"delete confirmation",
+    "deleteCmt":"Do you want to delete this record ?"
   }
 }

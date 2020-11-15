@@ -1,7 +1,7 @@
 <template>
   <div ref="roomManager" id="main">
     <div class="content">
-      <div class="row title mt-20 mb-20">Quản lý tin đăng</div>
+      <div class="row title mt-20 mb-20">{{ $t('roomManager.titleR') }}</div>
       <div class="row">
         <b-table
           striped
@@ -15,8 +15,8 @@
           :current-page="currentPage"
         >
           <template #cell(actions)="row">
-            <b-button variant="success" class="icon-success">
-              <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+            <b-button variant="success" class="icon-success" @click="showModal( row.item)">
+              <b-icon  icon="pencil-square" aria-hidden="true"></b-icon>
             </b-button>
             <b-button variant="danger" @click="onDelete(row.item)">
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
@@ -36,6 +36,106 @@
 
     <b-modal id="modal-delete" modal-class="modal-delete" static title="Xác nhận xóa" size="sm" centered no-close-on-backdrop>
       <label>Bạn có muốn xóa bản ghi này?</label>
+    </b-modal>
+    
+    <b-modal id="modal" size="xl" @hidden="resetModal" centered static title= "Update room details"  hide-footer no-close-on-backdrop >
+
+      <div class="container" style="font-family:'Noto Serif'">
+        <div class="row">
+              <div class="col-md-3">
+                <b-form-group :label="$t('roomManager.province')" label-align="left">
+                  <b-form-select size="md" ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-3">
+                <b-form-group :label="$t('roomManager.district')" label-align="left">
+                  <b-form-select size="md" ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-3">
+                <b-form-group :label="$t('roomManager.ward')" label-align="left">
+                  <b-form-select size="md" ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-3">
+                <b-form-group :label="$t('roomManager.street')" label-align="left">
+                  <b-form-select size="md" ></b-form-select>
+                </b-form-group>
+              </div>
+        </div>
+        <div class="row">
+              <div class="col-md-3">
+                <b-form-group :label="$t('roomManager.typeroom')" label-align="left">
+                  <b-form-select size="md" ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-9">
+                <b-form-group :label="$t('roomManager.title')" label-align="left">
+                  <b-form-input size="md"></b-form-input>
+                </b-form-group>               
+              </div>
+            </div>
+        <div class="row">
+            <div class="col-sm-12">
+              <b-form-group :label="$t('roomManager.content')" label-align="left">
+                <b-form-textarea v-model="description" rows="4" max-rows="20"></b-form-textarea>
+              </b-form-group>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+              <b-form-group :label="$t('roomManager.minprice')" label-align="left">
+                <b-input-group size="md" :append="$t('roomadd.money')">
+                  <b-form-input v-model="minPrice" trim type="number"></b-form-input>
+                </b-input-group>
+              </b-form-group>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <b-form-group :label="$t('roomManager.maxprice')" label-align="left">
+                <b-input-group size="md" :append="$t('roomadd.money')">
+                  <b-form-input v-model="minPrice" trim type="number"></b-form-input>
+                </b-input-group>
+              </b-form-group>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <b-form-group :label="$t('roomManager.minacreage')" label-align="left">
+                <b-input-group size="md" :append="$t('roomadd.money')">
+                  <b-form-input v-model="minPrice" trim type="number"></b-form-input>
+                </b-input-group>
+              </b-form-group>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <b-form-group :label="$t('roomManager.maxacreage')" label-align="left">
+                <b-input-group size="md" :append="$t('roomadd.money')">
+                  <b-form-input v-model="minPrice" trim type="number"></b-form-input>
+                </b-input-group>
+              </b-form-group>
+            </div>
+        </div>
+         <div class="row">
+              <div class="col-md-4">
+                <b-form-group :label="$t('roomManager.posttype')" label-align="left">
+                  <b-form-select size="md" ></b-form-select>
+                </b-form-group>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <b-form-group :label="$t('roomManager.picture')" label-align="left">
+                <div class="choose-file">
+                  <h1><b-icon icon="upload" aria-hidden="true"></b-icon></h1>
+                </div>
+                <input ref="file-input" type="file" accept=".jpg,.png,.jpeg" :value="image" style="display:none" @change="uploadImage">
+              </b-form-group>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <b-button variant="success" class="btn-dialog" @click="onSubmit">
+              <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+              {{ $t('roomManager.submit') }}
+           </b-button>
+        </div>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -223,6 +323,9 @@ export default class RoomManager extends Vue {
   onDelete(item: any) {
     this.$bvModal.show('modal-delete')
   }
+  showModal(item: any) {
+    this.$bvModal.show('modal');
+  }
 }
 </script>
 
@@ -265,6 +368,22 @@ export default class RoomManager extends Vue {
 }
 #main >>> .modal-delete .btn-primary:hover {
   background:#005ab9;
+}
+.choose-file {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  border: 1px groove;
+}
+.row >>> .btn-dialog {
+  background: none;
+  color: #009222;
+  padding: .375rem .75rem;
+}
+.row >>> .btn-dialog:hover {
+  background: none;
+  color: #09b903;
+  padding: .375rem .75rem;
 }
 
 </style>
