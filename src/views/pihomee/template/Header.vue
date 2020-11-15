@@ -20,10 +20,10 @@
                     <li>
                       <a href="#">{{ $t('header.searchRoom') }}</a>
                       <ul class="submenu">
-                        <li><a href="about.html">{{ $t('header.room') }}</a></li>
-                        <li><a href="services.html">{{ $t('header.apartment') }}</a></li>
-                        <li><a href="blog.html">{{ $t('header.house') }}</a></li>
-                        <li><a href="blog.html">{{ $t('header.office') }}</a></li>
+                        <li><a href="/room?type=0">{{ $t('header.room') }}</a></li>
+                        <li><a href="/room?type=1">{{ $t('header.apartment') }}</a></li>
+                        <li><a href="/room?type=2">{{ $t('header.house') }}</a></li>
+                        <li><a href="/room?type=3">{{ $t('header.office') }}</a></li>
                       </ul>
                     </li>
                     <li><a href="/room-add">{{ $t('header.post') }}</a></li>

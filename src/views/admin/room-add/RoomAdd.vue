@@ -327,15 +327,15 @@ export default class RoomAdd extends Vue {
       text: this.$t("roomadd.roomType1").toString(),
     }),
     new Options({
-      value: TypeOfRoom.MOTEL_ROOM,
+      value: TypeOfRoom.APARTMENMT,
       text: this.$t("roomadd.roomType2").toString(),
     }),
     new Options({
-      value: TypeOfRoom.MOTEL_ROOM,
+      value: TypeOfRoom.HOUSE,
       text: this.$t("roomadd.roomType3").toString(),
     }),
     new Options({
-      value: TypeOfRoom.MOTEL_ROOM,
+      value: TypeOfRoom.OFFICE,
       text: this.$t("roomadd.roomType4").toString(),
     }),
   ];

@@ -11,7 +11,6 @@ import About from '@/views/pihomee/about/About.vue';
 import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
-import Pay from '@/views/pihomee/Vnpay/Pay.vue';
 
 Vue.use(VueRouter);
 
@@ -27,7 +26,14 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: '/room',
-        component: SearchPage
+        component: SearchPage,
+        props: route => ({
+          type: route.query.type,
+          province: route.query.province,
+          district: route.query.district,
+          acreage: route.query.acreage,
+          price: route.query.price
+        })
       },
       {
         path: '/contact',
@@ -38,12 +44,9 @@ const routes: Array<RouteConfig> = [
         component: About
       },
       {
-        path: '/details-room',
-        component: DetailsRoom
-      },
-      {
-        path: '/Vnpay',
-        component: Pay
+        path: '/details-room/:id',
+        component: DetailsRoom,
+        props: true
       }
     ]
   },
@@ -66,6 +69,11 @@ const routes: Array<RouteConfig> = [
     path: '/manager/master-table',
     component: Admin,
     props: { mode: 4 }
+  },
+  {
+    path: '/payment',
+    component: Admin,
+    props: { mode: 5 }
   },
   {
     path: '/login',
