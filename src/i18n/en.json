@@ -194,6 +194,7 @@
   },
   "information": {
     "updateInfor": "Personal information editor",
+    "updateAvatar": "Do you want to update avatar",
     "updatePassword": "Change password",
     "btnPassword": "Submit",
     "accountCode": "Account code",

@@ -34,19 +34,19 @@
         <div class="row">
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12" v-for="(item, index) in displayData" :key="index">
             <!-- Single Room -->
-            <div class="single-room mb-50" style="position:relative" @click="goToDetail(item.id)">
+            <div class="single-room mb-50" style="cursor:pointer;position:relative" @click="goToDetail(item.id)">
               <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUpTop"/>
               <div class="room-img">
-                <a><img :src="item.image" alt=""/></a>
+                <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
               </div>
               <div class="room-caption">
-                <h4><a href="#" class="limited-label" style="color:red">{{ item.title }}</a></h4>
+                <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>
                 <div class="per-night">
                   <label class="limited-label" style="color: #035699" v-b-tooltip.hover :title="item.contact">{{ item.contact }}</label>
                   <br>
-                  <label class="left">Diện tích {{ item.acreage }} <label>m2</label></label>
+                  <label class="left limited-label">Diện tích {{ item.acreage }} <label>m2</label></label>
                   <br>
-                  <label class="left" style="color:#37a344">{{ item.price }} <label> vnd/tháng</label></label>
+                  <label class="left limited-label" style="color:#37a344">{{ item.price }} <label> vnd/tháng</label></label>
                 </div>
               </div>
             </div>

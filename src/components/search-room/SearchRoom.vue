@@ -148,6 +148,7 @@ export default class SearchRoom extends Vue {
   wardSelected: any = null;
   wardOptions: Options[] = [this.defaultOption];
   selectedTypeOfRoom: any = null;
+  isStart = true;
 
   @Watch("provinceSelected")
   onChangeProvinceSelected() {
@@ -221,21 +222,22 @@ export default class SearchRoom extends Vue {
   }
 
   updated() {
-    if (!isNaN(this.type) && this.typeOfRoom.findIndex(x => x.value == this.type)>=0) {
+    if (this.isStart && !isNaN(this.type) && this.typeOfRoom.findIndex(x => x.value == this.type)>=0) {
       this.selectedTypeOfRoom = this.type;
     }
-    if (!isNaN(this.province) && this.provinceOptions.findIndex(x => x.value == this.province)>=0) {
+    if (this.isStart && !isNaN(this.province) && this.provinceOptions.findIndex(x => x.value == this.province)>=0) {
       this.provinceSelected = this.province;
     }
-    if (!isNaN(this.district) && this.districtOptions.findIndex(x => x.value == this.district)>=0) {
+    if (this.isStart && !isNaN(this.district) && this.districtOptions.findIndex(x => x.value == this.district)>=0) {
       this.districtSelected = this.district;
     }
-    if (!isNaN(this.acreage) && this.acreageOptions.findIndex(x => x.value == this.acreage)>=0) {
+    if (this.isStart && !isNaN(this.acreage) && this.acreageOptions.findIndex(x => x.value == this.acreage)>=0) {
       this.acreageSelected = this.acreage;
     }
-    if (!isNaN(this.price) && this.priceOptions.findIndex(x => x.value == this.price)>=0) {
+    if (this.isStart && !isNaN(this.price) && this.priceOptions.findIndex(x => x.value == this.price)>=0) {
       this.priceSelected = this.price;
     }
+    this.isStart = false;
   }
 
   getAllAcreage() {

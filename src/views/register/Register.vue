@@ -167,7 +167,6 @@ export default class Register extends Vue {
    * Click button register
    */
   onClickRegister(): void {
-    debugger
     this.isValidate = true;
     if (!this.validation.isValid()) {
       return;
@@ -195,14 +194,13 @@ export default class Register extends Vue {
             centered: true,
             noCloseOnBackdrop: true
           })
-          .then(value => {
+          .then(() => {
             this.$router.push({ path: '/home' });
           })
         }
       })
       .catch(error => {
         if (!!error.response && !!error.response && !!error.response.data.errorCode) {
-          // show error code and validate
           this.validation.username.rule = false;
           this.validation.username.firstRule = false;
         }

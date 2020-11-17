@@ -95,7 +95,7 @@
             <div class="discription">
               <div style="margin-top: 10px; margin-left: 10px">
                 <p><strong>Thông tin mô tả</strong></p>
-                <span v-html="detailData.description"></span>
+                <span style="white-space:pre-wrap;" v-html="detailData.description"></span>
                 <p>---------------------------------------------------</p>
                 <p>
                   Điện thoại liên hệ :
@@ -117,8 +117,8 @@
                   class="carousel slide"
                   data-ride="carousel"
                 >
-                  <div class="carousel-inner" v-for="(item, index) in detailData.pictures" :key="index">
-                    <div :class="`carousel-item ${index == 0 ? 'active' : ''}`">
+                  <div class="carousel-inner">
+                    <div :class="`carousel-item ${index == 0 ? 'active' : ''}`" v-for="(item, index) in detailData.pictures" :key="index">
                       <img
                         class="d-block w-100"
                         :src="item"
