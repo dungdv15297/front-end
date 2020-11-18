@@ -12,10 +12,9 @@
           :fields="fields"
           :items="items"
           :per-page="10"
-          :current-page="currentPage"
         >
           <template #cell(actions)="row">
-            <b-button variant="success" class="icon-success" @click="showModal( row.item)">
+            <b-button variant="success" class="icon-success" @click="showModal(row.item)">
               <b-icon  icon="pencil-square" aria-hidden="true"></b-icon>
             </b-button>
             <b-button variant="danger" @click="onDelete(row.item)">
@@ -26,8 +25,8 @@
       </div>
       <div class="row mb-40">
         <b-pagination 
-          :total-rows="100"
-          :per-page="10"
+          :total-rows="totalRows"
+          :per-page="15"
           v-model="currentPage"
           size="sm" pills
           class="m-auto"/>
@@ -148,11 +147,11 @@ import { axiosCreator, axiosCreatorWithMultipart } from '@/base/customAxios';
 export default class RoomManager extends Vue {
   @Prop()
   mini!: boolean;
-
+  totalRows: number = 0;
   currentPage: number = 1;
 
   emptyHtml: string =
-    '<span>Chưa có tin đăng. Click <a href="#"">vào đây</a> để đăng tin</span>';
+    '<span>Chưa có tin đăng. Click <a href="/room-add">vào đây</a> để đăng tin</span>';
 
   fields: any = [
     {
@@ -166,24 +165,24 @@ export default class RoomManager extends Vue {
       label: "Giá phòng",
     },
     {
-      key: "updated",
+      key: "acreage",
       sortable: true,
-      label: "Ngày cập nhật",
+      label: "Diện tích",
     },
     {
-      key: "status",
-      label: "Trạng thái",
+      key: "address",
+      label: "Địa chỉ",
       sortable: true,
     },
     {
       key: "last_uptop",
       sortable: true,
-      label: "Lên TOP",
+      label: "Ngày uptop",
     },
     {
       key: "endUpTop",
       sortable: true,
-      label: "Hết hạn TOP",
+      label: "Hết hạn uptop",
     },
     {
       key: "actions",
@@ -191,120 +190,7 @@ export default class RoomManager extends Vue {
     }
   ];
 
-  items: any = [
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu1",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-    {
-      title: "Phòng khép kín ngõ 75 Hồ Tùng Mậu",
-      price: 4000000,
-      updated: "2020 10 10",
-      status: "Up top",
-      last_uptop: "2020 10 10",
-      endUpTop: "2020 10 11",
-    },
-  ];
+  items: any[] = [];
 
   @Watch("mini")
   toggleSidebar() {
@@ -315,16 +201,41 @@ export default class RoomManager extends Vue {
     }
   }
 
-  created() {
+  async created() {
     const axios = axiosCreator();
-    axios.get(`/room/getPageRoom?accountId=${this.$store.getters['accountId']}&page=0&size=10`)
+    await axios.get(`/room/getPageRoom?accountId=${this.$store.getters['accountId']}&page=${this.currentPage-1}&size=15`)
+      .then(response => {
+        if (response && response.data) {
+          const data = response.data;
+          this.totalRows = data.totalElements;
+          this.items = data.content.map((x: any) => {
+            return {
+              title: x.title,
+              price: x.priceMin===x.priceMax
+                ? this.numberWithCommas(x.priceMin) + 'vnd'
+                : `${this.numberWithCommas(x.priceMin)} - ${this.numberWithCommas(x.priceMax)} vnd`,
+              acreage: x.acreageMin===x.acreageMax
+                ? this.numberWithCommas(x.acreageMin) + 'm²'
+                : `${this.numberWithCommas(x.acreageMin)} - ${this.numberWithCommas(x.acreageMax)} m²`,
+              address: x.address,
+              last_uptop: x.lastUpTop == null ? '' : this.$moment(x.lastUpTop as string).format('YYYY-MM-DD hh:mm:ss'),
+              endUpTop: x.lastUpTop == null ? '' : this.$moment(x.lastUpTop as string).add(15,'days').format('YYYY-MM-DD hh:mm:ss')
+            }
+          });
+        }
+      })
   }
 
   onDelete(item: any) {
     this.$bvModal.show('modal-delete')
   }
+
   showModal(item: any) {
     this.$bvModal.show('modal');
+  }
+
+  numberWithCommas(x: any): string {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }
 </script>

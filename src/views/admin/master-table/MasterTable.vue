@@ -202,7 +202,7 @@ export default class MasterTable extends Vue {
   }
 
   getAllPrice(): void {
-    this.axios.get<any>(`/master/price-range/getAll?page=${this.priceCurrentPage - 1}&size=${this.priceSize}`).then(response => {
+    this.axios.get<any>(`/master/price-range/getPage?page=${this.priceCurrentPage - 1}&size=${this.priceSize}`).then(response => {
       if (response && response.data) {
         const data: any = response.data;
         this.priceItems = data.content;
@@ -220,7 +220,7 @@ export default class MasterTable extends Vue {
   }
 
   getAllAcre(): void {
-    this.axios.get<any>(`/master/acreage-range/getAll?page=${this.acreCurrentPage - 1}&size=${this.acreSize}`).then(response => {
+    this.axios.get<any>(`/master/acreage-range/getPage?page=${this.acreCurrentPage - 1}&size=${this.acreSize}`).then(response => {
       if (response && response.data) {
         const data: any = response.data;
         this.acreItems = data.content;
@@ -304,7 +304,7 @@ export default class MasterTable extends Vue {
     this.$bvModal.msgBoxConfirm(this.$t('masterTable.confirm1').toString(), {buttonSize: 'sm', okVariant: 'success', centered: true, noCloseOnBackdrop: true})
     .then(value => {
       if (value) {
-        this.axios.post('/master/price-range/inactive', price)
+        this.axios.post('/master/price-range/delete', price.id)
           .then(() => {
             this.$bvModal.msgBoxOk(this.$t('masterTable.success').toString(), {buttonSize: 'sm', okVariant: 'success', centered: true, noCloseOnBackdrop: true})
               .then(() => {
@@ -319,7 +319,7 @@ export default class MasterTable extends Vue {
     this.$bvModal.msgBoxConfirm(this.$t('masterTable.confirm1').toString(), {buttonSize: 'sm', okVariant: 'success', centered: true, noCloseOnBackdrop: true})
     .then(value => {
       if (value) {
-        this.axios.post('/master/acreage-range/inactive', acreage)
+        this.axios.post('/master/acreage-range/delete', acreage.id)
           .then(() => {
             this.$bvModal.msgBoxOk(this.$t('masterTable.success').toString(), {buttonSize: 'sm', okVariant: 'success', centered: true, noCloseOnBackdrop: true})
               .then(() => {

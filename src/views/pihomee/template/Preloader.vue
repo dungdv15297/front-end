@@ -1,6 +1,5 @@
 <template>
   <div class="loader-wrapper" v-if="show">
-    <span class="loader"><span class="loader-inner"></span></span>
   </div>
 </template>
 
@@ -20,8 +19,8 @@ export default class Preloader extends Vue {
 
 <style scoped>
 .loader-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 1000vw;
+  height: 100vh;
   position: absolute;
   top: 0;
   left: 0;

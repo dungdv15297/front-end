@@ -51,6 +51,12 @@ export default class GoogleMap extends Vue {
     }
   }
 
+  updated() {
+    if (!!this.staticCenter && this.hiddenSearch) {
+      this.position = this.staticCenter;
+    }
+  }
+
   setPlace(place: any) {
     if (place && place.geometry && place.geometry.location) {
       this.position = {

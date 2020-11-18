@@ -7,6 +7,7 @@
     <RoomManager :mini="mini" v-if="showRoom"/>
     <RoomAdd :mini="mini" v-if="showAddRoom"/>
     <MasterTable :mini="mini" v-if="showMasterTable"/>
+    <Pay :mini="mini" v-if="showPay"/>
     <Footer :mini="mini"/>
     <section class="w100vw"></section>
   </div>
@@ -23,7 +24,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
     Information: () => import('./information/Information.vue'),
     RoomManager: () => import('./room-manager/RoomManager.vue'),
     RoomAdd: () => import('./room-add/RoomAdd.vue'),
-    MasterTable: () => import('./master-table/MasterTable.vue')
+    MasterTable: () => import('./master-table/MasterTable.vue'),
+    Pay: () => import('@/views/pihomee/Vnpay/Pay.vue')
   }
 })
 export default class Admin extends Vue {
@@ -34,6 +36,7 @@ export default class Admin extends Vue {
   showRoom: boolean = false;
   showAddRoom: boolean = false;
   showMasterTable: boolean = false;
+  showPay: boolean = false;
 
   mini: boolean = true;
 
@@ -49,6 +52,9 @@ export default class Admin extends Vue {
     }
     if (this.mode === 4) { //show master table
       this.showMasterTable = true;
+    }
+    if (this.mode === 5) { //show payment
+      this.showPay = true;
     }
   }
 

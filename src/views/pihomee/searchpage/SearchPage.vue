@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <search-room @search="onSearch" :fluid="true"/>
+    <search-room @search="onSearch" :fluid="true" :type="type" :province="province" :district="district" :acreage="acreage" :price="price"/>
     <!-- Trend Đà Nẵng Start -->
     <section class="room-area border-groove mt-5 pt-5" style="padding-bottom:40px;border-bottom:1px groove">
       <div class="container-fluid">
@@ -25,142 +25,38 @@
             <!--font-back-tittle  -->
             <div class="font-back-tittle mb-45">
               <div class="archivment-front">
-                <h3>Danh sách các phòng</h3>
+                <h3 v-if="!listTitle">Danh sách các phòng</h3>
+                <h3 v-if="listTitle">Không có phòng được tìm thấy</h3>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12" v-for="(item, index) in displayData" :key="index">
             <!-- Single Room -->
-            <div class="single-room mb-50">
+            <div class="single-room mb-50" style="cursor:pointer;position:relative" @click="goToDetail(item.id)">
+              <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUpTop"/>
               <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
+                <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
               </div>
               <div class="room-caption">
-                <h4><a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a></h4>
+                <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>
                 <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
+                  <label class="limited-label" style="color: #035699" v-b-tooltip.hover :title="item.contact">{{ item.contact }}</label>
                   <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
+                  <label class="left limited-label">Diện tích {{ item.acreage }} <label>m2</label></label>
                   <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
+                  <label class="left limited-label" style="color:#37a344">{{ item.price }} <label> vnd/tháng</label></label>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- Single Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4><a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a></h4>
-                <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
-                  <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
-                  <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- Single Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4><a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a></h4>
-                <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
-                  <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
-                  <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- Single Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4><a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a></h4>
-                <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
-                  <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
-                  <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- Single Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4><a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a></h4>
-                <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
-                  <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
-                  <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- Single Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4><a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a></h4>
-                <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
-                  <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
-                  <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <!-- Single Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a><img src="assets/img/rooms/room1.jpg" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4 v-b-tooltip.hover title="Số 7 Hồ Tùng Mậu, Cầu Giấy">
-                  <a href="rooms.html" class="limited-label">Số 7 Hồ Tùng Mậu, Cầu Giấy</a>
-                </h4>
-                <div class="per-night">
-                  <span><u>Diện tích</u>30 <span>m2</span></span>
-                  <br>
-                  <span><u>VND</u>5.000.000 <span>/ tháng</span></span>
-                  <br>
-                  <span><u>Liên hệ</u>0397304591 <span></span></span>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div class="row">
+          <b-pagination size="sm" pills class="m-auto"
+            :total-rows="totalRows"
+            :per-page="20"
+            v-model="currentPage"/>
         </div>
 
       <!-- Pagination here -->
@@ -210,7 +106,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { axiosCreator } from '@/base/customAxios';
+import { AxiosInstance } from 'axios';
+import Room from '@/base/domains/room';
+import BaseDomain from '@/base/domains/base-domain';
 
 @Component({
   components: {
@@ -219,20 +119,116 @@ import { Component, Prop, Vue } from "vue-property-decorator";
   }
 })
 export default class SearchPage extends Vue {
+  @Prop()
+  type!: number;
+  @Prop()
+  province!: number;
+  @Prop()
+  district!: number;
+  @Prop()
+  acreage!: number;
+  @Prop()
+  price!: number;
+
+  totalRows: number = 0;
+  currentPage: number = 1;
+  @Watch('currentPage')
+  currentPageChange(): void {
+    this.onSearch();
+  }
+
+  get listTitle(): boolean {
+    return this.displayData.length <= 0;
+  }
+
+  axios: AxiosInstance = axiosCreator();
+
   dataSearch: SearchValue = new SearchValue();
 
-  onSearch(data: SearchValue) {
-    this.dataSearch = data;
+  dataList: Room[] = [];
+  displayData: DisplayData[] = [];
+
+  created() {
+    if (!isNaN(this.type)) {
+      this.dataSearch.type = this.type;
+    }
+    if (!isNaN(this.province)) {
+      this.dataSearch.province = this.province;
+    }
+    if (!isNaN(this.district)) {
+      this.dataSearch.district = this.district;
+    }
+    if (!isNaN(this.acreage)) {
+      this.dataSearch.acreage = this.acreage;
+    }
+    if (!isNaN(this.price)) {
+      this.dataSearch.price = this.price;
+    }
+    this.onSearch(this.dataSearch);
+  }
+
+  onSearch(data?: SearchValue) {
+    if (!!data) {
+      this.dataSearch.type = data.type;
+      this.dataSearch.province = data.province;
+      this.dataSearch.district = data.district;
+      this.dataSearch.acreage = data.acreage;
+      this.dataSearch.price = data.price;
+      this.dataSearch.page = 0;
+    } else {
+      this.dataSearch.page = this.currentPage;
+    }
+    this.axios.post<any>('/room/search-room-any', this.dataSearch)
+    .then((response: any) => {
+      if (response && response.data) {
+        this.dataList = response.data.content;
+        this.totalRows = response.data.totalElements;
+        this.displayData = this.dataList.map(x => new DisplayData({
+            id: x.id,
+            title: x.title,
+            price: x.priceMin == x.priceMax ? this.numberWithCommas(x.priceMin) : this.numberWithCommas(x.priceMin) + ' - ' +this.numberWithCommas(x.priceMax),
+            acreage: x.acreageMin == x.acreageMax ? x.acreageMin.toString() : x.acreageMin + ' - ' + x.acreageMax,
+            contact: x.address,
+            image: x.image,
+            isUptop: false
+          })
+        );
+      }
+    });
+  }
+
+  goToDetail(id: string) {
+    this.$router.push('/details-room/'+id);
+  }
+
+  numberWithCommas(x: any): string {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+}
+
+class DisplayData {
+  id: string = '';
+  title: string = '';
+  price: string = '';
+  acreage: string = '';
+  contact: string = '';
+  image: string = '';
+  isUptop: boolean = false;
+  
+  constructor(init?: DisplayData) {
+    Object.assign(this, init);
   }
 }
 
 class SearchValue {
-  type: number = 0;
-  province: number = 0;
-  district: number = 0;
-  street: number = 0;
-  acreage: number = 0;
-  price: number = 0;
+  type: number | null = null;
+  province: number | null = null;
+  district: number | null = null;
+  street: number | null = null;
+  acreage: number | null = null;
+  price: number | null = null;
+  page: number = 0;
+  size: number = 20;
 }
 </script>
 
@@ -263,5 +259,15 @@ main >>> .select-btn {
   overflow: hidden;
   width: 100%;
   white-space: nowrap;
+}
+.new-gif {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  z-index: 1;
+  width: 70px;
+}
+.room-img {
+  height: 260px;
 }
 </style>

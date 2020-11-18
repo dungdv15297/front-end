@@ -194,6 +194,7 @@
   },
   "information": {
     "updateInfor": "Personal information editor",
+    "updateAvatar": "Do you want to update avatar",
     "updatePassword": "Change password",
     "btnPassword": "Submit",
     "accountCode": "Account code",
@@ -242,7 +243,19 @@
     "roomType1": "Motel room",
     "roomType2": "Department",
     "roomType3": "House",
-    "roomType4": "Office"
+    "roomType4": "Office",
+    "success": "Register post successfully",
+    "checkProvince": "Province must be selected",
+    "checkDistrict": "District must be selected",
+    "checkWard": "Ward must be selected",
+    "checkDetailInformation": "Enter the information of address",
+    "checkPrice2": "The maximum price must be greater or equal the minimum price and must be multiple of 10000",
+    "checkPrice1": "The minimum price must greater or equal 0 and must be multiple of 10000",
+    "checkAcreage1": "The minimum acreage must greater than 0",
+    "checkAcreage2": "The maximum acreage must greater or equal minimum acreage",
+    "checkTitle": "Title must not be empty and less than 60 characters",
+    "checkContent": "Content must not be empty",
+    "checkImages": "Choose picture for your room"
   },
   "masterTable": {
     "active": "◯",
