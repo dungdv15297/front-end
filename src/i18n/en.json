@@ -282,6 +282,7 @@
     "confirm2": "Activate this record?"
   },
   "roomManager": {
+    "titleUpdate": "Update room details",
     "titleR":"Manage posting rooms",
     "colTitle":"Title",
     "province": "Province",

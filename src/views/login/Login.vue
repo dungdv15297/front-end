@@ -68,7 +68,7 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import LoginData from './login-data';
-import * as axios from '@/base/customAxios';
+import { axiosCreator } from '@/base/customAxios';
 import AuthRequest from '@/base/request/auth-request';
 import AuthResponse from '@/base/response/auth-response';
 import Account from '@/base/domains/account';
@@ -84,7 +84,7 @@ export default class Login extends Vue {
   get validation(): any {
     return !this.isValidate ? validate.validation() : validate.validation(this.loginData);
   }
-  axios: AxiosInstance = axios.axiosCreator();
+  axios: AxiosInstance = axiosCreator();
 
   API = {
     login: 'account/authenticate',
@@ -112,6 +112,7 @@ export default class Login extends Vue {
    * Click button login
    */
   onClickLogin(): void {
+    const axios: AxiosInstance = axiosCreator();
     this.isValidate = true;
     if (!this.validation.isValid()) {
       return;
@@ -120,7 +121,7 @@ export default class Login extends Vue {
       username: this.loginData.username,
       password: this.loginData.password
     });
-    this.axios.post<AuthResponse>(this.API.login, body)
+    axios.post<AuthResponse>(this.API.login, body)
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;

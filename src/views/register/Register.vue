@@ -126,7 +126,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import RegisterData from './register-data';
 import RegisterRequest from '@/base/request/register-request';
-import * as axios from '@/base/customAxios';
+import {axiosCreator} from '@/base/customAxios';
 import AuthResponse from '@/base/response/auth-response';
 import * as validate from './validation-rules';
 
@@ -137,7 +137,6 @@ export default class Register extends Vue {
     register: 'account/register',
     byToken: 'account/byToken'
   }
-  axios = axios.axiosCreator();
 
   isValidate: boolean = false;
 
@@ -146,10 +145,11 @@ export default class Register extends Vue {
   }
 
   created() {
+    const axios = axiosCreator();
     const token = this.$store.getters['token'];
     if (!!token) {
       if (!!token) {
-        this.axios.get<any>(this.API.byToken)
+        axios.get<any>(this.API.byToken)
           .then(response => {
             if (response && response.data) {
               this.$router.push({ path: '/home' });
@@ -178,7 +178,9 @@ export default class Register extends Vue {
       password: this.registerData.password,
       rePassword: this.registerData.rePassword
     });
-    this.axios.post<AuthResponse>(this.API.register, body)
+    
+    const axios = axiosCreator();
+    axios.post<AuthResponse>(this.API.register, body)
       .then(response => {
         if (response && response.data && response.data.jwt) {
           const token: string = response.data.jwt;

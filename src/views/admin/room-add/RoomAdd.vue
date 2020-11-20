@@ -407,7 +407,7 @@ export default class RoomAdd extends Vue {
       return null;
     }
     const maxAcreage = this.maxAcreage;
-    return maxAcreage !== "" && this.maxAcreage > this.minAcreage;
+    return maxAcreage !== "" && this.maxAcreage >= this.minAcreage;
   }
 
   get checkTitle(): boolean | null {

@@ -20,43 +20,31 @@
           <ul class="navbar-nav mr-auto"></ul>
           <form class="form-inline my-2 my-lg-0">
             <div class="row">
-              <div class="col-sm-6 col-md-6 text-right">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    value=""
-                    class="search-box form-control"
-                    placeholder="Search..."
-                  />
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-6 text-right">
-                <div class="dropdown">
-                  <a
-                    href="#"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <img src="@/assets/img/team/3.png" class="avatar" />
+              <div class="dropdown">
+                <a
+                  href="#"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img src="@/assets/img/team/3.png" class="avatar" />
+                </a>
+                <span style="font-family: cursive; margin-left: 10px"
+                  ><strong>{{ accountDetail.name }}</strong></span
+                >
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <a class="dropdown-item inline-flex" href="#">
+                    <i class="material-icons">notifications_none</i>
+                    <i class="pl-10">Thông báo</i>
                   </a>
-                  <span style="font-family: cursive; margin-left: 10px"
-                    ><strong>{{ accountDetail.name }}</strong></span
-                  >
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a class="dropdown-item inline-flex" href="#">
-                      <i class="material-icons">notifications_none</i>
-                      <i class="pl-10">Thông báo</i>
-                    </a>
-                    <a class="dropdown-item inline-flex" href="#" @click="onSignOut">
-                      <i class="material-icons">exit_to_app</i>
-                      <i class="pl-10">Đăng xuất</i>
-                    </a>
-                  </div>
+                  <a class="dropdown-item inline-flex" href="#" @click="onSignOut">
+                    <i class="material-icons">exit_to_app</i>
+                    <i class="pl-10">Đăng xuất</i>
+                  </a>
                 </div>
               </div>
             </div>
