@@ -86,7 +86,6 @@ import { TypeOfRoom } from "@/base/enum/type-of-room";
 import Options from "@/base/options";
 import DistrictResponse from "@/base/response/district-response";
 import ProvinceResponse from "@/base/response/province-response";
-import WardResponse from "@/base/response/ward-response";
 import { AxiosInstance } from "axios";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import SearchValue from "./search-value";
@@ -100,12 +99,6 @@ export default class SearchRoom extends Vue {
   type!: number;
   @Prop()
   province!: number;
-  @Prop()
-  district!: number;
-  @Prop()
-  acreage!: number;
-  @Prop()
-  price!: number;
 
   get container(): string {
     return this.fluid ? "container-fluid" : "container";
@@ -145,8 +138,6 @@ export default class SearchRoom extends Vue {
   provinceOptions: Options[] = [];
   districtSelected: any = null;
   districtOptions: Options[] = [this.defaultOption];
-  wardSelected: any = null;
-  wardOptions: Options[] = [this.defaultOption];
   selectedTypeOfRoom: any = null;
   isStart = true;
 
@@ -176,36 +167,10 @@ export default class SearchRoom extends Vue {
       .finally(() => (this.districtSelected = null));
   }
 
-  @Watch("districtSelected")
-  onChangeDistrictSelected() {
-    if (this.districtSelected === null) {
-      this.wardOptions = [this.defaultOption];
-      this.wardSelected = null;
-      return;
-    }
-    this.axios
-      .get<WardResponse[]>(
-        `/ward/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`
-      )
-      .then((res) => {
-        if (res && res.data) {
-          this.wardOptions = res.data.map(
-            (x) =>
-              new Options({
-                value: x.id,
-                text: x.prefix + " " + x.name,
-              })
-          );
-          this.wardOptions.unshift(this.defaultOption);
-        }
-      })
-      .finally(() => (this.wardSelected = null));
-  }
-
   axios: AxiosInstance = axiosCreator();
 
-  async created() {
-    await this.axios.get<ProvinceResponse[]>("province/getAll").then((res) => {
+  created() {
+    this.axios.get<ProvinceResponse[]>("province/getAll").then((res) => {
       if (res && res.data) {
         this.provinceOptions = res.data.map(
           (x) =>
@@ -217,7 +182,7 @@ export default class SearchRoom extends Vue {
         this.provinceOptions.unshift(this.defaultOption);
       }
     });
-    this.getAllAcreage();
+    this.getAllAcreage(); 
     this.getAllPrice();
   }
 
@@ -225,17 +190,9 @@ export default class SearchRoom extends Vue {
     if (this.isStart && !isNaN(this.type) && this.typeOfRoom.findIndex(x => x.value == this.type)>=0) {
       this.selectedTypeOfRoom = this.type;
     }
-    if (this.isStart && !isNaN(this.province) && this.provinceOptions.findIndex(x => x.value == this.province)>=0) {
+
+    if (this.isStart && !isNaN(this.province) && this.provinceOptions.findIndex(x => x.value == this.province) >= 0) {
       this.provinceSelected = this.province;
-    }
-    if (this.isStart && !isNaN(this.district) && this.districtOptions.findIndex(x => x.value == this.district)>=0) {
-      this.districtSelected = this.district;
-    }
-    if (this.isStart && !isNaN(this.acreage) && this.acreageOptions.findIndex(x => x.value == this.acreage)>=0) {
-      this.acreageSelected = this.acreage;
-    }
-    if (this.isStart && !isNaN(this.price) && this.priceOptions.findIndex(x => x.value == this.price)>=0) {
-      this.priceSelected = this.price;
     }
     this.isStart = false;
   }
@@ -253,16 +210,9 @@ export default class SearchRoom extends Vue {
               })
           );
           this.acreageOptions.unshift(this.defaultOption);
+          this.acreageSelected = null;
         }
-      })
-      .catch((error) =>
-        this.$bvModal.msgBoxOk(error, {
-          buttonSize: "sm",
-          okVariant: "danger",
-          centered: true,
-          noCloseOnBackdrop: true,
-        })
-      );
+      });
   }
 
   getAllPrice() {
@@ -277,15 +227,8 @@ export default class SearchRoom extends Vue {
               })
           );
           this.priceOptions.unshift(this.defaultOption);
-      })
-      .catch((error) =>
-        this.$bvModal.msgBoxOk(error, {
-          buttonSize: "sm",
-          okVariant: "danger",
-          centered: true,
-          noCloseOnBackdrop: true,
-        })
-      );
+          this.priceSelected = null;
+      });
   }
 
   emitData() {

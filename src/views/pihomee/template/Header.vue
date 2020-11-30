@@ -24,6 +24,7 @@
                         <li><a href="/room?type=1">{{ $t('header.apartment') }}</a></li>
                         <li><a href="/room?type=2">{{ $t('header.house') }}</a></li>
                         <li><a href="/room?type=3">{{ $t('header.office') }}</a></li>
+                        <li><a href="/room">{{ $t('header.custom') }}</a></li>
                       </ul>
                     </li>
                     <li><a href="/room-add">{{ $t('header.post') }}</a></li>

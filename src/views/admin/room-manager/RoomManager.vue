@@ -2,7 +2,7 @@
   <div ref="roomManager" id="main">
     <div class="content">
       <div class="row title mt-20 mb-20">{{ $t("roomManager.titleR") }}</div>
-      <div class="row">
+      <div class="row" style="min-height: 400px">
         <b-table
           striped
           hover
@@ -14,6 +14,9 @@
           :per-page="10"
         >
           <template #cell(actions)="row">
+            <b-button variant="success" @click="uptop(row.item)">
+              <b-icon icon="box-arrow-in-up" aria-hidden="true"></b-icon>
+            </b-button>
             <b-button
               variant="success"
               class="icon-success"
@@ -56,110 +59,221 @@
       </template>
       <div class="container" style="font-family: 'Noto Serif'">
         <div class="row">
-          <div class="col-md-3">
-            <b-form-group
-              :label="$t('roomManager.province')"
-              label-align="left"
-            >
-              <b-form-select
-                size="md"
-                :state="checkProvince"
-                v-b-tooltip.hover.right.v-danger
-                :title="
-                  checkProvince == null || checkProvince
-                    ? ''
-                    : $t('roomadd.checkProvince')
-                "
-                v-model="provinceSelected"
-                :options="provinceOptions"
-              ></b-form-select>
-            </b-form-group>
+          <div class="col-7">
+            <div class="row">
+              <div class="col-md-4">
+                <b-form-group
+                  :label="$t('roomManager.province')"
+                  label-align="left"
+                >
+                  <b-form-select
+                    size="md"
+                    :state="checkProvince"
+                    v-b-tooltip.hover.right.v-danger
+                    :title="
+                      checkProvince == null || checkProvince
+                        ? ''
+                        : $t('roomadd.checkProvince')
+                    "
+                    v-model="provinceSelected"
+                    :options="provinceOptions"
+                  ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-4">
+                <b-form-group
+                  :label="$t('roomManager.district')"
+                  label-align="left"
+                >
+                  <b-form-select
+                    size="md"
+                    v-model="districtSelected"
+                    :options="districtOptions"
+                    :state="checkDistrict"
+                    v-b-tooltip.hover.right.v-danger
+                    :title="
+                      checkDistrict == null || checkDistrict
+                        ? ''
+                        : $t('roomadd.checkDistrict')
+                    "
+                  ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-4">
+                <b-form-group
+                  :label="$t('roomManager.ward')"
+                  label-align="left"
+                >
+                  <b-form-select
+                    size="md"
+                    v-model="wardSelected"
+                    :options="wardOptions"
+                    :state="checkWard"
+                    v-b-tooltip.hover.right.v-danger
+                    :title="
+                      checkWard == null || checkWard
+                        ? ''
+                        : $t('roomadd.checkWard')
+                    "
+                  ></b-form-select>
+                </b-form-group>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <b-form-group :label="$t('roomadd.detail')" label-align="left">
+                  <b-form-input
+                    v-model="detailInformation"
+                    :disabled="!enabledDetail"
+                    trim
+                    @blur="focusOutDetail"
+                    :state="checkDetailInformation"
+                    v-b-tooltip.hover.right.v-danger
+                    :title="
+                      checkDetailInformation == null || checkDetailInformation
+                        ? ''
+                        : $t('roomadd.checkDetailInformation')
+                    "
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+              <div class="col-md-12">
+                <b-form-input
+                  trim
+                  disabled
+                  v-model="information"
+                ></b-form-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <b-form-group
+                  :label="$t('roomManager.minprice')"
+                  label-align="left"
+                >
+                  <b-input-group size="md" :append="$t('roomadd.money')">
+                    <b-form-input
+                      v-model="minPrice"
+                      trim
+                      type="number"
+                      :state="checkPrice1"
+                      v-b-tooltip.hover.right.v-danger
+                      :title="
+                        checkPrice1 == null || checkPrice1
+                          ? ''
+                          : $t('roomadd.checkPrice1')
+                      "
+                    ></b-form-input>
+                  </b-input-group>
+                </b-form-group>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <b-form-group
+                  :label="$t('roomManager.maxprice')"
+                  label-align="left"
+                >
+                  <b-input-group size="md" :append="$t('roomadd.money')">
+                    <b-form-input
+                      v-model="maxPrice"
+                      trim
+                      type="number"
+                      :state="checkPrice2"
+                      v-b-tooltip.hover.right.v-danger
+                      :title="
+                        checkPrice2 == null || checkPrice2
+                          ? ''
+                          : $t('roomadd.checkPrice2')
+                      "
+                    ></b-form-input>
+                  </b-input-group>
+                </b-form-group>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <b-form-group
+                  :label="$t('roomManager.minacreage')"
+                  label-align="left"
+                >
+                  <b-input-group size="md" :append="$t('roomadd.m2')">
+                    <b-form-input
+                      v-model="minAcreage"
+                      trim
+                      type="number"
+                      :state="checkAcreage1"
+                      v-b-tooltip.hover.right.v-danger
+                      :title="
+                        checkAcreage1 == null || checkAcreage1
+                          ? ''
+                          : $t('roomadd.checkAcreage1')
+                      "
+                    ></b-form-input>
+                  </b-input-group>
+                </b-form-group>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <b-form-group
+                  :label="$t('roomManager.maxacreage')"
+                  label-align="left"
+                >
+                  <b-input-group size="md" :append="$t('roomadd.m2')">
+                    <b-form-input
+                      v-model="maxAcreage"
+                      trim
+                      type="number"
+                      :state="checkAcreage2"
+                      v-b-tooltip.hover.right.v-danger
+                      :title="
+                        checkAcreage2 == null || checkAcreage2
+                          ? ''
+                          : $t('roomadd.checkAcreage2')
+                      "
+                    ></b-form-input>
+                  </b-input-group>
+                </b-form-group>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <b-form-group
+                  :label="$t('roomManager.typeroom')"
+                  label-align="left"
+                >
+                  <b-form-select
+                    size="md"
+                    v-model="selectedTypeOfRoom"
+                    :options="typeOfRoom"
+                  ></b-form-select>
+                </b-form-group>
+              </div>
+              <div class="col-md-9">
+                <b-form-group
+                  :label="$t('roomManager.title')"
+                  label-align="left"
+                >
+                  <b-form-input
+                    v-model="title"
+                    :state="checkTitle"
+                    v-b-tooltip.hover.right.v-danger
+                    :title="
+                      checkTitle == null || checkTitle
+                        ? ''
+                        : $t('roomadd.checkTitle')
+                    "
+                    trim
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+            </div>
           </div>
-          <div class="col-md-3">
-            <b-form-group
-              :label="$t('roomManager.district')"
-              label-align="left"
-            >
-              <b-form-select
-                size="md"
-                v-model="districtSelected"
-                :options="districtOptions"
-                :state="checkDistrict"
-                v-b-tooltip.hover.right.v-danger
-                :title="
-                  checkDistrict == null || checkDistrict
-                    ? ''
-                    : $t('roomadd.checkDistrict')
-                "
-              ></b-form-select>
-            </b-form-group>
-          </div>
-          <div class="col-md-3">
-            <b-form-group :label="$t('roomManager.ward')" label-align="left">
-              <b-form-select
-                size="md"
-                v-model="wardSelected"
-                :options="wardOptions"
-                :state="checkWard"
-                v-b-tooltip.hover.right.v-danger
-                :title="
-                  checkWard == null || checkWard ? '' : $t('roomadd.checkWard')
-                "
-              ></b-form-select>
-            </b-form-group>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <b-form-group :label="$t('roomadd.detail')" label-align="left">
-              <b-form-input
-                v-model="detailInformation"
-                :disabled="!enabledDetail"
-                trim
-                @blur="focusOutDetail"
-                :state="checkDetailInformation"
-                v-b-tooltip.hover.right.v-danger
-                :title="
-                  checkDetailInformation == null || checkDetailInformation
-                    ? ''
-                    : $t('roomadd.checkDetailInformation')
-                "
-              ></b-form-input>
-            </b-form-group>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <b-form-input trim disabled v-model="information"></b-form-input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <b-form-group
-              :label="$t('roomManager.typeroom')"
-              label-align="left"
-            >
-              <b-form-select
-                size="md"
-                v-model="selectedTypeOfRoom"
-                :options="typeOfRoom"
-              ></b-form-select>
-            </b-form-group>
-          </div>
-          <div class="col-md-9">
-            <b-form-group :label="$t('roomManager.title')" label-align="left">
-              <b-form-input
-                v-model="title"
-                :state="checkTitle"
-                v-b-tooltip.hover.right.v-danger
-                :title="
-                  checkTitle == null || checkTitle
-                    ? ''
-                    : $t('roomadd.checkTitle')
-                "
-                trim
-              ></b-form-input>
-            </b-form-group>
+          <div class="col-5">
+            <google-map
+              :hidden-search="true"
+              :draggable="true"
+              @changePlace="changePlace"
+            />
           </div>
         </div>
         <div class="row">
@@ -177,92 +291,6 @@
                     : $t('roomadd.checkContent')
                 "
               ></b-form-textarea>
-            </b-form-group>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-3">
-            <b-form-group
-              :label="$t('roomManager.minprice')"
-              label-align="left"
-            >
-              <b-input-group size="md" :append="$t('roomadd.money')">
-                <b-form-input
-                  v-model="minPrice"
-                  trim
-                  type="number"
-                  :state="checkPrice1"
-                  v-b-tooltip.hover.right.v-danger
-                  :title="
-                    checkPrice1 == null || checkPrice1
-                      ? ''
-                      : $t('roomadd.checkPrice1')
-                  "
-                ></b-form-input>
-              </b-input-group>
-            </b-form-group>
-          </div>
-          <div class="col-sm-12 col-md-3">
-            <b-form-group
-              :label="$t('roomManager.maxprice')"
-              label-align="left"
-            >
-              <b-input-group size="md" :append="$t('roomadd.money')">
-                <b-form-input
-                  v-model="maxPrice"
-                  trim
-                  type="number"
-                  :state="checkPrice2"
-                  v-b-tooltip.hover.right.v-danger
-                  :title="
-                    checkPrice2 == null || checkPrice2
-                      ? ''
-                      : $t('roomadd.checkPrice2')
-                  "
-                ></b-form-input>
-              </b-input-group>
-            </b-form-group>
-          </div>
-          <div class="col-sm-12 col-md-3">
-            <b-form-group
-              :label="$t('roomManager.minacreage')"
-              label-align="left"
-            >
-              <b-input-group size="md" :append="$t('roomadd.m2')">
-                <b-form-input
-                  v-model="minAcreage"
-                  trim
-                  type="number"
-                  :state="checkAcreage1"
-                  v-b-tooltip.hover.right.v-danger
-                  :title="
-                    checkAcreage1 == null || checkAcreage1
-                      ? ''
-                      : $t('roomadd.checkAcreage1')
-                  "
-                ></b-form-input>
-              </b-input-group>
-            </b-form-group>
-          </div>
-          <div class="col-sm-12 col-md-3">
-            <b-form-group
-              :label="$t('roomManager.maxacreage')"
-              label-align="left"
-            >
-              <b-input-group size="md" :append="$t('roomadd.m2')">
-                <b-form-input
-                  v-model="maxAcreage"
-                  trim
-                  type="number"
-                  :state="checkAcreage2"
-                  v-b-tooltip.hover.right.v-danger
-                  :title="
-                    checkAcreage2 == null || checkAcreage2
-                      ? ''
-                      : $t('roomadd.checkAcreage2')
-                  "
-                ></b-form-input>
-              </b-input-group>
             </b-form-group>
           </div>
         </div>
@@ -285,7 +313,7 @@
         </div>
         <div class="row">
           <div
-            class="col-sm-6 col-md-4 col-lg-3"
+            class="col-sm-3 col-md-2 col-lg-1"
             v-for="image in images"
             :key="image.index"
           >
@@ -317,10 +345,14 @@ import WardResponse from "@/base/response/ward-response";
 import Options from "@/base/options";
 import DistrictResponse from "@/base/response/district-response";
 import { TypeOfRoom } from "@/base/enum/type-of-room";
-import ProvinceResponse from '@/base/response/province-response';
-import Room from '@/base/domains/room';
+import ProvinceResponse from "@/base/response/province-response";
+import Room from "@/base/domains/room";
 
-@Component
+@Component({
+  components: {
+    GoogleMap: () => import("@/components/map/GoogleMap.vue"),
+  },
+})
 export default class RoomManager extends Vue {
   @Prop()
   mini!: boolean;
@@ -447,6 +479,7 @@ export default class RoomManager extends Vue {
           this.totalRows = data.totalElements;
           this.items = data.content.map((x: any) => {
             return {
+              accountId: x.accountId,
               id: x.id,
               title: x.title,
               price:
@@ -510,31 +543,28 @@ export default class RoomManager extends Vue {
   detailData: Room = new Room();
 
   async showModal(item: any) {
-    await this.axios.post<any>("/room/details-room", item.id).then((response) => {
-      if (response && response.data) {
-        this.detailData = response.data;
-        console.log(this.detailData);
+    await this.axios
+      .post<any>("/room/details-room", item.id)
+      .then((response) => {
+        if (response && response.data) {
+          this.detailData = response.data;
+          console.log(this.detailData);
 
-        this.provinceSelected = this.detailData.province.id;
-        this.districtSelected = this.detailData.district.id;
-        this.wardSelected = this.detailData.ward.id;
-        this.title = this.detailData.title;
-        this.description = this.detailData.description;
-        this.selectedTypeOfRoom = this.detailData.typeOfRoom;
-        this.minPrice = this.detailData.priceMin;
-        this.maxPrice = this.detailData.priceMax;
-        this.minAcreage = this.detailData.acreageMin;
-        this.maxAcreage = this.detailData.acreageMax;
-        this.images = this.detailData.pictures;
+          this.provinceSelected = this.detailData.province.id;
+          this.districtSelected = this.detailData.district.id;
+          this.wardSelected = this.detailData.ward.id;
+          this.title = this.detailData.title;
+          this.description = this.detailData.description;
+          this.selectedTypeOfRoom = this.detailData.typeOfRoom;
+          this.minPrice = this.detailData.priceMin;
+          this.maxPrice = this.detailData.priceMax;
+          this.minAcreage = this.detailData.acreageMin;
+          this.maxAcreage = this.detailData.acreageMax;
+          this.images = this.detailData.pictures;
+        }
+      });
 
-        const lastIndex = this.detailData.address.lastIndexOf(',');
-        const index = lastIndex - 3;
-        this.detailInformation = this.detailData.address.substring(0, index);
-        this.information = this.detailData.address;
-      }
-    });
-    
-    this.axios.get<ProvinceResponse[]>("province/getAll").then((res) => {
+    this.axios.get<ProvinceResponse[]>("/province/getAll").then((res) => {
       if (res && res.data) {
         this.provinceOptions = res.data.map(
           (x) =>
@@ -544,11 +574,14 @@ export default class RoomManager extends Vue {
             })
         );
         this.provinceOptions.unshift(this.defaultOption);
-        this.$nextTick();
+        this.$nextTick().then(() => this.getDistrict());
       }
     });
-    
-    this.axios
+    this.$bvModal.show("modal-update");
+  }
+
+  async getDistrict() {
+    return this.axios
       .get<DistrictResponse[]>(
         `/district/getByProvinceId?provinceId=${this.provinceSelected}`
       )
@@ -564,8 +597,11 @@ export default class RoomManager extends Vue {
           this.districtOptions.unshift(this.defaultOption);
         }
         this.districtSelected = this.detailData.district.id;
-        this.$nextTick();
-      })
+        this.$nextTick().then(() => this.getWard());
+      });
+  }
+
+  async getWard() {
     this.axios
       .get<WardResponse[]>(
         `/ward/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`
@@ -581,11 +617,19 @@ export default class RoomManager extends Vue {
           );
           this.wardOptions.unshift(this.defaultOption);
         }
-        
+
         this.wardSelected = this.detailData.ward.id;
-        this.$nextTick();
-      })
-    this.$bvModal.show("modal-update");
+        this.$nextTick().then(() => {
+          let index = this.detailData.address.lastIndexOf(",");
+          let subStr = this.detailData.address.substring(0, index);
+          index = subStr.lastIndexOf(",");
+          subStr = subStr.substring(0, index);
+          index = subStr.lastIndexOf(",");
+          subStr = subStr.substring(0, index);
+          this.detailInformation = subStr;
+          this.information = this.detailData.address;
+        });
+      });
   }
 
   changePlace(place: any): void {
@@ -764,7 +808,7 @@ export default class RoomManager extends Vue {
       this.detailInformation = "";
       return;
     }
-    
+
     this.axios
       .get<WardResponse[]>(
         `/ward/getByDistrictAndProvince?districtId=${this.districtSelected}&provinceId=${this.provinceSelected}`
@@ -807,6 +851,54 @@ export default class RoomManager extends Vue {
       (x) => x.value === this.provinceSelected
     ) as Options).text;
     this.information = `${this.detailInformation}, ${ward}, ${district}, ${province}`.trim();
+  }
+
+  uptop(item: any) {
+    console.log(item);
+    this.$bvModal
+      .msgBoxConfirm(this.$t("roomManager.uptopMsg").toString(), {
+        buttonSize: "sm",
+        okVariant: "success",
+        centered: true,
+        noCloseOnBackdrop: true,
+      })
+      .then((value) => {
+        if (!value) {
+          return;
+        }
+        this.axios.post<boolean>("/account/check-payment").then((response) => {
+          if (response && !!response.data) {
+            this.axios.post<any>("/room/uptop", item).then(() => {
+              this.$bvModal
+                .msgBoxOk(this.$t("roomadd.uptopDone").toString(), {
+                  size: "sm",
+                  buttonSize: "sm",
+                  okVariant: "success",
+                  headerClass: "p-2 border-bottom-0",
+                  footerClass: "p-2 border-top-0",
+                  centered: true,
+                  noCloseOnBackdrop: true,
+                })
+                .then(() => {
+                  this.clickButton = false;
+                  this.getDisplayData();
+                });
+            });
+          } else {
+            this.$bvModal
+              .msgBoxOk(this.$t("roomadd.notEnough").toString(), {
+                size: "sm",
+                buttonSize: "sm",
+                okVariant: "danger",
+                headerClass: "p-2 border-bottom-0",
+                footerClass: "p-2 border-top-0",
+                centered: true,
+                noCloseOnBackdrop: true,
+              })
+              .then(() => (this.clickButton = false));
+          }
+        });
+      });
   }
 }
 </script>
@@ -870,7 +962,6 @@ export default class RoomManager extends Vue {
   color: #09b903;
   padding: 0.375rem 0.75rem;
 }
-
 
 .title {
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;

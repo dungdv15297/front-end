@@ -35,7 +35,7 @@
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12" v-for="(item, index) in displayData" :key="index">
             <!-- Single Room -->
             <div class="single-room mb-50" style="cursor:pointer;position:relative" @click="goToDetail(item.id)">
-              <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUpTop"/>
+              <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
               <div class="room-img">
                 <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
               </div>
@@ -190,9 +190,10 @@ export default class SearchPage extends Vue {
             acreage: x.acreageMin == x.acreageMax ? x.acreageMin.toString() : x.acreageMin + ' - ' + x.acreageMax,
             contact: x.address,
             image: x.image,
-            isUptop: false
+            isUptop: x.isUptop
           })
         );
+        console.log(this.displayData)
       }
     });
   }

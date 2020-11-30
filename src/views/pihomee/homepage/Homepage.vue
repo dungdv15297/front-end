@@ -16,7 +16,6 @@
         </div>
       </div>
     </div>
-    <search-room @search="onSearch" :fluid="true"/>
     <!-- Trend Hà Nội Start -->
     <section class="room-area border-groove mt-5 pt-5">
       <div class="container">
@@ -183,14 +182,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
   }
 })
 export default class Homepage extends Vue {
-  onSearch(data: SearchValue) {
-    const type = data.type;
-    const province = data.province;
-    const district = data.district;
-    const acreage = data.acreage;
-    const price = data.price;
-    this.$router.push(`/room?type=${type}&province=${province}&district=${district}&acreage=${acreage}&price=${price}`);
-  }
+  
 }
 
 class SearchValue {

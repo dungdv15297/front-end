@@ -612,6 +612,30 @@ export default class RoomAdd extends Vue {
       this.clickButton = false;
       return;
     }
+    if (this.selectedPosting === 1) {
+      this.axios.post<boolean>('/account/check-payment')
+        .then(response => {
+          if (response && !!response.data) {
+            this.addRoomFnc();
+          } else {
+            this.$bvModal.msgBoxOk(this.$t('roomadd.notEnough').toString(), {
+              size: 'sm',
+              buttonSize: 'sm',
+              okVariant: 'danger',
+              headerClass: 'p-2 border-bottom-0',
+              footerClass: 'p-2 border-top-0',
+              centered: true,
+              noCloseOnBackdrop: true
+            }).then(() => this.clickButton = false);
+          }
+        })
+    } else {
+      this.addRoomFnc();
+    }
+    
+  }
+
+  async addRoomFnc() {
     const param: RoomRequest = new RoomRequest({
       address: this.information,
       description: this.description,

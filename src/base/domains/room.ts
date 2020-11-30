@@ -7,7 +7,7 @@ export default class Room {
 
     image: string = '';
 
-    isUpTop: boolean = false;
+    isUptop: boolean = false;
 
     address: string = '';
 
