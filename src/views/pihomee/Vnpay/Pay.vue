@@ -13,14 +13,17 @@
               <div>
                 <b-form-group class="radioPrice">
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="10000"
+                    :state="validation.amount.rule"
+                    v-b-tooltip.hover.right.v-danger
+                    :title="validation.amount.msg()"
                   >
                     10 000 VND </b-form-radio
                   ><br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="20000"
                   >
@@ -28,7 +31,7 @@
                   </b-form-radio>
                   <br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="50000"
                   >
@@ -36,14 +39,14 @@
                   >
                   <br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="100000"
                   >
                     100 000 VND </b-form-radio
                   ><br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="200000"
                   >
@@ -51,14 +54,14 @@
                   </b-form-radio>
                   <br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="500000"
                   >
                     500 000 VND</b-form-radio
                   ><br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="1000000"
                   >
@@ -66,14 +69,14 @@
                   </b-form-radio>
                   <br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="2000000"
                   >
                     2 000 000 VND</b-form-radio
                   ><br />
                   <b-form-radio
-                    v-model="select"
+                    v-model="vnpayData.amount"
                     name="some-radios"
                     value="5000000"
                   >
@@ -102,7 +105,7 @@
                       </div>
                       <div class="col-3">
                         <div class="form-group">
-                          <span>{{ select }}</span>
+                          <span>{{ vnpayData.amount }}</span>
                         </div>
                       </div>
                     </div>
@@ -130,7 +133,7 @@
                     <div class="form-group">
                       <div>
                         <b-form-select
-                          v-model="selected"
+                          v-model="vnpayData.bank"
                           :options="options"
                         ></b-form-select>
                       </div>
@@ -139,7 +142,7 @@
                 </div>
                 <div class="form-group mt-3">
                   <button
-                    type="submit"
+                    type="button"
                     class="button button-contactForm boxed-btn"
                     @click="onClickPay"
                   >
@@ -159,16 +162,28 @@
 <script lang='ts'>
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { axiosCreator } from "@/base/customAxios";
+import VNpayData from "./vn-pay"
 import router from "@/router";
 import AccountDetailResponse from "@/base/response/account-detail-response";
+import * as validate from './validation-rules';
 @Component({})
 export default class Contact extends Vue {
   @Prop()
   mini!: boolean;
-  public select = "";
-  public options = ["Ngân hàng NCB"];
-  public selected = "";
-
+  
+  public options = [{value:"", text: 'Không chọn' },
+  {value:"NCB", text: 'Ngân hàng NCB' },
+  {value:"SACOMBANK", text: 'Ngân hàng SacomBank' },
+  {value:"EXIMBANK", text: 'Ngân hàng EximBank' },
+  {value:"MSBANK", text: 'Ngân hàng MSBANK' },
+  {value:"VISA", text: 'Thanh toan qua VISA/MASTER' },
+  {value:"VIETINBANK", text: 'Ngân hàng ViettinBank' },
+  {value:"VIETCOMBANK", text: 'Ngân hàng VietComBank' },
+  {value:"HDBANK", text: 'Ngân hàng HDBANK' },
+  {value:"VPBANK", text: 'Ngân hàng VPBANK' }
+  ];
+  public vnpayData: VNpayData = new VNpayData();
+  public isValidate = false;
   @Watch("mini")
   toggleSidebar() {
     if (this.mini) {
@@ -184,6 +199,7 @@ export default class Contact extends Vue {
     byId: "/account/getById",
     updateByUser: "/account/detail/updateByUser",
   };
+
   created() {
     const id = this.$store.getters["accountId"];
     if (window.location.search !== "") {
@@ -191,7 +207,6 @@ export default class Contact extends Vue {
         .split("vnp_ResponseCode=")[1]
         .substring(0, 2);
       if (data === "00") {
-        debugger;
         const amount = window.location.search
           .split("vnp_Amount=")[1]
           .split("&vnp_BankCode")[0];
@@ -216,10 +231,19 @@ export default class Contact extends Vue {
       }
     }
   }
+
+  get validation(): any {
+    return !this.isValidate ? validate.validation() : validate.validation(this.vnpayData);
+  }
+
   onClickPay() {
+    this.isValidate = true;
+    if (!this.validation.isValid()) {
+      return;
+    }
     let param = {
-      amount: this.select,
-      bank: this.selected,
+      amount: this.vnpayData.amount,
+      bank: this.vnpayData.bank,
     };
     this.axios.post<string>(this.API.pay, param).then((res: any) => {
       let link = res.data;
