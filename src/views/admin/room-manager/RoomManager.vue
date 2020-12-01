@@ -138,7 +138,7 @@
                 </b-form-group>
               </div>
             </div>
-            <div class="row" style="margin-bottom:10px;">
+            <div class="row" style="margin-bottom: 10px">
               <div class="col-md-12">
                 <b-form-input
                   trim
@@ -270,8 +270,9 @@
           </div>
           <div class="col-5">
             <google-map
-              :hidden-search="true"
+              :hidden-search="false"
               :draggable="true"
+              :static-center="position"
               @changePlace="changePlace"
             />
           </div>
@@ -347,6 +348,7 @@ import DistrictResponse from "@/base/response/district-response";
 import { TypeOfRoom } from "@/base/enum/type-of-room";
 import ProvinceResponse from "@/base/response/province-response";
 import Room from "@/base/domains/room";
+import RoomRequest from "@/base/request/room-request";
 
 @Component({
   components: {
@@ -356,7 +358,6 @@ import Room from "@/base/domains/room";
 export default class RoomManager extends Vue {
   @Prop()
   mini!: boolean;
-
   defaultOption: Options = new Options({
     value: null,
     text: this.$t("roomadd.defaultOption").toString(),
@@ -506,7 +507,7 @@ export default class RoomManager extends Vue {
                   ? ""
                   : this.$moment(x.lastUpTop as string)
                       .add(15, "days")
-                      .format("YYYY-MM-DD hh:mm:ss"),
+                      .format("YYYY-MM-DD hh:mm:ss")
             };
           });
         }
@@ -548,7 +549,6 @@ export default class RoomManager extends Vue {
       .then((response) => {
         if (response && response.data) {
           this.detailData = response.data;
-          console.log(this.detailData);
 
           this.provinceSelected = this.detailData.province.id;
           this.districtSelected = this.detailData.district.id;
@@ -561,6 +561,11 @@ export default class RoomManager extends Vue {
           this.minAcreage = this.detailData.acreageMin;
           this.maxAcreage = this.detailData.acreageMax;
           this.images = this.detailData.pictures;
+          this.imagesBase64 = this.images.map(x => x.replace(/^data:.+;base64,/, ""));
+          this.position = {
+            lat: this.detailData.latitude,
+            lng: this.detailData.longtitude
+          }
         }
       });
 
@@ -665,8 +670,6 @@ export default class RoomManager extends Vue {
     this.images.splice(index, 1);
     this.imagesBase64.splice(index, 1);
   }
-
-  onSubmit() {}
 
   get checkProvince(): boolean | null {
     if (!this.showTooltip) {
@@ -802,10 +805,12 @@ export default class RoomManager extends Vue {
 
   @Watch("districtSelected")
   onChangeDistrictSelected() {
+    this.detailInformation = '';
+    this.information = '';
+
     if (this.districtSelected === null) {
       this.wardOptions = [this.defaultOption];
       this.wardSelected = null;
-      this.detailInformation = "";
       return;
     }
 
@@ -854,51 +859,138 @@ export default class RoomManager extends Vue {
   }
 
   uptop(item: any) {
-    console.log(item);
-    this.$bvModal
-      .msgBoxConfirm(this.$t("roomManager.uptopMsg").toString(), {
-        buttonSize: "sm",
-        okVariant: "success",
-        centered: true,
-        noCloseOnBackdrop: true,
-      })
-      .then((value) => {
-        if (!value) {
-          return;
-        }
-        this.axios.post<boolean>("/account/check-payment").then((response) => {
-          if (response && !!response.data) {
-            this.axios.post<any>("/room/uptop", item).then(() => {
-              this.$bvModal
-                .msgBoxOk(this.$t("roomadd.uptopDone").toString(), {
-                  size: "sm",
-                  buttonSize: "sm",
-                  okVariant: "success",
-                  headerClass: "p-2 border-bottom-0",
-                  footerClass: "p-2 border-top-0",
-                  centered: true,
-                  noCloseOnBackdrop: true,
-                })
-                .then(() => {
-                  this.clickButton = false;
-                  this.getDisplayData();
-                });
-            });
-          } else {
-            this.$bvModal
-              .msgBoxOk(this.$t("roomadd.notEnough").toString(), {
-                size: "sm",
-                buttonSize: "sm",
-                okVariant: "danger",
-                headerClass: "p-2 border-bottom-0",
-                footerClass: "p-2 border-top-0",
-                centered: true,
-                noCloseOnBackdrop: true,
-              })
-              .then(() => (this.clickButton = false));
+    this.axios.post<any>("/room/canbeUptop", item).then((response) => {
+      if (response && response.data && response.data.accept) {
+        this.$bvModal
+          .msgBoxConfirm(this.$t("roomManager.uptopMsg").toString(), {
+            buttonSize: "sm",
+            okVariant: "success",
+            centered: true,
+            noCloseOnBackdrop: true,
+          })
+          .then((value) => {
+            if (!value) {
+              return;
+            }
+            this.axios
+              .post<boolean>("/account/check-payment")
+              .then((response) => {
+                if (response && !!response.data) {
+                  this.axios.post<any>("/room/uptop", item).then(() => {
+                    this.$bvModal
+                      .msgBoxOk(this.$t("roomadd.uptopDone").toString(), {
+                        size: "sm",
+                        buttonSize: "sm",
+                        okVariant: "success",
+                        headerClass: "p-2 border-bottom-0",
+                        footerClass: "p-2 border-top-0",
+                        centered: true,
+                        noCloseOnBackdrop: true,
+                      })
+                      .then(() => {
+                        this.clickButton = false;
+                        this.getDisplayData();
+                      });
+                  });
+                } else {
+                  this.$bvModal
+                    .msgBoxOk(this.$t("roomadd.notEnough").toString(), {
+                      size: "sm",
+                      buttonSize: "sm",
+                      okVariant: "danger",
+                      headerClass: "p-2 border-bottom-0",
+                      footerClass: "p-2 border-top-0",
+                      centered: true,
+                      noCloseOnBackdrop: true,
+                    })
+                    .then(() => (this.clickButton = false));
+                }
+              });
+          });
+      } else {
+        const time = this.$moment(response.data.time as string).format("YYYY-MM-DD hh:mm:ss");
+        this.$bvModal.msgBoxConfirm(
+          this.$t("roomManager.eligible").toString() + ' ' + time,
+          {
+            buttonSize: "sm",
+            okVariant: "success",
+            centered: true,
+            noCloseOnBackdrop: true,
           }
-        });
+        );
+        return;
+      }
+    });
+  }
+
+  onSubmit() {
+    if (this.clickButton) {
+      return;
+    }
+    this.clickButton = true;
+    this.showTooltip = true;
+    if (!this.checkImages) {
+      this.$bvModal.msgBoxOk(this.$t('roomadd.checkImages').toString(), {
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
+        headerClass: 'p-2 border-bottom-0',
+        footerClass: 'p-2 border-top-0',
+        centered: true,
+        noCloseOnBackdrop: true
       });
+      this.clickButton = false;
+    }
+    if (!this.isValidData) {
+      this.clickButton = false;
+      return;
+    }
+    this.updateData();
+  }
+
+  async updateData() {
+    const param: RoomRequest = new RoomRequest({
+      id: this.detailData.id,
+      address: this.information,
+      description: this.description,
+      priceMin: this.minPrice,
+      priceMax: this.maxPrice,
+      acreageMin: this.minAcreage,
+      acreageMax: this.maxAcreage,
+      longtitude: this.position.lng,
+      latitude: this.position.lat,
+      accountId: this.$store.getters["accountId"],
+      account: { id: this.$store.getters["accountId"] },
+      wardId: this.wardSelected,
+      title: this.title,
+      typeOfRoom: this.selectedTypeOfRoom,
+    });
+    const body = {
+      body: {
+        room: param,
+      },
+    };
+    await this.axios.post('room/update-room', body).then((response) => {
+      if (
+        response &&
+        response.data &&
+        response.data.room &&
+        response.data.room.id
+      ) {
+        const id = response.data.room.id;
+        if (this.imagesBase64.length > 0) {
+          this.axios.post(`upload/images?roomId=${id}`, this.imagesBase64);
+        }
+        this.$bvModal.msgBoxOk(this.$t('roomManager.success').toString(), {
+          buttonSize: 'sm',
+          okVariant: 'success',
+          centered: true,
+          noCloseOnBackdrop: true,
+        }).then(() => this.$router.go(0));
+      }
+    });
+
+    this.clickButton = false;
   }
 }
 </script>

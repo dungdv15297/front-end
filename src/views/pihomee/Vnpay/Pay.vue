@@ -221,13 +221,23 @@ export default class Contact extends Vue {
                 .post<string>(this.API.updateByUser, AccountDetail)
                 .then((response) => {
                   if (response && response.data) {
-                    window.alert("Thanh toan thanh cong");
+                    this.$bvModal.msgBoxOk(this.$t("pay.success").toString(), {
+                      buttonSize: "sm",
+                      okVariant: "success",
+                      centered: true,
+                      noCloseOnBackdrop: true,
+                    });
                   }
                 });
             }
           });
       } else {
-        window.alert("Thanh toan that bai hihi");
+        this.$bvModal.msgBoxOk(this.$t("pay.fail").toString(), {
+          buttonSize: "sm",
+          okVariant: "danger",
+          centered: true,
+          noCloseOnBackdrop: true,
+        });
       }
     }
   }
@@ -239,6 +249,12 @@ export default class Contact extends Vue {
   onClickPay() {
     this.isValidate = true;
     if (!this.validation.isValid()) {
+      this.$bvModal.msgBoxOk(this.$t("pay.choose").toString(), {
+          buttonSize: "sm",
+          okVariant: "success",
+          centered: true,
+          noCloseOnBackdrop: true,
+        });
       return;
     }
     let param = {

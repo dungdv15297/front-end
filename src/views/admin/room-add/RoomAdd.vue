@@ -312,7 +312,7 @@ export default class RoomAdd extends Vue {
   position: any = { lat: 20.9885852, lng: 105.8058151 };
   showTooltip: boolean = false;
   clickButton: boolean = false;
-  provinceSelected: any = null;
+  provinceSelected: number | null = null;
   provinceOptions: Options[] = [];
   districtSelected: any = null;
   districtOptions: Options[] = [this.defaultOption];
@@ -491,10 +491,12 @@ export default class RoomAdd extends Vue {
 
   @Watch("districtSelected")
   onChangeDistrictSelected() {
+    this.detailInformation = '';
+    this.information = '';
+    this.focusOutDetail();
     if (this.districtSelected === null) {
       this.wardOptions = [this.defaultOption];
       this.wardSelected = null;
-      this.detailInformation = "";
       return;
     }
     this.axios
