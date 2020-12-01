@@ -30,10 +30,10 @@
           </div>
         </div>
         <!-- 6 room in top of condition -->
-        <trend-6-room />
+        <trend-6-room :province="2"/>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
-            <a href="#" class="btn view-btn1"
+            <a @click="moreRoom(2)" class="btn view-btn1"
               >View more <i class="ti-angle-right"></i>
             </a>
           </div>
@@ -55,10 +55,10 @@
             </div>
           </div>
         </div>
-        <trend-6-room />
+        <trend-6-room :province="1"/>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
-            <a href="#" class="btn view-btn1"
+            <a @click="moreRoom(1)"  class="btn view-btn1"
               >View more <i class="ti-angle-right"></i>
             </a>
           </div>
@@ -80,10 +80,10 @@
             </div>
           </div>
         </div>
-        <trend-6-room />
+        <trend-6-room :province="3"/>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
-            <a href="#" class="btn view-btn1"
+            <a @click="moreRoom(3)"  class="btn view-btn1"
               >View more <i class="ti-angle-right"></i>
             </a>
           </div>
@@ -181,8 +181,12 @@ import { Component, Prop, Vue } from "vue-property-decorator";
     Trend6Room: () => import('@/components/trend-6room/TrendRoom.vue')
   }
 })
+
 export default class Homepage extends Vue {
-  
+
+   moreRoom(province: number){
+    this.$router.push('/room?province=' + province);
+  }
 }
 
 class SearchValue {
