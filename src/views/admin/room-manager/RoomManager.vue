@@ -560,8 +560,12 @@ export default class RoomManager extends Vue {
           this.maxPrice = this.detailData.priceMax;
           this.minAcreage = this.detailData.acreageMin;
           this.maxAcreage = this.detailData.acreageMax;
-          this.images = this.detailData.pictures;
-          this.imagesBase64 = this.images.map(x => x.replace(/^data:.+;base64,/, ""));
+          if (this.detailData.pictures != null) {
+            this.images = this.detailData.pictures;
+          }
+          if (this.images != null) {
+            this.imagesBase64 = this.images.map(x => x.replace(/^data:.+;base64,/, ""));
+          }
           this.position = {
             lat: this.detailData.latitude,
             lng: this.detailData.longtitude
@@ -651,7 +655,7 @@ export default class RoomManager extends Vue {
       const reader: FileReader = new FileReader();
       reader.readAsDataURL(input.target.files[0]);
       reader.onload = (event: any) => {
-        if (vm.images.length < 6) {
+        if (!!vm.images && vm.images.length < 6) {
           vm.images.push(event.target.result);
         }
         vm.image = null;
