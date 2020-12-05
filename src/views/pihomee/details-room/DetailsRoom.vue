@@ -366,7 +366,7 @@ table {
 .new-gif {
   position: absolute;
   top: 0px;
-  right: 10px;
+  left: 0px;
   z-index: 1;
   width: 30px;
 }

@@ -4,7 +4,7 @@
       <!-- Single Room -->
       <a :href="'/details-room/' + item.id" style="display:unset">
         <div class="single-room mb-50" style="cursor:pointer;position:relative">
-          <img src='../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
+          <img src='../../assets/img/new.gif' class="new-gif img-fluid"/>
           <div class="room-img">
             <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
           </div>
@@ -97,5 +97,12 @@ h4 a:hover {
   overflow: hidden;
   width: 100%;
   white-space: nowrap;
+}
+.new-gif {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  z-index: 1;
+  width: 70px;
 }
 </style>
