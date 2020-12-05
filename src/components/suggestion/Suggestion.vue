@@ -1,15 +1,15 @@
 <template>
-  <div class="row" style="margin:auto">
-    <div class="col-xl-4 col-lg-6 col-md-6" v-for="(item, index) in displayData" :key="index" style="margin:auto">
+  <div class="row">
+    <div class="col-xl-2 col-lg-2 col-md-3" v-for="(item, index) in displayData" :key="index" style="margin:auto">
       <!-- Single Room -->
       <a :href="'/details-room/' + item.id" style="display:unset">
-        <div class="single-room mb-50" style="cursor:pointer;position:relative" @click="goToDetail(item.id)">
+        <div class="single-room mb-50" style="cursor:pointer;position:relative">
           <img src='../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
           <div class="room-img">
             <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
           </div>
           <div class="room-caption">
-            <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>
+            <h4><a class="limited-label" style="cursor:pointer;color:red" v-b-tooltip.hover :title="item.title">{{ item.title }}</a></h4>
             <div class="per-night">
               <label class="limited-label" style="color: #035699" v-b-tooltip.hover :title="item.contact">{{ item.contact }}</label>
               <br>
@@ -91,5 +91,11 @@ h4 {
 }
 h4 a:hover {
   color: #dca73a;
+}
+.limited-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
 }
 </style>

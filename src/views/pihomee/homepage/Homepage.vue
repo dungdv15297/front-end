@@ -36,7 +36,7 @@
         <trend-6-room :province="2"/>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
-            <a @click="moreRoom(2)" class="btn view-btn1"
+            <a href="/room?province=2" class="btn view-btn1"
               >View more <i class="ti-angle-right"></i>
             </a>
           </div>
@@ -61,7 +61,7 @@
         <trend-6-room :province="1"/>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
-            <a @click="moreRoom(1)"  class="btn view-btn1"
+            <a href="/room?province=1" class="btn view-btn1"
               >View more <i class="ti-angle-right"></i>
             </a>
           </div>
@@ -86,7 +86,7 @@
         <trend-6-room :province="3"/>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
-            <a @click="moreRoom(3)"  class="btn view-btn1"
+            <a href="/room?province=3"  class="btn view-btn1"
               >View more <i class="ti-angle-right"></i>
             </a>
           </div>
@@ -133,7 +133,7 @@
     <!-- Make customer End-->
 
     <!-- Testimonial Start -->
-    <div class="testimonial-area testimonial-padding border-groove mt-5 pt-5">
+    <div class="border-groove testimonial-area t-padding">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-9 col-lg-9 col-md-9">
@@ -145,15 +145,14 @@
                   <div class="archivment-front">
                     <img src="assets/img/logo/testimonial.png" alt="" />
                   </div>
+                  <h3 class="archivment-back"></h3>
                 </div>
                 <!-- Testimonial Content -->
                 <div class="testimonial-caption text-center">
                   <p>
-                    Trước khi biết Pihomee, mình phải tốn nhiều công sức và chi phí cho việc đăng tin cho thuê:
-                     từ việc phát tờ rơi, dán giấy, và đăng lên các website khác nhưng hiệu quả không cao.
-                      Từ khi biết Pihomee, mình đã thử đăng tin lên và đánh giá hiệu quả khá cao
-                       trong khi chi phí khá thấp, không còn tình trạng phòng trống kéo dài.
+                    {{ $t("about.textcmt") }}
                   </p>
+                  <!-- Rattion -->
                   <div class="testimonial-ratting">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -162,7 +161,10 @@
                     <i class="fas fa-star"></i>
                   </div>
                   <div class="rattiong-caption">
-                    <span>Đàm Văn Dũng, <span>Chủ phòng</span> </span>
+                    <span
+                      >{{ $t("about.textUser") }},
+                      <span>{{ $t("about.textRole") }}</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -213,5 +215,8 @@ class SearchValue {
 }
 .single-slider {
   background-image: url('../../../assets/img/hero/roomspage_hero.jpg');
+}
+.slider-height {
+  min-height: 400px !important;
 }
 </style>

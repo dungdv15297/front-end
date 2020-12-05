@@ -6,11 +6,11 @@
       <div class="single-room mb-50">
         <img src='../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
         <div class="room-img">
-          <a @click="goToDetail(item.id)"><img :src="item.image" alt=""/></a>
+          <a><img :src="item.image" alt=""/></a>
         </div>
         <div class="room-caption">
           <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>
-          <h4><a @click="goToDetail(item.id)">{{item.contact}}</a></h4>
+          <h4><a>{{item.contact}}</a></h4>
           <div class="per-night">
             <span><u>Diện tích</u>{{item.acreage}} <span>m2</span></span>
             <br>
@@ -71,11 +71,6 @@ export default class Trend6Room extends Vue {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   
-   goToDetail(id: string) {
-    this.$router.push('/details-room/'+ id);
-  }
-  
- 
 }
 
 class SearchValue {

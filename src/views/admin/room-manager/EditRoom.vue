@@ -393,8 +393,8 @@ export default class RoomManager extends Vue {
 
   detailData: Room = new Room();
 
-  showModal(item: any) {
-    this.axios
+  async showModal(item: any) {
+    await this.axios
       .post<any>("/room/details-room", item.id)
       .then((response) => {
         if (response && response.data) {
@@ -438,8 +438,8 @@ export default class RoomManager extends Vue {
     });
   }
 
-  getDistrict() {
-    this.axios
+  async getDistrict() {
+    await this.axios
       .get<DistrictResponse[]>(
         `/district/getByProvinceId?provinceId=${this.provinceSelected}`
       )

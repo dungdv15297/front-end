@@ -57,7 +57,8 @@
         <div class="row">
           <b-pagination size="sm" pills class="m-auto"
             :total-rows="totalRows"
-            :per-page="20"
+            @change="onSearch"
+            :per-page="12"
             v-model="currentPage"/>
         </div>
 
@@ -182,7 +183,7 @@ export default class SearchPage extends Vue {
       this.dataSearch.price = data.price;
       this.dataSearch.page = 0;
     } else {
-      this.dataSearch.page = this.currentPage;
+      this.dataSearch.page = this.currentPage - 1;
     }
     this.dataSearch.accountId = this.accountId;
     this.axios.post<any>('/room/search-room-any', this.dataSearch)
@@ -200,7 +201,6 @@ export default class SearchPage extends Vue {
             isUptop: x.isUptop
           })
         );
-        console.log(this.displayData)
       }
     });
   }
@@ -237,7 +237,7 @@ class SearchValue {
   price: number | null = null;
   accountId: string | null = null;
   page: number = 0;
-  size: number = 20;
+  size: number = 12;
 }
 </script>
 
