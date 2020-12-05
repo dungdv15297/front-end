@@ -486,7 +486,7 @@ export default class RoomAdd extends Vue {
           this.districtOptions.unshift(this.defaultOption);
         }
       })
-      .finally(() => (this.districtSelected = null));
+      .finally(() => {this.districtSelected = null; this.information=''});
   }
 
   @Watch("districtSelected")
@@ -515,7 +515,12 @@ export default class RoomAdd extends Vue {
           this.wardOptions.unshift(this.defaultOption);
         }
       })
-      .finally(() => (this.wardSelected = null));
+      .finally(() => {this.wardSelected = null; this.information=''});
+  }
+
+  @Watch('wardSelected')
+  changewardSelected() {
+    this.focusOutDetail();
   }
 
   axios: AxiosInstance = axiosCreator();
@@ -537,6 +542,7 @@ export default class RoomAdd extends Vue {
 
   changePlace(place: any): void {
     this.position = place;
+    debugger
   }
 
   openChooseFile(): void {

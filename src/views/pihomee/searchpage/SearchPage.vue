@@ -17,7 +17,7 @@
       </div>
     </div>
     <search-room @search="onSearch" :fluid="true" :type="type" :province="province" :district="district" :acreage="acreage" :price="price"/>
-    <!-- Trend Đà Nẵng Start -->
+    <!-- Result list -->
     <section class="room-area border-groove mt-5 pt-5" style="padding-bottom:40px;border-bottom:1px groove">
       <div class="container-fluid">
         <div class="row justify-content-center">
@@ -34,22 +34,24 @@
         <div class="row">
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12" v-for="(item, index) in displayData" :key="index">
             <!-- Single Room -->
-            <div class="single-room mb-50" style="cursor:pointer;position:relative" @click="goToDetail(item.id)">
-              <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
-              <div class="room-img">
-                <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
-              </div>
-              <div class="room-caption">
-                <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>
-                <div class="per-night">
-                  <label class="limited-label" style="color: #035699" v-b-tooltip.hover :title="item.contact">{{ item.contact }}</label>
-                  <br>
-                  <label class="left limited-label">Diện tích {{ item.acreage }} <label>m2</label></label>
-                  <br>
-                  <label class="left limited-label" style="color:#37a344">{{ item.price }} <label> vnd/tháng</label></label>
+            <a :href="'/details-room/' + item.id" style="display:unset">
+              <div class="single-room mb-50" style="cursor:pointer;position:relative">
+                <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
+                <div class="room-img">
+                  <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
+                </div>
+                <div class="room-caption">
+                  <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>
+                  <div class="per-night">
+                    <label class="limited-label" style="color: #035699" v-b-tooltip.hover :title="item.contact">{{ item.contact }}</label>
+                    <br>
+                    <label class="left limited-label">Diện tích {{ item.acreage }} <label>m2</label></label>
+                    <br>
+                    <label class="left limited-label" style="color:#37a344">{{ item.price }} <label> vnd/tháng</label></label>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
         <div class="row">
@@ -63,7 +65,7 @@
 
       </div>
     </section>
-    <!-- Trend Đà Nẵng End -->
+    <!-- Result List -->
 
     <!-- Make customer Start-->
     <section class="make-customer-area customar-padding fix">
@@ -167,6 +169,10 @@ export default class SearchPage extends Vue {
     this.onSearch(this.dataSearch);
   }
 
+  get accountId(): string {
+    return this.$store.getters['accountId'];
+  }
+
   onSearch(data?: SearchValue) {
     if (!!data) {
       this.dataSearch.type = data.type;
@@ -178,6 +184,7 @@ export default class SearchPage extends Vue {
     } else {
       this.dataSearch.page = this.currentPage;
     }
+    this.dataSearch.accountId = this.accountId;
     this.axios.post<any>('/room/search-room-any', this.dataSearch)
     .then((response: any) => {
       if (response && response.data) {
@@ -228,6 +235,7 @@ class SearchValue {
   street: number | null = null;
   acreage: number | null = null;
   price: number | null = null;
+  accountId: string | null = null;
   page: number = 0;
   size: number = 20;
 }

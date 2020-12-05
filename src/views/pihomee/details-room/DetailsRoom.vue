@@ -166,27 +166,22 @@
               />
             </div>
           </div>
-          <div class="col-lg-3 offset-lg-1">
-            <div class="media contact-info">
-              <span class="contact-info__icon"><i class="ti-home"></i></span>
-              <div class="media-body">
-                <h3>{{ $t("detailsRoom.text1") }}</h3>
-                <p>{{ $t("detailsRoom.text2") }}</p>
-              </div>
+          <div class="col-lg-3 offset-sm-1">
+            <div class="row">
+              <h4 style="font-family:Arial, Helvetica, sans-serif; font-weight:bold">Phòng tương tự</h4>
             </div>
-            <div class="media contact-info">
-              <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-              <div class="media-body">
-                <h3>+84 987654321</h3>
-                <p>{{ $t("detailsRoom.text3") }}</p>
+            <div class="row" style="margin-top: 10px" v-for="(item, index) in displayData" :key="index">
+              <a :href="'/details-room/' + item.id">
+              <div class="col-5" style="padding-left:0px">
+                <img src='../../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
+                <b-img :src="item.image" fluid></b-img>
               </div>
-            </div>
-            <div class="media contact-info">
-              <span class="contact-info__icon"><i class="ti-email"></i></span>
-              <div class="media-body">
-                <h3>support@colorlib.com</h3>
-                <p>{{ $t("detailsRoom.text4") }}</p>
+              <div class="col-12" style="text-align:left">
+                <div class="row" style="color:rgb(3, 86, 153)">{{item.contact}}</div>
+                <div class="row" style="color:#7e7e7e">{{item.price}} vnd</div>
+                <div class="row" style="color:rgb(55, 163, 68)">{{item.acreage}} m²</div>
               </div>
+              </a>
             </div>
           </div>
         </div>
@@ -212,8 +207,9 @@ export default class DetailsRoom extends Vue {
   @Prop()
   id!: string;
 
+  image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9kAAAKCCAYAAADFihpqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAEtNSURBVHhe7d3hj9vWmQdqT7w=';
+
   get staticCenter(): any {
-    console.log(this.detailData.latitude)
     return {
       lat: this.detailData.latitude,
       lng: this.detailData.longtitude,
@@ -270,17 +266,48 @@ export default class DetailsRoom extends Vue {
 
   detailData: Room = new Room();
 
+  displayData: DisplayData[] = [];
+  
   created() {
     this.axios.post<any>("/room/details-room", this.id).then((response) => {
       if (response && response.data) {
         this.detailData = response.data;
-        console.log(this.detailData);
+      }
+    });
+
+    this.axios.post<any>("/room/sameAs", this.id).then((response) => {
+      if (response && response.data) {
+        const dataList = response.data.content;
+        this.displayData = dataList.map((x: any) => new DisplayData({
+            id: x.id,
+            title: x.title,
+            price: x.priceMin == x.priceMax ? this.numberWithCommas(x.priceMin) : this.numberWithCommas(x.priceMin) + ' - ' +this.numberWithCommas(x.priceMax),
+            acreage: x.acreageMin == x.acreageMax ? x.acreageMin.toString() : x.acreageMin + ' - ' + x.acreageMax,
+            contact: x.address,
+            image: x.image,
+            isUptop: x.isUptop
+          })
+        );
       }
     });
   }
 
   numberWithCommas(x: any): string {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+}
+
+class DisplayData {
+  id: string = '';
+  title: string = '';
+  price: string = '';
+  acreage: string = '';
+  contact: string = '';
+  image: string = '';
+  isUptop: boolean = false;
+  
+  constructor(init?: DisplayData) {
+    Object.assign(this, init);
   }
 }
 </script>
@@ -335,5 +362,12 @@ table {
 }
 .mapgg >>> .vue-map-container {
   height: 400px !important;
+}
+.new-gif {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  z-index: 1;
+  width: 30px;
 }
 </style>

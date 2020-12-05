@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-xl-4 col-lg-6 col-md-6" v-for="(item, index) in displayData" :key="index">
       <!-- Single Room -->
+      <a :href="'/details-room/' + item.id" style="display:unset">
       <div class="single-room mb-50">
         <img src='../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
         <div class="room-img">
@@ -18,6 +19,7 @@
           </div>
         </div>
       </div>
+      </a>
     </div>
   </div>
 </template>
@@ -42,7 +44,7 @@ export default class Trend6Room extends Vue {
       return;
     }
     this.dataSearch.province = this.province;
-    this.axios.post<any>('/room/search-room-any', this.dataSearch)
+    this.axios.post<any>('/room/search-trend-room', this.dataSearch)
     .then((response: any) => {
       if (response && response.data) {
         this.dataList = response.data.content;
@@ -53,8 +55,7 @@ export default class Trend6Room extends Vue {
             acreage: x.acreageMin == x.acreageMax ? x.acreageMin.toString() : x.acreageMin + ' - ' + x.acreageMax,
             contact: x.address,
             image: x.image,
-            isUptop: x.isUptop,
-            phone: x.phone
+            isUptop: x.isUptop
           })
         );
         if (this.resData.length < 7) {
@@ -95,7 +96,6 @@ class DisplayData {
   acreage: string = '';
   contact: string = '';
   image: string = '';
-  phone: string = '';
   isUptop: boolean = false;
   
   constructor(init?: DisplayData) {
@@ -122,5 +122,11 @@ h4 a:hover {
 }
 .room-img {
   height: 260px;
+}
+.limited-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
 }
 </style>

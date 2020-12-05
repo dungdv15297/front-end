@@ -29,7 +29,7 @@ export default class GoogleMap extends Vue {
   zoom!: number
 
   @Prop()
-  staticCenter: any;
+  staticCenter!: any;
 
   @Prop()
   hiddenSearch!: boolean;
@@ -51,8 +51,9 @@ export default class GoogleMap extends Vue {
     }
   }
 
-  updated() {
-    if (!!this.staticCenter && this.hiddenSearch) {
+  @Watch('staticCenter')
+  onChangeCenter() {
+    if (!!this.staticCenter) {
       this.position = this.staticCenter;
     }
   }
@@ -63,6 +64,7 @@ export default class GoogleMap extends Vue {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       }
+      this.$emit('changePlace', this.position);
     } else {
       this.$bvModal.msgBoxOk(this.$t('message.wrongAddress').toString(), {
         buttonSize: 'sm',

@@ -16,6 +16,9 @@
         </div>
       </div>
     </div>
+    <div class="row" v-if="!!accountId">
+      <suggestion />
+    </div>
     <!-- Trend Hà Nội Start -->
     <section class="room-area border-groove mt-5 pt-5">
       <div class="container">
@@ -177,12 +180,17 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
+    Suggestion: () => import('@/components/suggestion/Suggestion.vue'),
     SearchRoom: () => import('@/components/search-room/SearchRoom.vue'),
     Trend6Room: () => import('@/components/trend-6room/TrendRoom.vue')
   }
 })
 
 export default class Homepage extends Vue {
+
+  get accountId(): string {
+    return this.$store.getters['accountId'];
+  }
 
    moreRoom(province: number){
     this.$router.push('/room?province=' + province);

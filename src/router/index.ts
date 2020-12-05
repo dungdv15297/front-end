@@ -29,10 +29,7 @@ const routes: Array<RouteConfig> = [
         component: SearchPage,
         props: route => ({
           type: route.query.type,
-          province: route.query.province,
-          district: route.query.district,
-          acreage: route.query.acreage,
-          price: route.query.price
+          province: route.query.province
         })
       },
       {
