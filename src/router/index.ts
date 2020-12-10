@@ -11,6 +11,7 @@ import About from '@/views/pihomee/about/About.vue';
 import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
+import UserManager from '@/views/pihomee/admin/DetailsRoom.vue';
 
 Vue.use(VueRouter);
 
@@ -93,9 +94,15 @@ const routes: Array<RouteConfig> = [
     component: Register
   },
   {
+    path: '/manager/user-manager',
+    component: Admin,
+    props: { mode: 6 }
+  },
+  {
     path: '/*',
     redirect: '/home'
   }
+  
 ]
 
 const router = new VueRouter({

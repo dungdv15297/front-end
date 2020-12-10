@@ -312,5 +312,9 @@
     "choose": "Please choose an option.",
     "success": "Payment successfully",
     "fail": "Payment failed"
+  },
+  "account": {
+    "adminTitle": "Account Admin",
+    "user": "Account User"
   }
 }

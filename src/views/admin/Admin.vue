@@ -4,6 +4,7 @@
     <Sidebar @toggleSidebar="toggleSidebar"/>
     <Navbar :mini="mini"/>
     <Information :mini="mini" v-if="showInfor"/>
+    <UserManager :mini="mini" v-if="showUserManager"/>
     <RoomManager :mini="mini" v-if="showRoom"/>
     <RoomAdd :mini="mini" v-if="showAddRoom"/>
     <MasterTable :mini="mini" v-if="showMasterTable"/>
@@ -25,6 +26,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
     RoomManager: () => import('./room-manager/RoomManager.vue'),
     RoomAdd: () => import('./room-add/RoomAdd.vue'),
     MasterTable: () => import('./master-table/MasterTable.vue'),
+    UserManager: () => import('./user-manager/UserManager.vue'),
     Pay: () => import('@/views/pihomee/Vnpay/Pay.vue')
   }
 })
@@ -37,6 +39,7 @@ export default class Admin extends Vue {
   showAddRoom: boolean = false;
   showMasterTable: boolean = false;
   showPay: boolean = false;
+  showUserManager: boolean = false;
 
   mini: boolean = true;
 
@@ -55,6 +58,9 @@ export default class Admin extends Vue {
     }
     if (this.mode === 5) { //show payment
       this.showPay = true;
+    }
+     if (this.mode === 6) { //show user-manager
+      this.showUserManager = true;
     }
   }
 
