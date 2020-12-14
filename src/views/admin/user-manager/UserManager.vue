@@ -43,7 +43,7 @@
               <b-button
                 v-if="row.item.status"
                 variant="danger"
-                @click="deleteAcreage(row.item)"
+                @click="deleteAccount(row.item.id)"
               >
                 <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
               </b-button>
@@ -65,13 +65,6 @@
       <div class="w-100">
         <div class="row title mt-20 mb-20">
           {{ $t("account.userTitle") }}
-          <b-button
-            variant="success"
-            class="icon-primary"
-            @click="showModal(DialogMode.CREATE_ACREAGE)"
-          >
-            <b-icon icon="plus-circle" aria-hidden="true"></b-icon>
-          </b-button>
         </div>
         <div class="row">
           <b-table
@@ -104,7 +97,7 @@
               <b-button
                 v-if="row.item.status"
                 variant="danger"
-                @click="deleteAcreage(row.item)"
+                @click="deleteAccount(row.item.id)"
               >
                 <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
               </b-button>
@@ -402,7 +395,7 @@ export default class MasterTable extends Vue {
       });
   }
 
-  deletePrice(price: Range): void {
+  deleteAccount(id: String): void {
     this.$bvModal
       .msgBoxConfirm(this.$t("account.confirm3").toString(), {
         buttonSize: "sm",
@@ -412,16 +405,17 @@ export default class MasterTable extends Vue {
       })
       .then((value) => {
         if (value) {
-          this.axios.post("/master/price-range/delete", price.id).then(() => {
+          this.axios.post("/account/deleteById", id).then(() => {
             this.$bvModal
-              .msgBoxOk(this.$t("masterTable.success").toString(), {
+              .msgBoxOk(this.$t("account.delSuccess").toString(), {
                 buttonSize: "sm",
                 okVariant: "success",
                 centered: true,
                 noCloseOnBackdrop: true,
               })
               .then(() => {
-                // this.getAllPrice();
+                this.getAllUserAdmin();
+                this.getAllUser();
               });
           });
         }

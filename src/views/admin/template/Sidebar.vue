@@ -13,7 +13,7 @@
       </a>
 
       <a href="/manager/user-manager" class="inline-flex">
-        <i class="material-icons">info</i>
+        <i class="material-icons">people</i>
         <span class="icon-text">Quản lý tài khoản</span>
       </a>
 

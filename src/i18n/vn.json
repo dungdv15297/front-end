@@ -278,6 +278,7 @@
     "rule": "❖ Username must not be blank and have at least 4 characters<br/>❖ Password must not be blank and have at least 6 characters",
     "lockSuccess": "Lock account successfully",
     "unLockSuccess": "Unlock account successfully",
+    "delSuccess": "Delete account successfully",
     "confirm1": "Lock this user ?",
     "confirm2": "Unlock this user ?",
     "confirm3": "Delete this user ?",
