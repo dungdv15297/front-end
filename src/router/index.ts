@@ -11,7 +11,6 @@ import About from '@/views/pihomee/about/About.vue';
 import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
-import Dashboard from '@/views/admin/dashboard/Dashboard.vue'
 
 Vue.use(VueRouter);
 
@@ -74,9 +73,14 @@ const routes: Array<RouteConfig> = [
     props: { mode: 5 }
   },
   {
-    path: '/dashboard',
+    path: '/manager/user-manager',
     component: Admin,
     props: { mode: 6 }
+  },
+  {
+    path: '/dashboard',
+    component: Admin,
+    props: { mode: 7 }
   },
   {
     path: '/login',
@@ -99,9 +103,15 @@ const routes: Array<RouteConfig> = [
     component: Register
   },
   {
+    path: '/manager/user-manager',
+    component: Admin,
+    props: { mode: 6 }
+  },
+  {
     path: '/*',
     redirect: '/home'
   }
+  
 ]
 
 const router = new VueRouter({

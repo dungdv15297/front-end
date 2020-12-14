@@ -12,6 +12,11 @@
         <span class="icon-text">Trang chủ</span>
       </a>
 
+      <a href="/manager/user-manager" class="inline-flex" v-if="isAdmin">
+        <i class="material-icons">people</i>
+        <span class="icon-text">Quản lý tài khoản</span>
+      </a>
+
       <a href="/personal" class="inline-flex">
         <i class="material-icons">info</i>
         <span class="icon-text">Thông tin cá nhân</span>
