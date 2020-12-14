@@ -11,6 +11,7 @@ import About from '@/views/pihomee/about/About.vue';
 import Admin from '@/views/admin/Admin.vue';
 import SearchPage from '@/views/pihomee/searchpage/SearchPage.vue';
 import DetailsRoom from '@/views/pihomee/details-room/DetailsRoom.vue';
+import Dashboard from '@/views/admin/dashboard/Dashboard.vue'
 
 Vue.use(VueRouter);
 
@@ -73,6 +74,11 @@ const routes: Array<RouteConfig> = [
     props: { mode: 5 }
   },
   {
+    path: '/dashboard',
+    component: Admin,
+    props: { mode: 6 }
+  },
+  {
     path: '/login',
     name: 'Login',
     children: [
@@ -105,6 +111,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const isAdmin = localStorage.getItem('isAdmin');
+  if (to.fullPath == '/dashboard'
+    || to.fullPath == '/manager/master-table') {
+    if (!!isAdmin && isAdmin=='admin') {
+      next();
+    } else {
+      next({ path: '/personal'});
+    }
+  }
   if (to.fullPath === '/login') {
     next({
       path: to.fullPath,

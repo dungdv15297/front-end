@@ -9,32 +9,22 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label>{{ $t('information.accountCode') }}</label>
-                <input type="text" class="form-control" :value="detailData.id" disabled>
+                <label>{{ $t('information.fullName') }}</label>
+                <input type="text" class="form-control" v-model="detailData.name">
               </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label>{{ $t('information.phone') }}</label>
-                <input type="text" class="form-control" :value="detailData.phone" disabled>
-              </div>
-              
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label>{{ $t('information.fullName') }}</label>
-                <input type="text" class="form-control" v-model="detailData.name">
+                <label>{{ $t('information.phone') }}</label>
+                <input type="text" class="form-control" :value="detailData.phone" disabled>
               </div>
             </div>
-            
             <div class="col-sm-6">
               <div class="form-group">
-                <label>{{ $t('information.birthday') }}</label>
-                <b-form-datepicker id="example-datepicker"
-                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                  class="date-picker" v-model="detailData.birthday"></b-form-datepicker>
+                <label>{{ $t('information.balance') }}</label>
+                <input type="text" class="form-control" :value="detailData.balance" disabled>
               </div>
             </div>
           </div>
@@ -48,12 +38,13 @@
                   v-model="detailData.gender">
                 </b-form-radio-group>
               </div>
-              
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label>{{ $t('information.balance') }}</label>
-                <input type="text" class="form-control" :value="detailData.balance" disabled>
+                <label>{{ $t('information.birthday') }}</label>
+                <b-form-datepicker id="example-datepicker"
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                  class="date-picker" v-model="detailData.birthday"></b-form-datepicker>
               </div>
             </div>
           </div>
@@ -79,16 +70,10 @@
                   class="form-control"></b-form-input>
               </div>
             </div>
-            <div class="col-sm-5">
-              <div class="form-group">
-                <label>{{ $t('information.updated') }}</label>
-                <input type="text" class="form-control" :value="detailData.updated" disabled>
-              </div>
-            </div>
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-10 col-lg-6">
-              <a href="#" class="btn" style="width: 100%" @click="onClickUpdateInfor">{{ $t('information.update') }}</a>
+              <a href="#" class="btn" @click="onClickUpdateInfor">{{ $t('information.update') }}</a>
             </div>
           </div>
         </div>

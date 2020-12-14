@@ -4,9 +4,9 @@
       <!-- Single Room -->
       <a :href="'/details-room/' + item.id" style="display:unset">
         <div class="single-room mb-50" style="cursor:pointer;position:relative">
-          <img src='../../assets/img/new.gif' class="new-gif img-fluid"/>
+          <img src='../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
           <div class="room-img">
-            <a style="cursor:pointer;"><img :src="item.image" alt=""/></a>
+            <a style="cursor:pointer;"><img :src="item.image" alt="" style="height:200px; background-size:cover"/></a>
           </div>
           <div class="room-caption">
             <h4><a class="limited-label" style="cursor:pointer;color:red" v-b-tooltip.hover :title="item.title">{{ item.title }}</a></h4>

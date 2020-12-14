@@ -17,22 +17,22 @@
         <span class="icon-text">Thông tin cá nhân</span>
       </a>
 
-      <a href="/room-manager" class="inline-flex">
+      <a href="/room-manager" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">museum</i>
         <span class="icon-text">Quản lý phòng đăng</span>
       </a>
 
-      <a href="/room-add" class="inline-flex">
+      <a href="/room-add" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">post_add</i>
         <span class="icon-text">Cho thuê phòng</span>
       </a>
 
-      <a href="/payment" class="inline-flex">
+      <a href="/payment" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">attach_money</i>
         <span class="icon-text">Nạp tiền tài khoản</span>
       </a>
 
-      <a href="/manager/master-table" class="inline-flex">
+      <a href="/manager/master-table" class="inline-flex" v-if="isAdmin">
         <i class="material-icons">menu_book</i>
         <span class="icon-text">Giá & diện tích</span>
       </a>
@@ -63,6 +63,11 @@ export default class Sidebar extends Vue {
       this.mini = true;
     }
     this.$emit('toggleSidebar', this.mini);
+  }
+
+
+  get isAdmin(): boolean {
+    return localStorage.getItem('isAdmin') === 'admin';
   }
 
   onSignOut(): void {

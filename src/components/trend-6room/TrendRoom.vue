@@ -6,7 +6,7 @@
       <div class="single-room mb-50">
         <img src='../../assets/img/new.gif' class="new-gif img-fluid" v-if="item.isUptop"/>
         <div class="room-img">
-          <a><img :src="item.image" alt=""/></a>
+          <a><img :src="item.image" alt="" style="height:260px; background-size:cover"/></a>
         </div>
         <div class="room-caption">
           <h4><a class="limited-label" style="cursor:pointer;color:red">{{ item.title }}</a></h4>

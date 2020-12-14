@@ -255,7 +255,7 @@ export default class MasterTable extends Vue {
   }
 
   onSubmit(): void {
-    if ((this.dialogMode < 3 && this.rule1()) || this.rule2()) {
+    if ((this.dialogMode < 3 && this.rule1()) || (this.dialogMode >= 3 && this.rule3())) {
       this.$bvModal.msgBoxOk(this.$t('masterTable.inValid').toString(), {buttonSize: 'sm', okVariant: 'danger', centered: true, noCloseOnBackdrop: true});
       return;
     }
@@ -293,11 +293,11 @@ export default class MasterTable extends Vue {
   rule1(): boolean {
     return this.dataDialog.min === 0 || this.dataDialog.min%10000 > 0
       || this.dataDialog.max === 0 || this.dataDialog.max%10000 > 0
-      || this.dataDialog.min > this.dataDialog.max;
+      || Number(this.dataDialog.min) > Number(this.dataDialog.max);
   }
 
-  rule2(): boolean {
-    return this.dataDialog.min === 0 || this.dataDialog.max === 0 || this.dataDialog.min > this.dataDialog.max;
+  rule3(): boolean {
+    return Number(this.dataDialog.min) > Number(this.dataDialog.max);
   }
 
   deletePrice(price: Range): void {

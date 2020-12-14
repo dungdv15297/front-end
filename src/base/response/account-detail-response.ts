@@ -13,6 +13,7 @@ export default class AccountDetailResponse extends BaseDomain {
   updated: string = '';
   username: string = '';
   updatedAc: string = '';
+  role: number = 0;
   errorCode: string = '';
 
   constructor(init?: Partial<AccountDetailResponse>) {

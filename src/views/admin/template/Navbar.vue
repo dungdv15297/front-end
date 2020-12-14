@@ -1,56 +1,34 @@
 <template>
   <div ref="main" id="main">
     <div class="content">
-      <nav class="navbar navbar-expand-md navbar-light">
-        <a class="navbar-brand" href="/home">
-          <img src="../../../assets/img/logo/logo.png" alt="" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="material-icons"> menu </span>
-        </button>
-        <div class="collapse navbar-collapse row" id="navbarTogglerDemo02">
-          <ul class="navbar-nav mr-auto"></ul>
-          <form class="form-inline my-2 my-lg-0">
-            <div class="row">
-              <div class="dropdown">
-                <a
-                  href="#"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <img src="@/assets/img/team/3.png" class="avatar" />
-                </a>
-                <span style="font-family: cursive; margin-left: 10px"
-                  ><strong>{{ accountDetail.name }}</strong></span
-                >
-                <div
-                  class="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <a class="dropdown-item inline-flex" href="#">
-                    <i class="material-icons">notifications_none</i>
-                    <i class="pl-10">Thông báo</i>
-                  </a>
-                  <a class="dropdown-item inline-flex" href="#" @click="onSignOut">
-                    <i class="material-icons">exit_to_app</i>
-                    <i class="pl-10">Đăng xuất</i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </form>
+      <div class="row">
+        <div class="col-4" style="text-align:left">
+          <a class="navbar-brand" href="/home">
+            <img src="../../../assets/img/logo/logo.png" alt="" />
+          </a>
         </div>
-      </nav>
+        <div class="col-8">
+          <a v-b-modal.modal-account style="cursor: pointer;padding:25px;margin:auto;float:right">
+            <img src="@/assets/img/team/3.png" class="avatar" />
+          </a>
+        </div>
+      </div>
+      <b-modal id="modal-account" size="md" hide-footer hide-header>
+
+        <div class="container" style="font-family:'Noto Serif'">
+          <div class="container" style="text-align:center">
+            <strong>{{ accountDetail.name }}</strong>
+          </div>
+          <a class="dropdown-item inline-flex" href="#">
+            <i class="material-icons">notifications_none</i>
+            <i class="pl-10">Thông báo</i>
+          </a>
+          <a class="dropdown-item inline-flex" href="#" @click="onSignOut">
+            <i class="material-icons">exit_to_app</i>
+            <i class="pl-10">Đăng xuất</i>
+          </a>
+        </div>
+      </b-modal>
     </div>
   </div>
 </template>
@@ -84,11 +62,13 @@ export default class Navbar extends Vue {
         if (response && response.data) {
           this.accountDetail = response.data;
           this.$store.dispatch('setAccountId', response.data.id);
+          localStorage.setItem('isAdmin', response.data.role == 1 ? 'admin' : 'normal');
         }
       })
       .catch(error => {
         this.$store.dispatch('setToken', null);
         this.$store.dispatch('setAccountId', null);
+        localStorage.removeItem('isAdmin');
         this.$router.push('/login');
       });
   }
@@ -115,5 +95,8 @@ export default class Navbar extends Vue {
   border: 1px solid #ced4da;
   border-radius: 10rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.dropdown-item:hover {
+  background: #dca73a;
 }
 </style>

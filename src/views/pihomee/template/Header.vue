@@ -27,7 +27,7 @@
                         <li><a href="/room">{{ $t('header.custom') }}</a></li>
                       </ul>
                     </li>
-                    <li><a href="/room-add">{{ $t('header.post') }}</a></li>
+                    <li v-if="!isAdmin"><a href="/room-add">{{ $t('header.post') }}</a></li>
                     <li>
                       <a href="#">{{ $t('header.aboutUs') }}</a>
                       <ul class="submenu">
@@ -83,6 +83,8 @@ export default class Header extends Vue {
     logout: 'account/logout'
   }
 
+  isAdmin = false;
+
   mounted() {
     if (!!this.$store.getters['token']) {
       this.getAccountDetailInfo();
@@ -96,11 +98,14 @@ export default class Header extends Vue {
         if (response && response.data) {
           this.accountDetail = response.data;
           this.$store.dispatch('setAccountId', response.data.id);
+          this.isAdmin = response.data.role === 1;
+          localStorage.setItem('isAdmin', response.data.role === 1 ? 'admin' : 'normal');
         }
       })
       .catch(error => {
         this.$store.dispatch('setToken', null);
         this.$store.dispatch('setAccountId', null);
+        localStorage.removeItem('isAdmin');
       });
   }
 
@@ -110,6 +115,7 @@ export default class Header extends Vue {
     axios.post(this.API.logout).then(() => {
       this.$store.dispatch('setToken', null);
       this.$store.dispatch('setAccountId', null);
+      localStorage.removeItem('isAdmin');
       this.$router.go(0);
     });
   }
