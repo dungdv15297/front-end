@@ -14,7 +14,14 @@
           :per-page="10"
         >
           <template #cell(actions)="row">
-            <b-button variant="success" @click="uptop(row.item)">
+            <b-button variant="success" @click="updateStatus(row.item, 2)" v-if="row.item.status==1">
+              <b-icon icon="journal" aria-hidden="true"></b-icon>
+            </b-button>
+            <b-button variant="success" @click="updateStatus(row.item, 1)" v-if="row.item.status==2">
+              <b-icon icon="journal-check" aria-hidden="true"></b-icon>
+            </b-button>
+
+            <b-button variant="success" @click="uptop(row.item)" v-if="row.item.status==1">
               <b-icon icon="box-arrow-in-up" aria-hidden="true"></b-icon>
             </b-button>
             <b-button
@@ -136,38 +143,38 @@ export default class RoomManager extends Vue {
   currentPage: number = 1;
 
   emptyHtml: string =
-    '<span>Chưa có tin đăng. Click <a href="/room-add">vào đây</a> để đăng tin</span>';
+    `<span><a href="/room-add">${this.$t('editroom.emptyHtml')}</a></span>`;
 
   fields: any = [
     {
       key: "title",
-      label: "Tiêu đề",
+      label: this.$t('roomManager.title').toString(),
       sortable: true,
     },
     {
       key: "price",
       sortable: true,
-      label: "Giá phòng",
+      label: this.$t('roomManager.price').toString()
     },
     {
       key: "acreage",
       sortable: true,
-      label: "Diện tích",
+      label: this.$t('roomManager.acreage').toString(),
     },
     {
       key: "address",
-      label: "Địa chỉ",
+      label: this.$t('roomManager.address').toString(),
       sortable: true,
     },
     {
       key: "last_uptop",
       sortable: true,
-      label: "Ngày uptop",
+      label: this.$t('roomManager.lastuptop').toString()
     },
     {
       key: "endUpTop",
       sortable: true,
-      label: "Hết hạn uptop",
+      label: this.$t('roomManager.enduptop').toString()
     },
     {
       key: "actions",
@@ -210,6 +217,7 @@ export default class RoomManager extends Vue {
               accountId: x.accountId,
               id: x.id,
               title: x.title,
+              status: x.status,
               price:
                 x.priceMin === x.priceMax
                   ? this.numberWithCommas(x.priceMin) + "vnd"
@@ -247,7 +255,7 @@ export default class RoomManager extends Vue {
 
   onDelete(item: any) {
     this.$bvModal
-      .msgBoxConfirm("Xóa thông tin phòng?", {
+      .msgBoxConfirm(this.$t('roomManager.deleteConfirm').toString(), {
         buttonSize: "sm",
         okVariant: "danger",
         centered: true,
@@ -285,7 +293,17 @@ export default class RoomManager extends Vue {
 
   uptop(item: any) {
     this.axios.post<any>("/room/canbeUptop", item).then((response) => {
-      if (response && response.data && response.data.accept) {
+      if (response && response.data && response.data.statusReject) {
+        this.$bvModal.msgBoxOk(this.$t("roomManager.statusReject").toString(), {
+          size: "sm",
+          buttonSize: "sm",
+          okVariant: "danger",
+          headerClass: "p-2 border-bottom-0",
+          footerClass: "p-2 border-top-0",
+          centered: true,
+          noCloseOnBackdrop: true,
+        });
+      } else if (response.data.accept) {
         this.$bvModal
           .msgBoxConfirm(this.$t("roomManager.uptopMsg").toString(), {
             buttonSize: "sm",
@@ -346,6 +364,32 @@ export default class RoomManager extends Vue {
         return;
       }
     });
+  }
+
+  updateStatus(item: any, status: number) {
+    let message = '';
+    if (status === 1) {
+      message = this.$t('roomManager.updateStatus1').toString();
+    } else {
+      message = this.$t('roomManager.updateStatus2').toString();
+    }
+    this.$bvModal.msgBoxConfirm(message, {
+      buttonSize: "sm",
+      okVariant: "success",
+      centered: true,
+      noCloseOnBackdrop: true,
+    })
+    .then(value => {
+      if (!value) {
+        return;
+      }
+      this.axios.post<boolean>(`/room/updateStatus?roomId=${item.id}&status=${status}`)
+      .then(response => {
+        if (response && response.data) {
+          this.getDisplayData();
+        }
+      });
+    })
   }
 
   resetModal() {

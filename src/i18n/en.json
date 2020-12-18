@@ -1,12 +1,4 @@
 {
-  "button": {
-    "print": "Print",
-    "clear": "Clear"
-  },
-  "screen": {
-    "PIS001": "Demo manger screen",
-    "PIS002": "Course Information"
-  },
   "hello": "hello",
   "title": {
     "confirmDialog": "CONFIRM",
@@ -93,6 +85,7 @@
     "username": "Username",
     "password": "Password",
     "loginBtn": "Login",
+    "locked": "Account was locked",
     "remember": "Remember Me",
     "forgot": "Forgot password",
     "signUp": "Sign up now",
@@ -262,7 +255,7 @@
   },
   "masterTable": {
     "active": "◯",
-    "empty": "<span>Không tìm thấy bất kỳ bản ghi nào</span>",
+    "empty": "<span>No records found</span>",
     "pMin": "Min of price (VND)",
     "pMax": "Max of price (VND)",
     "aMin": "Min of acreage (m²)",
@@ -285,6 +278,7 @@
     "confirm2": "Activate this record?"
   },
   "roomManager": {
+    "statusReject": "The room is rented. Can't be uptop",
     "titleUpdate": "Update room details",
     "titleR":"Manage posting rooms",
     "colTitle":"Title",
@@ -306,7 +300,15 @@
     "deleteCmt":"Do you want to delete this record ?",
     "uptopMsg": "The uptop function will reset the uptop date and cost 10,000 VND. Do you want the uptop?",
     "eligible": "Not eligible for uptop. Please uptop after",
-    "success": "Update room information successfully"
+    "success": "Update room information successfully",
+    "price": "Price",
+    "acreage": "Acreage",
+    "address": "Address",
+    "lastuptop": "Last uptop",
+    "enduptop": "Duedate uptop",
+    "deleteConfirm": "Delete room information?",
+    "updateStatus1": "Update status of room to FOR RENT?",
+    "updateStatus2": "Room with RENTED status can't be uptop. Update this status?"
   },
   "pay": {
     "choose": "Please choose an option.",
@@ -315,6 +317,8 @@
   },
   "account": {
     "adminTitle": "Account Admin",
+    "cantLock": "You can't lock yourself",
+    "cantDelete": "You can't remove yourself",
     "userTitle": "Account User",
     "userName": "User Name",
     "passWord": "Pass Word",
@@ -336,5 +340,96 @@
     "fullName": "Full name",
     "phoneNumber": "Phone Number",
     "rePassWord": "Re-Password"
+  },
+  "searchpage": {
+    "fadeInUp": "rent a house for you",
+    "fadeInDown": "Houses & Rooms",
+    "listTitle": "List of rooms",
+    "nonlistTitle": "No room found",
+    "acreage": "Acreage",
+    "m2": "m²",
+    "price": "vnd/month",
+    "pihomee": "Pihomee",
+    "peradtails": "The leading website for finding and renting rooms in Vietnam",
+    "line1": "Pihomee is proud to be the leading website in finding and reporting accommodation rentals in Vietnam.",
+    "line2": "We will help you make a reasonable choice in room selection, as well as rent a room."
+  },
+  "homepage": {
+    "topHN": "Top room in Ha Noi",
+    "topHCM": "Top room in Ho Chi Minh",
+    "topDN": "Top room in Da Nang",
+    "viewmore": "View more"
+  },
+  "searchroom": {
+    "type": "Type of room",
+    "province": "Province",
+    "district": "District",
+    "acreage": "Acreage",
+    "price": "Price",
+    "search": "Search"
+  },
+  "suggestion": {
+    "acreage": "Acreage",
+    "m2": "m²",
+    "price": "vnd/month"
+  },
+  "trendroom": {
+    "acreage": "Acreage",
+    "m2": "m²",
+    "vnd": "VND",
+    "month": "/ month"
+  },
+  "dashboard": {
+    "chartTitle": "Statistics of the number of rooms in "
+  },
+  "tableProvince": {
+    "code": "Code",
+    "province": "Province",
+    "uptop": "Uptop",
+    "unuptop": "Not uptop",
+    "title": "Statistical of provinces in "
+  },
+  "provinceDetail": {
+    "title": "Detailed statistics of the province",
+    "province": "Province",
+    "year": "Year",
+    "uptop": "Uptop",
+    "unuptop": "Not uptop"
+  },
+  "top3Province": {
+    "title": "3 provinces have the most rooms in "
+  },
+  "editroom": {
+    "emptyHtml": "No posts yet. Click here to post",
+    "title": "Title",
+    "price": "Price",
+    "acreage": "Acreage",
+    "address": "Address",
+    "lastuptop": "Last uptop",
+    "enduptop": "Duedate uptop"
+  },
+  "footer": {
+    "line1": "Pihomee - Top in renting and leasing rooms and apartments in Vietnam.",
+    "line2": "Topping the keywords related to rooms for rent, house for rent, apartment for rent.",
+    "help1": "Help with room problem",
+    "help2": "Help with payment problem"
+  },
+  "payment": {
+    "choose": "Payment package",
+    "detail": "Payment detail",
+    "option": "Price option",
+    "method": "Payment methods",
+    "vnpay": "Payment by VNPay",
+    "bank": "Payment by bank",
+    "process": "Process",
+    "blank": "Not choose",
+    "ncb": "National Citizen Bank (NCB)",
+    "sacombank": "Sai Gon Thuong Tin Commercial Joint Stock Bank (Sacombank)",
+    "eximbank": "Vietnam Export Import Commercial Joint - Stock Bank (EximBank)",
+    "msb": "Military Commercial Joint Stock Bank (MB)",
+    "viettinbank": "Vietnam Joint Stock Commercial Bank for Industry and Trade (VietinBank)",
+    "vietcombank": "Joint Stock Commercial Bank for Foreign Trade of Vietnam (VietComBank)",
+    "vpbank": "Vietnam Prosperity Joint Stock Commercial Bank (VPBANK)",
+    "visa": "VISA/MASTER Card"
   }
 }

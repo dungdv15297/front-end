@@ -6,7 +6,7 @@
         <div class="container">
           <div class="row left">
             <div class="col-12">
-              <h2 class="title">Chọn gói thanh toán</h2>
+              <h2 class="title">{{$t('payment.choose')}}</h2>
             </div>
 
             <div class="col-lg-3 offset-lg-1">
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div class="col-lg-8">
-              <h5 class="contact-title">Chi tiết giao dịch</h5>
+              <h5 class="contact-title">{{$t('payment.detail')}}</h5>
               <hr />
               <form
                 class="form-contact contact_form"
@@ -100,7 +100,7 @@
                     <div class="row">
                       <div class="col-8">
                         <div class="form-group">
-                          <span>Giá chọn</span>
+                          <span>{{$t('payment.option')}}</span>
                         </div>
                       </div>
                       <div class="col-3">
@@ -114,19 +114,19 @@
                     <div class="row">
                       <div class="col-8">
                         <div class="form-group">
-                          <span>Phương thức thanh toán</span>
+                          <span>{{$t('payment.method')}}</span>
                         </div>
                       </div>
                       <div class="col-3">
                         <div class="form-group">
-                          <span>Thanh toán bằng VNPay</span>
+                          <span>{{$t('payment.vnpay')}}</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="form-group">
-                      <span>Chọn ngân hàng thanh toán</span>
+                      <span>{{$t('payment.bank')}}</span>
                     </div>
                   </div>
                   <div class="col-12">
@@ -146,7 +146,7 @@
                     class="button button-contactForm boxed-btn"
                     @click="onClickPay"
                   >
-                    Xử lý thanh toán
+                    {{$t('payment.process')}}
                   </button>
                 </div>
               </form>
@@ -171,17 +171,19 @@ export default class Contact extends Vue {
   @Prop()
   mini!: boolean;
   
-  public options = [{value:"", text: 'Không chọn' },
-  {value:"NCB", text: 'Ngân hàng NCB' },
-  {value:"SACOMBANK", text: 'Ngân hàng SacomBank' },
-  {value:"EXIMBANK", text: 'Ngân hàng EximBank' },
-  {value:"MSBANK", text: 'Ngân hàng MSBANK' },
-  {value:"VISA", text: 'Thanh toan qua VISA/MASTER' },
-  {value:"VIETINBANK", text: 'Ngân hàng ViettinBank' },
-  {value:"VIETCOMBANK", text: 'Ngân hàng VietComBank' },
-  {value:"HDBANK", text: 'Ngân hàng HDBANK' },
-  {value:"VPBANK", text: 'Ngân hàng VPBANK' }
-  ];
+  get options(): any[] {
+    return [
+      {value:"", text: this.$t('payment.blank').toString() },
+      {value:"NCB", text: this.$t('payment.ncb').toString() },
+      {value:"SACOMBANK", text: this.$t('payment.sacombank').toString() },
+      {value:"EXIMBANK", text: this.$t('payment.eximbank').toString() },
+      {value:"MSBANK", text: this.$t('payment.msb').toString() },
+      {value:"VIETINBANK", text: this.$t('payment.viettinbank').toString() },
+      {value:"VIETCOMBANK", text: this.$t('payment.vietcombank').toString() },
+      {value:"VPBANK", text: this.$t('payment.vpbank').toString() },
+      {value:"VISA", text: this.$t('payment.visa').toString() }
+    ];
+  }
   public vnpayData: VNpayData = new VNpayData();
   public isValidate = false;
   @Watch("mini")

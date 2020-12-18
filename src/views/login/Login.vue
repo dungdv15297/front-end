@@ -123,11 +123,23 @@ export default class Login extends Vue {
     });
     axios.post<AuthResponse>(this.API.login, body)
       .then(response => {
-        if (response && response.data && response.data.jwt) {
-          const token: string = response.data.jwt;
-          this.$store.dispatch('setToken', token);
-          const path: any = this.$route.query.from || '';
-          this.$router.push({ path: atob(path)} );
+        if (response && response.data) {
+          if (response.data.errorCode && response.data.errorCode == 'locked') {
+            this.$bvModal.msgBoxOk(this.$t('login.locked').toString(), {
+              size: 'sm',
+              buttonSize: 'sm',
+              okVariant: 'danger',
+              headerClass: 'p-2 border-bottom-0',
+              footerClass: 'p-2 border-top-0',
+              centered: true,
+              noCloseOnBackdrop: true
+            })
+          } else if (response.data.jwt) {
+            const token: string = response.data.jwt;
+            this.$store.dispatch('setToken', token);
+            const path: any = this.$route.query.from || '';
+            this.$router.push({ path: atob(path)} );
+          }
         }
       })
       .catch(err => {

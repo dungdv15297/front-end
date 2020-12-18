@@ -10,7 +10,7 @@
             <!-- Loại phòng -->
             <div class="single-select-box mb-30 m-auto">
               <div class="boking-tittle">
-                <span class="float-left">Loại phòng</span>
+                <span class="float-left">{{$t('searchroom.type')}}</span>
               </div>
               <b-form-select
                 class="nice-select"
@@ -22,7 +22,7 @@
             <div class="single-select-box mb-30 m-auto">
               <!-- select out date -->
               <div class="boking-tittle">
-                <span class="float-left">Tỉnh thành</span>
+                <span class="float-left">{{$t('searchroom.province')}}</span>
               </div>
               <b-form-select
                 class="nice-select"
@@ -33,7 +33,7 @@
             <!-- Single Select Box -->
             <div class="single-select-box mb-30 m-auto">
               <div class="boking-tittle">
-                <span class="float-left">Quận huyện</span>
+                <span class="float-left">{{$t('searchroom.district')}}</span>
               </div>
               <b-form-select
                 v-model="districtSelected"
@@ -44,7 +44,7 @@
             <!-- Single Select Box -->
             <div class="single-select-box mb-30 m-auto">
               <div class="boking-tittle">
-                <span class="float-left">Diện tích</span>
+                <span class="float-left">{{$t('searchroom.acreage')}}</span>
               </div>
               <b-form-select
                 v-model="acreageSelected"
@@ -55,7 +55,7 @@
             <!-- Single Select Box -->
             <div class="single-select-box mb-30 m-auto">
               <div class="boking-tittle">
-                <span class="float-left">Giá</span>
+                <span class="float-left">{{$t('searchroom.price')}}</span>
               </div>
               <b-form-select
                 v-model="priceSelected"
@@ -69,7 +69,7 @@
                 class="btn select-btn float-left mt-45"
                 style="font-weight: bold; color: white"
                 @click="emitData"
-                >Tìm kiếm</a
+                >{{$t('searchroom.search')}}</a
               >
             </div>
           </div>

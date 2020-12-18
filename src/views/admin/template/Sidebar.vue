@@ -12,9 +12,9 @@
         <span class="icon-text">Trang chủ</span>
       </a>
 
-      <a href="/manager/user-manager" class="inline-flex" v-if="isAdmin">
-        <i class="material-icons">people</i>
-        <span class="icon-text">Quản lý tài khoản</span>
+      <a href="/dashboard" class="inline-flex" v-if="isAdmin">
+        <i class="material-icons">dashboard</i>
+        <span class="icon-text">Dashboard</span>
       </a>
 
       <a href="/personal" class="inline-flex">
@@ -25,6 +25,11 @@
       <a href="/room-manager" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">museum</i>
         <span class="icon-text">Quản lý phòng đăng</span>
+      </a>
+
+      <a href="/manager/user-manager" class="inline-flex" v-if="isAdmin">
+        <i class="material-icons">people</i>
+        <span class="icon-text">Quản lý tài khoản</span>
       </a>
 
       <a href="/room-add" class="inline-flex" v-if="!isAdmin">

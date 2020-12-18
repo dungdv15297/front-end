@@ -7,8 +7,8 @@
             <div class="row justify-content-center text-center">
               <div class="col-xl-9">
                 <div class="h1-slider-caption">
-                  <h1 data-animation="fadeInUp" data-delay=".4s">rent a house for you</h1>
-                  <h3 data-animation="fadeInDown" data-delay=".4s">Houses & Rooms</h3>
+                  <h1 data-animation="fadeInUp" data-delay=".4s">{{$t('searchpage.fadeInUp')}}</h1>
+                  <h3 data-animation="fadeInDown" data-delay=".4s">{{$t('searchpage.fadeInDown')}}</h3>
                 </div>
               </div>
             </div>
@@ -27,7 +27,7 @@
             <!--font-back-tittle  -->
             <div class="font-back-tittle mb-45">
               <div class="archivment-front">
-                <h3>Top phòng Hà Nội</h3>
+                <h3>{{$t('homepage.topHN')}}</h3>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
             <a href="/room?province=2" class="btn view-btn1"
-              >View more <i class="ti-angle-right"></i>
+              >{{$t('homepage.viewmore')}} <i class="ti-angle-right"></i>
             </a>
           </div>
         </div>
@@ -53,7 +53,7 @@
             <!--font-back-tittle  -->
             <div class="font-back-tittle mb-45">
               <div class="archivment-front">
-                <h3>Top phòng Hồ Chí Minh</h3>
+                <h3>{{$t('homepage.topHCM')}}</h3>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
             <a href="/room?province=1" class="btn view-btn1"
-              >View more <i class="ti-angle-right"></i>
+              >{{$t('homepage.viewmore')}} <i class="ti-angle-right"></i>
             </a>
           </div>
         </div>
@@ -78,7 +78,7 @@
             <!--font-back-tittle  -->
             <div class="font-back-tittle mb-45">
               <div class="archivment-front">
-                <h3>Top phòng Đà Nẵng</h3>
+                <h3>{{$t('homepage.topDN')}}</h3>
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@
         <div class="row justify-content-center">
           <div class="room-btn pt-70">
             <a href="/room?province=3"  class="btn view-btn1"
-              >View more <i class="ti-angle-right"></i>
+              >{{$t('homepage.viewmore')}} <i class="ti-angle-right"></i>
             </a>
           </div>
         </div>
@@ -115,14 +115,14 @@
           </div>
           <div class="col-xl-4 col-lg-4">
             <div class="customer-caption">
-              <h2>Pihomee</h2>
+              <h2>{{$t('searchpage.pihomee')}}</h2>
               <div class="caption-details">
                 <p class="pera-dtails">
-                  Website hàng đầu về tìm và cho thuê phòng trọ tại Việt Nam
+                  {{$t('searchpage.peradtails')}}
                 </p>
                 <p>
-                  Pihomee tự hào là trang web hàng đầu trong việc tìm kiếm cũng như đưa tin cho thuê phòng trọ tại Việt Nam.
-                  Chúng tôi sẽ giúp bạn có sự lựa chọn hợp lý trong lựa chọn phòng, cũng như cho thuê phòng trọ.
+                  {{$t('searchpage.line1')}}
+                  {{$t('searchpage.line2')}}
                 </p>
               </div>
             </div>

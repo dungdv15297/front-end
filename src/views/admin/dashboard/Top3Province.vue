@@ -29,7 +29,7 @@ import { Top3Provinces } from '@/base/response/top3-provinces';
 export default class Top3Province extends Vue {
   axios = axiosCreator();
   get title() {
-    return '3 tỉnh có nhiều phòng nhất năm ' + new Date().getFullYear();
+    return this.$t('top3Province.title').toString() + new Date().getFullYear();
   }
   dataBarChart: DataBarChart[] = [];
 

@@ -13,9 +13,9 @@
             <div class="per-night">
               <label class="limited-label" style="color: #035699" v-b-tooltip.hover :title="item.contact">{{ item.contact }}</label>
               <br>
-              <label class="left limited-label">Diện tích {{ item.acreage }} <label>m2</label></label>
+              <label class="left limited-label">{{$t('suggestion.acreage')}} {{ item.acreage }} <label>{{$t('suggestion.m2')}}</label></label>
               <br>
-              <label class="left limited-label" style="color:#37a344">{{ item.price }} <label> vnd/tháng</label></label>
+              <label class="left limited-label" style="color:#37a344">{{ item.price }} <label> {{$t('suggestion.price')}}</label></label>
             </div>
           </div>
         </div>

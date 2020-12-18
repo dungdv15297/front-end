@@ -36,16 +36,16 @@ export default class TableProvince extends Vue {
   page: number = 1;
   totalRow = 0;
   fields = [
-    { key: "id", sortable: true, label: 'Mã' },
-    { key: "name", sortable: true, label: 'Tỉnh/Thành phố' },
-    { key: "uptop", sortable: true, label: 'Đang uptop' },
-    { key: "unUptop", sortable: true, label: 'Không uptop' },
+    { key: "id", sortable: true, label: this.$t('tableProvince.code').toString() },
+    { key: "name", sortable: true, label: this.$t('tableProvince.province').toString() },
+    { key: "uptop", sortable: true, label: this.$t('tableProvince.uptop').toString() },
+    { key: "unUptop", sortable: true, label: this.$t('tableProvince.unuptop').toString() },
   ]
   items = [];
   axios = axiosCreator();
 
   get title(): string {
-    return 'Bảng thống kê các tỉnh năm ' + new Date().getFullYear();
+    return this.$t('tableProvince.title').toString() + new Date().getFullYear();
   }
 
   created() {

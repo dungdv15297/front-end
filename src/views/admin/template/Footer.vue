@@ -7,13 +7,13 @@
           <div class="col-sm-12 col-md-6">
             <h6>Pihomee</h6>
             <p class="text-justify">
-              Pihomee - Top đầu về thuê và cho thuê phòng trọ, căn hộ tại Việt Nam.
-              Đứng đầu các từ khóa liên quan đến phòng trọ cho thuê, nhà cho thuê, cho thuê căn hộ.
+              {{$t('footer.line1')}}
+              {{$t('footer.line2')}}
             </p>
           </div>
 
           <div class="col-xs-6 col-md-3">
-            <h6>Trợ giúp phòng trọ</h6>
+            <h6>{{$t('footer.help1')}}</h6>
             <ul class="footer-links">
               <li><a rel="nofollow" href="tel:+84397304591">+84397304591</a></li>
               <li><a rel="nofollow" href="tel:+84397304591">+84397304591</a></li>
@@ -21,7 +21,7 @@
           </div>
 
           <div class="col-xs-6 col-md-3">
-            <h6>Hỗ trợ thanh toán</h6>
+            <h6>{{$t('footer.help2')}}</h6>
             <ul class="footer-links">
               <li><a rel="nofollow" href="tel:+84397304591">+84397304591</a></li>
               <li><a rel="nofollow" href="tel:+84397304591">+84397304591</a></li>
@@ -45,12 +45,6 @@
           </div>
 
           <div class="col-md-4 col-sm-4 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
           </div>
         </div>
       </div>

@@ -22,7 +22,9 @@
         <!-- form -->
         <div class="row">
           <div class="col-12">
-            <h2 class="contact-title">{{ detailData.title }}</h2>
+            <h2 class="contact-title" style="font-family: 'Noto Serif' !important;">
+              {{ detailData.title }} <span v-if="detailData.status==2">(đã cho thuê)</span>
+            </h2>
           </div>
           <div class="col-lg-8">
             <table cellpadding="7" id="info">

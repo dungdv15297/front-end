@@ -338,39 +338,36 @@ export default class RoomManager extends Vue {
   totalRows: number = 0;
   currentPage: number = 1;
 
-  emptyHtml: string =
-    '<span>Chưa có tin đăng. Click <a href="/room-add">vào đây</a> để đăng tin</span>';
-
   fields: any = [
     {
       key: "title",
-      label: "Tiêu đề",
+      label: this.$t('editroom.title').toString(),
       sortable: true,
     },
     {
       key: "price",
       sortable: true,
-      label: "Giá phòng",
+      label: this.$t('editroom.price').toString()
     },
     {
       key: "acreage",
       sortable: true,
-      label: "Diện tích",
+      label: this.$t('editroom.acreage').toString(),
     },
     {
       key: "address",
-      label: "Địa chỉ",
+      label: this.$t('editroom.address').toString(),
       sortable: true,
     },
     {
       key: "last_uptop",
       sortable: true,
-      label: "Ngày uptop",
+      label: this.$t('editroom.lastuptop').toString()
     },
     {
       key: "endUpTop",
       sortable: true,
-      label: "Hết hạn uptop",
+      label: this.$t('editroom.enduptop').toString()
     },
     {
       key: "actions",

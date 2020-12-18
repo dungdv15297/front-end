@@ -396,6 +396,16 @@ export default class MasterTable extends Vue {
   }
 
   deleteAccount(id: String): void {
+    const accountId = this.$store.getters['accountId'];
+    if (accountId == id) {
+      this.$bvModal.msgBoxOk(this.$t("account.cantDelete").toString(), {
+        buttonSize: "sm",
+        okVariant: "danger",
+        centered: true,
+        noCloseOnBackdrop: true,
+      })
+      return;
+    }
     this.$bvModal
       .msgBoxConfirm(this.$t("account.confirm3").toString(), {
         buttonSize: "sm",
@@ -503,6 +513,16 @@ export default class MasterTable extends Vue {
   }
 
   activeLock(id: String) {
+    const accountId = this.$store.getters['accountId'];
+    if (accountId == id) {
+      this.$bvModal.msgBoxOk(this.$t("account.cantLock").toString(), {
+        buttonSize: "sm",
+        okVariant: "danger",
+        centered: true,
+        noCloseOnBackdrop: true,
+      })
+      return;
+    }
     this.$bvModal
       .msgBoxConfirm(this.$t("account.confirm1").toString(), {
         buttonSize: "sm",

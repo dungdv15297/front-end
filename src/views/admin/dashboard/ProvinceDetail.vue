@@ -2,13 +2,13 @@
   <div class="accordion" role="tablist">
       <b-card no-body class="mb-1">
         <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-button block v-b-toggle.accordion-2 variant="info">Thống kê chi tiết tỉnh/thành phố</b-button>
+          <b-button block v-b-toggle.accordion-2 variant="info">{{$t('provinceDetail.title')}}</b-button>
         </b-card-header>
         <b-collapse id="accordion-2" visible accordion="my-accordion-2" role="tabpanel">
           <b-card-body>
             <div class="row">
               <div class="col-md-2 col-sm-6">
-                <b-form-group :label="'Tỉnh/Thành phố'" label-align="left">
+                <b-form-group :label="$t('provinceDetail.province')" label-align="left">
                   <b-form-select
                     size="md"
                     v-model="selectedProvince"
@@ -18,7 +18,7 @@
                 </b-form-group>
               </div>
               <div class="col-md-1 col-sm-6">
-                <b-form-group :label="'Năm'" label-align="left">
+                <b-form-group :label="$t('provinceDetail.year')" label-align="left">
                   <b-form-select
                     size="md"
                     v-model="selectedYear"
@@ -59,9 +59,6 @@ export default class ProvinceDetail extends Vue {
   selectedYear: number = 0;
   labels: string[] = [];
   datasets: any[] = [];
-  get title(): string {
-    return 'Bảng thống kê các tỉnh năm ' + new Date().getFullYear();
-  }
 
   async created() {
     const thisYear = new Date().getFullYear();
@@ -103,12 +100,12 @@ export default class ProvinceDetail extends Vue {
         this.labels = data.labels;
         this.datasets = [
           {
-            label: 'Uptop',
+            label: this.$t('provinceDetail.uptop').toString(),
             backgroundColor: '#f87979',
             data: data.uptop
           },
           {
-            label: 'Không uptop',
+            label: this.$t('provinceDetail.unuptop').toString(),
             backgroundColor: '#240BF3',
             data: data.unuptop
           }
