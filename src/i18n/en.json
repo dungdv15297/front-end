@@ -251,7 +251,8 @@
     "checkTitle": "Title must not be empty and less than 60 characters",
     "checkContent": "Content must not be empty",
     "checkImages": "Choose picture for your room",
-    "uptopDone": "Up top successful! Room information has been updated"
+    "uptopDone": "Up top successful! Room information has been updated",
+    "defaultOption": "-------"
   },
   "masterTable": {
     "active": "◯",
@@ -371,7 +372,8 @@
   "suggestion": {
     "acreage": "Acreage",
     "m2": "m²",
-    "price": "vnd/month"
+    "price": "vnd/month",
+    "title": "Suggestion for you"
   },
   "trendroom": {
     "acreage": "Acreage",
@@ -380,7 +382,9 @@
     "month": "/ month"
   },
   "dashboard": {
-    "chartTitle": "Statistics of the number of rooms in "
+    "chartTitle": "Statistics of the number of rooms in ",
+    "uptop": "Uptop",
+    "unuptop": "Not uptop"
   },
   "tableProvince": {
     "code": "Code",
@@ -412,7 +416,17 @@
     "line1": "Pihomee - Top in renting and leasing rooms and apartments in Vietnam.",
     "line2": "Topping the keywords related to rooms for rent, house for rent, apartment for rent.",
     "help1": "Help with room problem",
-    "help2": "Help with payment problem"
+    "help2": "Help with payment problem",
+    "reference": "References",
+    "about": "About Pihomee",
+    "contact": "Contact",
+    "find": "Find a room",
+    "sp": "Support information",
+    "tel": "Tel: 039 730 4591",
+    "mail": "pihomee@gmail.com",
+    "location": "Location",
+    "map1": "63 Tran Quoc Vuong,",
+    "map2": "Cau Giay , Ha Noi"
   },
   "payment": {
     "choose": "Payment package",

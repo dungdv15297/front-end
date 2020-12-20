@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div class="col-12">
+      <h3 class="title">{{$t('suggestion.title')}}</h3>
+    </div>
     <div class="col-xl-2 col-lg-2 col-md-3" v-for="(item, index) in displayData" :key="index" style="margin:auto">
       <!-- Single Room -->
       <a :href="'/details-room/' + item.id" style="display:unset">
@@ -86,6 +89,12 @@ class DisplayData {
 </script>
 
 <style scoped>
+.title {
+    color: #112e41;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: 'Noto Serif', serif;
+}
 h4 {
   font-weight: bold;
 }

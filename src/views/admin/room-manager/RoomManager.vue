@@ -11,7 +11,7 @@
           :empty-html="emptyHtml"
           :fields="fields"
           :items="items"
-          :per-page="10"
+          :per-page="15"
         >
           <template #cell(actions)="row">
             <b-button variant="success" @click="updateStatus(row.item, 2)" v-if="row.item.status==1">
@@ -41,8 +41,8 @@
         <b-pagination
           :total-rows="totalRows"
           :per-page="15"
-          v-model="currentPage"
           @change="changePage"
+          v-model="currentPage"
           size="sm"
           pills
           class="m-auto"
@@ -196,17 +196,16 @@ export default class RoomManager extends Vue {
     }
   }
 
-  async created() {
-    await this.getDisplayData();
+  created() {
+    this.getDisplayData();
   }
 
   async getDisplayData() {
     const axios = axiosCreator();
+    const currentPage = this.currentPage;
     await axios
       .get(
-        `/room/getPageRoom?accountId=${this.$store.getters["accountId"]}&page=${
-          this.currentPage - 1
-        }&size=15`
+        `/room/getPageRoom?accountId=${this.$store.getters["accountId"]}&page=${currentPage-1}&size=15`
       )
       .then((response) => {
         if (response && response.data) {

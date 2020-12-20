@@ -26,12 +26,11 @@
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5">
             <div class="single-footer-caption mb-30">
               <div class="footer-tittle">
-                <h4>Quick Links</h4>
+                <h4>{{$t('footer.reference')}}</h4>
                 <ul>
-                  <li><a href="#">About Mariana</a></li>
-                  <li><a href="#">Our Best Rooms</a></li>
-                  <li><a href="#">Our Photo Gellary</a></li>
-                  <li><a href="#">Pool Service</a></li>
+                  <li><a href="/about">{{$t('footer.about')}}</a></li>
+                  <li><a href="/contact">{{$t('footer.contact')}}</a></li>
+                  <li><a href="/room">{{$t('footer.find')}}</a></li>
                 </ul>
               </div>
             </div>
@@ -39,11 +38,10 @@
           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
             <div class="single-footer-caption mb-30">
               <div class="footer-tittle">
-                <h4>Reservations</h4>
+                <h4>{{$t('footer.sp')}}</h4>
                 <ul>
-                  <li><a href="#">Tel: 345 5667 889</a></li>
-                  <li><a href="#">Skype: Marianabooking</a></li>
-                  <li><a href="#">reservations@hotelriver.com</a></li>
+                  <li><a href="#">{{$t('footer.tel')}}</a></li>
+                  <li><a href="#">{{$t('footer.mail')}}</a></li>
                 </ul>
               </div>
             </div>
@@ -51,10 +49,10 @@
           <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
             <div class="single-footer-caption mb-30">
               <div class="footer-tittle">
-                <h4>Our Location</h4>
+                <h4>{{$t('footer.location')}}</h4>
                 <ul>
-                  <li><a href="#">198 West 21th Street,</a></li>
-                  <li><a href="#">Suite 721 New York NY 10016</a></li>
+                  <li><a href="#">{{$t('footer.map1')}}</a></li>
+                  <li><a href="#">{{$t('footer.map2')}}</a></li>
                 </ul>
               </div>
             </div>

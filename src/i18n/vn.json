@@ -250,7 +250,8 @@
     "checkTitle": "Tiêu đề không được bỏ trống và có ít hơn 60 ký tự",
     "checkContent": "Nội dung không được bỏ trống",
     "checkImages": "Chọn ảnh cho phòng của bạn",
-    "uptopDone": "Lên top thành công. Thông tin phòng đã được cập nhật"
+    "uptopDone": "Lên top thành công. Thông tin phòng đã được cập nhật",
+    "defaultOption": "-------"
   },
   "masterTable": {
     "active": "◯",
@@ -370,7 +371,8 @@
   "suggestion": {
     "acreage": "Diện tích",
     "m2": "m²",
-    "price": "vnđ/tháng"
+    "price": "vnđ/tháng",
+    "title": "Phù hợp với bạn"
   },
   "trendroom": {
     "acreage": "Diện tích",
@@ -379,7 +381,9 @@
     "month": "/ tháng"
   },
   "dashboard": {
-    "chartTitle": "Thống kê số lượng phòng trong "
+    "chartTitle": "Thống kê số lượng phòng trong ",
+    "uptop": "Đang Uptop",
+    "unuptop": "Không Uptop"
   },
   "tableProvince": {
     "code": "Mã",
@@ -411,7 +415,17 @@
     "line1": "Pihomee - Top đầu về cho thuê phòng trọ, căn hộ tại Việt Nam.",
     "line2": "Đứng đầu các từ khóa liên quan đến phòng trọ, nhà cho thuê, căn hộ cho thuê. ",
     "help1": "Hỗ trợ phòng",
-    "help2": "Hỗ trợ thanh toán"
+    "help2": "Hỗ trợ thanh toán",
+    "reference": "Liên kết",
+    "about": "Về Pihomee",
+    "contact": "Liên hệ",
+    "find": "Tìm phòng",
+    "sp": "Thông tin hỗ trợ",
+    "tel": "Tel: 039 730 4591",
+    "mail": "pihomee@gmail.com",
+    "location": "Địa điểm",
+    "map1": "63 Trần Quốc Vượng,",
+    "map2": "Cầu Giấy , Hà Nội"
   },
   "payment": {
     "choose": "Gói thanh toán",

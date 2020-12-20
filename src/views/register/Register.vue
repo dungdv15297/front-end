@@ -234,7 +234,6 @@ export default class Register extends Vue {
 }
 .bg-gradient {
   font-family: cursive;
-  height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/h1_hero.jpg') no-repeat;
   background-size: cover;
 }
