@@ -34,9 +34,9 @@ export function validation(data?: RegisterData): any {
       msg: () => {
         return result.rePassword.rule === null
           ? ''
-          : !result.rePassword.firstRule
+          : result.rePassword.firstRule == false
             ? 'tooltip.VALIDATE002'
-            : !result.rePassword.secondRule
+            : result.rePassword.secondRule == false
               ? 'tooltip.VALIDATE006'
               : ''
       } 

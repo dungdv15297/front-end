@@ -60,7 +60,7 @@
         <div class="row">
           <b-pagination size="sm" pills class="m-auto"
             :total-rows="totalRows"
-            @change="onSearch"
+            @change="onSearchPage"
             :per-page="12"
             v-model="currentPage"/>
         </div>
@@ -141,10 +141,6 @@ export default class SearchPage extends Vue {
 
   totalRows: number = 0;
   currentPage: number = 1;
-  @Watch('currentPage')
-  currentPageChange(): void {
-    this.onSearch();
-  }
 
   get listTitle(): boolean {
     return this.displayData.length <= 0;
@@ -210,6 +206,11 @@ export default class SearchPage extends Vue {
         );
       }
     });
+  }
+
+  onSearchPage(page: number) {
+    this.currentPage = page;
+    this.onSearch();
   }
 
   goToDetail(id: string) {
