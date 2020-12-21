@@ -9,47 +9,47 @@
     >
       <a href="/home" class="inline-flex">
         <i class="material-icons">home</i>
-        <span class="icon-text">Trang chủ</span>
+        <span class="icon-text">{{$t('sidebar.home')}}</span>
       </a>
 
       <a href="/dashboard" class="inline-flex" v-if="isAdmin">
         <i class="material-icons">dashboard</i>
-        <span class="icon-text">Dashboard</span>
+        <span class="icon-text">{{$t('sidebar.dashboard')}}</span>
       </a>
 
       <a href="/personal" class="inline-flex">
         <i class="material-icons">info</i>
-        <span class="icon-text">Thông tin cá nhân</span>
+        <span class="icon-text">{{$t('sidebar.infor')}}</span>
       </a>
 
       <a href="/room-manager" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">museum</i>
-        <span class="icon-text">Quản lý phòng đăng</span>
+        <span class="icon-text">{{$t('sidebar.room')}}</span>
       </a>
 
       <a href="/manager/user-manager" class="inline-flex" v-if="isAdmin">
         <i class="material-icons">people</i>
-        <span class="icon-text">Quản lý tài khoản</span>
+        <span class="icon-text">{{$t('sidebar.account')}}</span>
       </a>
 
       <a href="/room-add" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">post_add</i>
-        <span class="icon-text">Cho thuê phòng</span>
+        <span class="icon-text">{{$t('sidebar.rent')}}</span>
       </a>
 
       <a href="/payment" class="inline-flex" v-if="!isAdmin">
         <i class="material-icons">attach_money</i>
-        <span class="icon-text">Nạp tiền tài khoản</span>
+        <span class="icon-text">{{$t('sidebar.payment')}}</span>
       </a>
 
       <a href="/manager/master-table" class="inline-flex" v-if="isAdmin">
         <i class="material-icons">menu_book</i>
-        <span class="icon-text">Giá & diện tích</span>
+        <span class="icon-text">{{$t('sidebar.master')}}</span>
       </a>
 
       <a href="#" class="inline-flex" @click="onSignOut">
         <i class="material-icons">exit_to_app</i>
-        <span class="icon-text">Đăng xuất</span>
+        <span class="icon-text">{{$t('sidebar.logout')}}</span>
       </a>
     </div>
   </div>

@@ -165,7 +165,21 @@
     "text3": "Từ thứ 2 tới thứ 6, 8 giờ tới 17 giờ",
     "text4": "Gửi câu hỏi bất cứ lúc nào cho chúng tôi!",
     "title1": "Chi Tiết Phòng",
-    "title2": "CHI TIẾT PHÒNG"
+    "title2": "CHI TIẾT PHÒNG",
+    "address": "Address:",
+    "area": "Khu vực:",
+    "type": "Loại phòng:",
+    "creator": "Người đăng:",
+    "phone": "Điện thoại:",
+    "acreage": "Diện tích:",
+    "price": "Giá phòng:",
+    "createdDate": "Ngày đăng:",
+    "modified": "Cập nhật lần cuối:",
+    "desc": "Mô tả:",
+    "picture": "Hình ảnh:",
+    "map": "Bản đồ",
+    "suggestion": "Phòng tương tự",
+    "rented": "(Đã cho thuê)"
   },
   "header": {
     "homepage": "Trang chủ",
@@ -316,7 +330,7 @@
     "fail": "Thanh toán thất bại"
   },
   "account": {
-    "adminTitle": "Tài khoản quản tị",
+    "adminTitle": "Tài khoản quản trị",
     "cantLock": "Không thể tự khóa bản thân",
     "cantDelete": "Không thể tự xóa bản thân",
     "userTitle": "Tài khoản người dùng",
@@ -444,5 +458,16 @@
     "vietcombank": "Ngân hàng TMCP Ngoại Thương Việt Nam (VietComBank)",
     "vpbank": "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBANK)",
     "visa": "Thẻ VISA/MASTER"
+  },
+  "sidebar": {
+    "home": "Trang chủ",
+    "dashboard": "Thống kê",
+    "infor": "Thông tin cá nhân",
+    "room": "Quản lý phòng",
+    "account": "Quản lý tài khoản",
+    "rent": "Cho thuê phòng",
+    "payment": "Nạp tiền",
+    "master": "Giá & diện tích",
+    "logout": "Đăng xuất"
   }
 }
