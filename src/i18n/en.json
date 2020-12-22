@@ -470,5 +470,9 @@
     "payment": "Pay In",
     "master": "Price & Acreage",
     "logout": "Sign Out"
+  },
+  "navbar": {
+    "notice": "Notice",
+    "logout": "Sign out"
   }
 }

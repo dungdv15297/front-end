@@ -85,14 +85,14 @@
         <div class="row">
           <div class="col-12">
             <b-form-group :label="minLabel" label-for="min">
-              <b-form-input type="number" id="min" v-model="dataDialog.min"></b-form-input>
+              <b-form-input type="number" id="min" v-model="dataDialogClone.min"></b-form-input>
             </b-form-group>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
             <b-form-group :label="maxLabel" label-for="max">
-              <b-form-input type="number" id="max" v-model="dataDialog.max"></b-form-input>
+              <b-form-input type="number" id="max" v-model="dataDialogClone.max"></b-form-input>
             </b-form-group>
           </div>
         </div>
@@ -185,6 +185,13 @@ export default class MasterTable extends Vue {
     status: 0
   };
 
+  dataDialogClone: Range = {
+    id: null,
+    min: 0,
+    max: 0,
+    status: 0
+  };
+
   axios: AxiosInstance = axiosCreator();
   @Watch('priceCurrentPage')
   findPricePage(): void {
@@ -238,7 +245,7 @@ export default class MasterTable extends Vue {
   }
 
   resetModal(): void {
-    this.dataDialog = {
+    this.dataDialogClone = {
       id: null,
       min: 0,
       max: 0,
@@ -250,6 +257,12 @@ export default class MasterTable extends Vue {
     this.dialogMode = mode;
     if (!!data) {
       this.dataDialog = data;
+      this.dataDialogClone = {
+        id: this.dataDialog.id,
+        min: this.dataDialog.min,
+        max: this.dataDialog.max,
+        status: this.dataDialog.status
+      }
     }
     this.$bvModal.show('modal');
   }
@@ -259,6 +272,8 @@ export default class MasterTable extends Vue {
       this.$bvModal.msgBoxOk(this.$t('masterTable.inValid').toString(), {buttonSize: 'sm', okVariant: 'danger', centered: true, noCloseOnBackdrop: true});
       return;
     }
+
+    this.dataDialog = this.dataDialogClone;
 
     if (this.dialogMode === DialogMode.CREATE_PRICE || this.dialogMode === DialogMode.UPDATE_PRICE) {
       this.axios.post('/master/price-range/save', this.dataDialog)
@@ -291,13 +306,13 @@ export default class MasterTable extends Vue {
   }
 
   rule1(): boolean {
-    return this.dataDialog.min === 0 || this.dataDialog.min%10000 > 0
-      || this.dataDialog.max === 0 || this.dataDialog.max%10000 > 0
-      || Number(this.dataDialog.min) > Number(this.dataDialog.max);
+    return this.dataDialogClone.min === 0 || this.dataDialogClone.min%10000 > 0
+      || this.dataDialogClone.max === 0 || this.dataDialogClone.max%10000 > 0
+      || Number(this.dataDialogClone.min) > Number(this.dataDialogClone.max);
   }
 
   rule3(): boolean {
-    return Number(this.dataDialog.min) > Number(this.dataDialog.max);
+    return Number(this.dataDialogClone.min) > Number(this.dataDialogClone.max);
   }
 
   deletePrice(price: Range): void {

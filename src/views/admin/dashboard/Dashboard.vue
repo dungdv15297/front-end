@@ -78,8 +78,8 @@ export default class Dashboard extends Vue {
         this.dataYear.push(data.uptop);
         this.dataMonth.push(data.monthNotUptop);
         this.dataMonth.push(data.monthUptop);
-        this.month = data.month;
-        this.year = data.year;
+        this.month = new Date().getMonth();
+        this.year = new Date().getFullYear();
       }
     })
   }

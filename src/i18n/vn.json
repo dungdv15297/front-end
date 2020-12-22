@@ -469,5 +469,9 @@
     "payment": "Nạp tiền",
     "master": "Giá & diện tích",
     "logout": "Đăng xuất"
+  },
+  "navbar": {
+    "notice": "Thông báo",
+    "logout": "Đăng xuất"
   }
 }

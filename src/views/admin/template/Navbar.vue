@@ -21,11 +21,11 @@
           </div>
           <a class="dropdown-item inline-flex" href="#">
             <i class="material-icons">notifications_none</i>
-            <i class="pl-10">Thông báo</i>
+            <i class="pl-10">{{$t('navbar.notice')}}</i>
           </a>
           <a class="dropdown-item inline-flex" href="#" @click="onSignOut">
             <i class="material-icons">exit_to_app</i>
-            <i class="pl-10">Đăng xuất</i>
+            <i class="pl-10">{{$t('navbar.logout')}}</i>
           </a>
         </div>
       </b-modal>
