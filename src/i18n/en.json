@@ -166,7 +166,21 @@
     "text3": "From Monday to Friday, 8:00 am to 5:00 pm",
     "text4": "Send us questions at any time!",
     "title1": "Details Room",
-    "title2": "DETAILS ROOM"
+    "title2": "DETAILS ROOM",
+    "address": "Address:",
+    "area": "Area:",
+    "type": "Type of room:",
+    "creator": "Creator:",
+    "phone": "Phone number:",
+    "acreage": "Acreage:",
+    "price": "Price:",
+    "createdDate": "Created date:",
+    "modified": "Last updated:",
+    "desc": "Description:",
+    "picture": "Picture:",
+    "map": "Map",
+    "suggestion": "Suggestion",
+    "rented": "(Rented)"
   },
   "header": {
     "homepage": "Homepage",
@@ -445,5 +459,16 @@
     "vietcombank": "Joint Stock Commercial Bank for Foreign Trade of Vietnam (VietComBank)",
     "vpbank": "Vietnam Prosperity Joint Stock Commercial Bank (VPBANK)",
     "visa": "VISA/MASTER Card"
+  },
+  "sidebar": {
+    "home": "Homepage",
+    "dashboard": "Dashboard",
+    "infor": "Information",
+    "room": "Room Manager",
+    "account": "Account Manager",
+    "rent": "Rental Post",
+    "payment": "Pay In",
+    "master": "Price & Acreage",
+    "logout": "Sign Out"
   }
 }

@@ -240,7 +240,7 @@ export default class RoomManager extends Vue {
                 x.lastUpTop == null
                   ? ""
                   : this.$moment(x.lastUpTop as string)
-                      .add(15, "days")
+                      .add(7, "days")
                       .format("YYYY-MM-DD hh:mm:ss")
             };
           });
@@ -248,7 +248,8 @@ export default class RoomManager extends Vue {
       });
   }
 
-  async changePage() {
+  async changePage(page: number) {
+    this.currentPage = page;
     await this.getDisplayData();
   }
 

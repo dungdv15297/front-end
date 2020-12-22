@@ -23,38 +23,38 @@
         <div class="row">
           <div class="col-12">
             <h2 class="contact-title" style="font-family: 'Noto Serif' !important;">
-              {{ detailData.title }} <span v-if="detailData.status==2">(đã cho thuê)</span>
+              {{ detailData.title }} <span v-if="detailData.status==2">{{$t('detailsRoom.rented')}}</span>
             </h2>
           </div>
           <div class="col-lg-8">
             <table cellpadding="7" id="info">
               <tbody>
                 <tr>
-                  <td class="nameT">Địa chỉ:</td>
+                  <td class="nameT">{{$t('detailsRoom.address')}}</td>
                   <td colspan="3">
                     <span>{{ detailData.address }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Khu vực:</td>
+                  <td class="nameT">{{$t('detailsRoom.area')}}</td>
                   <td colspan="3">
                     <span>{{ detailArea }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Loại phòng cho thuê:</td>
+                  <td class="nameT">{{$t('detailsRoom.type')}}</td>
                   <td colspan="3">
                     <span>{{ typeOfRoom }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Người đăng:</td>
+                  <td class="nameT">{{$t('detailsRoom.creator')}}</td>
                   <td colspan="3">
                     <span>{{ detailData.createdBy }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Điện thoại:</td>
+                  <td class="nameT">{{$t('detailsRoom.phone')}}</td>
                   <td colspan="3">
                     <h4 style="color: green; font-weight: bold">
                       <li>
@@ -66,25 +66,25 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Diện tích:</td>
+                  <td class="nameT">{{$t('detailsRoom.acreage')}}</td>
                   <td colspan="3">
                     <span>{{ detailAcreage }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Giá cho thuê:</td>
+                  <td class="nameT">{{$t('detailsRoom.price')}}</td>
                   <td>
                     <span style="color: red">{{ detailPrice }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Ngày đăng:</td>
+                  <td class="nameT">{{$t('detailsRoom.createDate')}}</td>
                   <td>
                     <span>{{ detailData.createdDate | moment('YYYY-MM-DD')  }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="nameT">Cập nhật lần cuối:</td>
+                  <td class="nameT">{{$t('detailsRoom.modified')}}</td>
                   <td colspan="3">
                     <span>{{ detailData.updatedDate | moment('YYYY-MM-DD')  }}</span>
                   </td>
@@ -96,11 +96,11 @@
             <!-- Mo ta -->
             <div class="discription">
               <div style="margin-top: 10px; margin-left: 10px">
-                <p><strong>Thông tin mô tả</strong></p>
+                <p><strong>{{$t('detailsRoom.desc')}}</strong></p>
                 <span style="white-space:pre-wrap;" v-html="detailData.description"></span>
                 <p>---------------------------------------------------</p>
                 <p>
-                  Điện thoại liên hệ :
+                  {{$t('detailsRoom.phone')}}
                   <span style="color: red">
                     <a rel="nofollow" :href="`tel:${detailData.phone}`">
                       {{ detailData.phone }}
@@ -112,7 +112,7 @@
             <br />
             <!-- ảnh -->
             <div class="picture">
-              <p><strong>Hình ảnh</strong></p>
+              <p><strong>{{$t('detailsRoom.picture')}}</strong></p>
               <div class="slidePic">
                 <div
                   id="carouselExampleControls"
@@ -157,7 +157,7 @@
             <br />
             <!-- map -->
             <div class="d-sm-block mb-5 pb-4 mapgg">
-              <p><strong>Bản đồ</strong></p>
+              <p><strong>{{$t('detailsRoom.map')}}</strong></p>
               <google-map
                 :hidden-search="true"
                 :draggable="false"
@@ -170,7 +170,7 @@
           </div>
           <div class="col-lg-3 offset-sm-1">
             <div class="row">
-              <h4 style="font-family:Arial, Helvetica, sans-serif; font-weight:bold">Phòng tương tự</h4>
+              <h4 style="font-family:Arial, Helvetica, sans-serif; font-weight:bold">{{$t('detailsRoom.suggestion')}}</h4>
             </div>
             <div class="row" style="margin-top: 10px" v-for="(item, index) in displayData" :key="index">
               <a :href="'/details-room/' + item.id">
