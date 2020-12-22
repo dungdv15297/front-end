@@ -228,7 +228,9 @@ export default class Contact extends Vue {
                       okVariant: "success",
                       centered: true,
                       noCloseOnBackdrop: true,
-                    });
+                    }).then(() => {
+                      this.$router.push('/payment')
+                    })
                   }
                 });
             }
